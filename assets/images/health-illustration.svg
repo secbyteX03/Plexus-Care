@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="500" viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="300" cy="250" r="240" fill="#FFE6E6" opacity="0.5"/>
+    
+    <!-- Doctor Character -->
+    <g transform="translate(150, 100)">
+        <!-- Head -->
+        <circle cx="100" cy="50" r="40" fill="#FFD1DC"/>
+        
+        <!-- Body -->
+        <rect x="80" y="90" width="40" height="100" rx="20" fill="#97b8f7"/>
+        
+        <!-- Arms -->
+        <rect x="50" y="100" width="20" height="60" rx="10" fill="#97b8f7"/>
+        <rect x="130" y="100" width="20" height="60" rx="10" fill="#97b8f7"/>
+        
+        <!-- Legs -->
+        <rect x="80" y="190" width="15" height="50" rx="7" fill="#5a6976"/>
+        <rect x="105" y="190" width="15" height="50" rx="7" fill="#5a6976"/>
+        
+        <!-- Face -->
+        <circle cx="88" cy="45" r="5" fill="#333"/>
+        <circle cx="112" cy="45" r="5" fill="#333"/>
+        <path d="M95 70 Q100 80 105 70" stroke="#333" stroke-width="2" fill="none"/>
+        
+        <!-- Stethoscope -->
+        <circle cx="70" cy="80" r="5" fill="#333"/>
+        <path d="M70 85 Q60 90 65 100 Q70 105 75 100 Q80 95 90 100" stroke="#333" stroke-width="3" fill="none"/>
+    </g>
+    
+    <!-- Medical Icons -->
+    <g transform="translate(400, 100)">
+        <!-- Heart -->
+        <path d="M50 20 C30 0 0 10 0 40 C0 70 50 90 50 90 C50 90 100 70 100 40 C100 10 70 0 50 20 Z" fill="#f4a5a5"/>
+        
+        <!-- Plus -->
+        <rect x="130" y="40" width="40" height="40" rx="5" fill="#97b8f7"/>
+        <rect x="140" y="30" width="20" height="60" rx="5" fill="#97b8f7"/>
+        <rect x="120" y="50" width="60" height="20" rx="5" fill="#97b8f7"/>
+    </g>
+    
+    <!-- Chat Bubble -->
+    <g transform="translate(350, 200)">
+        <path d="M0 0 H180 V120 H80 L40 160 V120 H0 V0 Z" fill="#f4a5a5" rx="10" ry="10"/>
+        <text x="20" y="40" font-family="Arial" font-size="14" fill="white">How can I help you today?</text>
+    </g>
+    
+    <!-- Pulsing Circles -->
+    <circle cx="500" cy="400" r="20" fill="#f4a5a5" opacity="0.5">
+        <animate attributeName="r" values="20;30;20" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle cx="100" cy="400" r="15" fill="#97b8f7" opacity="0.5">
+        <animate attributeName="r" values="15;25;15" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+</svg>

@@ -1,0 +1,32 @@
+:root {
+    /* Color Palette */
+    --primary: #f4a5a5;
+    --primary-light: #f8d7d7;
+    --primary-dark: #e8979a;
+    --secondary: #97b8f7;
+    --accent: #e8979a;
+    --text: #5a6976;
+    --text-light: #6c757d;
+    --background: #f8f3f0;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+    
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+    --border-radius-full: 9999px;
+}
