@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Plexus Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: var(--spacing-lg) 0;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .dashboard-content {
+            padding: var(--spacing-lg) 0;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .welcome-section h1 {
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .welcome-section p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard-card h3 {
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .dashboard-card p {
+            color: var(--text-light);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .dashboard-card .btn {
+            width: 100%;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .user-info h2 {
+            margin: 0;
+            color: white;
+        }
+        
+        .user-info p {
+            margin: 0.25rem 0 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h2 id="userName">Welcome back!</h2>
+                    <p id="userEmail">Loading your profile...</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-content">
+        <div class="container">
+            <div class="welcome-section">
+                <h1>Your Dashboard</h1>
+                <p>Welcome to Plexus Care. Here's what you can do today.</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-comment-medical"></i> Start a Chat</h3>
+                    <p>Connect with our AI assistant for immediate support and guidance.</p>
+                    <button class="btn btn-primary" id="startChatBtn">Start Chat</button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-calendar-check"></i> Book a Session</h3>
+                    <p>Schedule a one-on-one session with a licensed psychologist.</p>
+                    <button class="btn btn-secondary" id="bookSessionBtn">Book Now</button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-book"></i> Journal</h3>
+                    <p>Write down your thoughts and track your mood over time.</p>
+                    <button class="btn btn-secondary" id="journalBtn">Write Entry</button>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                <div id="recentActivity">
+                    <p>Your recent activity will appear here.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Supabase and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Initialize Supabase
+        const supabaseUrl = 'https://vkfntjnhanpaiuhpkroh.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrZm50am5oYW5wYWl1aHBrcm9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1NjY0NzMsImV4cCI6MjA3MjE0MjQ3M30.aGURsdU6nVv6XDUioeGOvVnApBnNcMTiORrkl1N5KlI';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // DOM Elements
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
+        const userAvatar = document.getElementById('userAvatar');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const startChatBtn = document.getElementById('startChatBtn');
+        const bookSessionBtn = document.getElementById('bookSessionBtn');
+        const journalBtn = document.getElementById('journalBtn');
+
+        // Check if user is logged in
+        async function checkAuth() {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            
+            if (error || !user) {
+                window.location.href = 'auth.html';
+                return;
+            }
+            
+            updateUI(user);
+        }
+
+        // Update UI with user data
+        function updateUI(user) {
+            const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
+            const email = user.email || '';
+            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+            
+            userName.textContent = `Hello, ${name.split(' ')[0]}!`;
+            userEmail.textContent = email;
+            
+            // Set avatar with initials
+            userAvatar.innerHTML = initials || '<i class="fas fa-user"></i>';
+            
+            // Add event listeners
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', handleLogout);
+            }
+            
+            if (startChatBtn) {
+                startChatBtn.addEventListener('click', () => {
+                    // Add chat functionality here
+                    alert('Chat functionality will be implemented soon!');
+                });
+            }
+            
+            if (bookSessionBtn) {
+                bookSessionBtn.addEventListener('click', () => {
+                    // Add booking functionality here
+                    alert('Booking functionality will be implemented soon!');
+                });
+            }
+            
+            if (journalBtn) {
+                journalBtn.addEventListener('click', () => {
+                    // Add journal functionality here
+                    alert('Journal functionality will be implemented soon!');
+                });
+            }
+        }
+
+        // Handle logout
+        async function handleLogout() {
+            const { error } = await supabase.auth.signOut();
+            if (!error) {
+                window.location.href = 'auth.html';
+            }
+        }
+
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            
+            // Add logout button functionality if it exists
+            const logoutBtn = document.createElement('button');
+            logoutBtn.id = 'logoutBtn';
+            logoutBtn.className = 'btn btn-secondary';
+            logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+            logoutBtn.style.position = 'absolute';
+            logoutBtn.style.top = '20px';
+            logoutBtn.style.right = '20px';
+            document.body.appendChild(logoutBtn);
+        });
+    </script>
+</body>
+</html>
