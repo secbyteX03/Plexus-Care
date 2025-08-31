@@ -1,0 +1,452 @@
+/* Navigation Styles */
+.navbar {
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.5rem 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing-md);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 0.5rem 0;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+    margin: 0 0.1rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    color: var(--text);
+    text-decoration: none;
+    padding: 1rem 0.4rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    position: relative;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+.nav-link.has-dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link .arrow {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: 6px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.nav-link .arrow::before,
+.nav-link .arrow::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 1.5px;
+    background-color: currentColor;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.nav-link .arrow::before {
+    left: 0;
+    transform: rotate(-45deg);
+    transform-origin: left center;
+}
+
+.nav-link .arrow::after {
+    right: 0;
+    transform: rotate(45deg);
+    transform-origin: right center;
+}
+
+.nav-link:hover .arrow::before,
+.nav-item.active .arrow::before {
+    transform: rotate(45deg);
+}
+
+.nav-link:hover .arrow::after,
+.nav-item.active .arrow::after {
+    transform: rotate(-45deg);
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    min-width: 260px;
+    border: 1px solid var(--primary-light);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+}
+
+.nav-item:last-child .dropdown {
+    right: 0;
+    left: auto;
+    min-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.25rem 1rem;
+    padding: 1rem;
+}
+
+.nav-item:hover .dropdown,
+.nav-item:focus-within .dropdown,
+.nav-item.active .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.6rem 1.5rem;
+    color: var(--text);
+    text-decoration: none;
+    transition: var(--transition);
+    margin: 0.15rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.nav-item:last-child .dropdown-item {
+    white-space: normal;
+    line-height: 1.4;
+    padding: 0.5rem 0.75rem;
+    margin: 0.15rem 0;
+}
+
+.dropdown-item:hover {
+    color: var(--primary);
+    background-color: var(--primary-lightest);
+}
+
+/* Mega Menu for Conditions */
+.mega-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.mega-menu-section {
+    padding: 0.5rem 0;
+}
+
+.mega-menu-section h4 {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mega-menu-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-links li {
+    margin-bottom: 0.5rem;
+}
+
+.mega-menu-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: block;
+    padding: 0.25rem 0;
+}
+
+.mega-menu-links a:hover {
+color: var(--primary);
+padding-left: 0.25rem;
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    position: relative;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    /* Hide all dropdown arrows on mobile */
+    .nav-link .arrow {
+        display: none !important;
+    }
+    
+    /* Only show arrow for More on mobile */
+    .nav-item.more-item .nav-link .arrow {
+        display: inline-block !important;
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-item.more-item .nav-link.active .arrow {
+        transform: rotate(180deg);
+    }
+    
+    /* Hide all dropdowns on mobile by default */
+    .nav-item .dropdown {
+        display: none !important;
+    }
+    
+    /* Style for the More dropdown on mobile */
+    .nav-item.more-item .dropdown {
+        display: none;
+        position: relative;
+        width: 100%;
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        margin: 0.25rem 0 0 0;
+        background: #f8f9fa;
+        border-radius: 4px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        z-index: 1001;
+        transform: translateY(-5px);
+    }
+    
+    .nav-item.more-item .dropdown.active {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        animation: fadeIn 0.2s ease-out;
+    }
+    
+    .nav-item.more-item .dropdown a {
+        display: block;
+        padding: 0.4rem 0.5rem;
+        color: #333;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        line-height: 1.3;
+    }
+    
+    .nav-item.more-item .dropdown .dropdown-item:hover {
+        background-color: #e9ecef;
+    }
+    
+    /* Remove hover effects on mobile */
+    .nav-item:not(.more-item):hover .dropdown {
+        display: none !important;
+    }
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 280px;
+        height: 100vh;
+        background-color: var(--white);
+        flex-direction: column;
+        padding: 5rem 1rem 2rem;
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-item {
+        margin: 0.25rem 0;
+        width: 100%;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border-radius: 4px;
+    }
+    
+    .nav-link:hover {
+        background-color: var(--light);
+    }
+
+    .mega-menu {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .mega-menu-section h4 {
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    .mega-menu-links {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border-radius: 4px;
+    }
+
+    .nav-link:hover {
+        background-color: var(--light);
+    }
+    
+    /* Show only the More dropdown on mobile */
+    .nav-item:last-child .dropdown.active {
+        display: block;
+    }
+
+    /* Adjust the More dropdown grid for mobile */
+    .nav-item:last-child .mega-menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        padding: 0.5rem;
+    }
+    
+    /* Make More dropdown items more compact on mobile */
+    .nav-item:last-child .mega-menu-section {
+        margin-bottom: 0.5rem;
+    }
+    
+    .nav-item:last-child .mega-menu-links {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+    
+    .nav-item:last-child .mega-menu-links a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        background: rgba(0,0,0,0.03);
+    }
+    .mega-menu-section h4 {
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    .mega-menu-links {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .mega-menu-links li a {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.85rem;
+    }
+
+/* Hide all dropdowns except More on mobile */
+.nav-item:not(:last-child) .dropdown {
+display: none !important;
+}
+
+/* Style for More dropdown on mobile */
+.nav-item:last-child .dropdown {
+width: 100%;
+left: 0;
+right: 0;
+padding: 0.5rem;
+margin: 0;
+border: none;
+box-shadow: none;
+}
+
+/* Adjust the More dropdown grid for mobile */
+.nav-item:last-child .mega-menu {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0.5rem;
+}
+
+.nav-item:last-child .mega-menu-section {
+padding: 0.25rem;
+}
+}
+
+/* Active state for mobile */
+.nav-item.active .dropdown {
+display: block;
+}
