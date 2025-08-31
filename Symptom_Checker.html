@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plexus Care - Symptom Checker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: #7ba3c0;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            background: white;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            background: #e9ecef;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #6c757d;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #e8979a;
+            border-bottom-color: #7ba3c0;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #dee2e6;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+        }
+
+        .condition-details {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .tab-content-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .tab-content-header h2 {
+            color: #2c5aa0;
+            margin-bottom: 10px;
+        }
+
+        .tab-content-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .tab-content-body {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .info-message {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .info-message p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .condition-selection-prompt {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 2px dashed #dee2e6;
+        }
+
+        .condition-selection-prompt h3 {
+            color: #2c5aa0;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .condition-selection-prompt p {
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* Treatment options and specialist lists */
+        .treatment-options,
+        .specialist-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+
+        .treatment-options li,
+        .specialist-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .treatment-options li:before {
+            content: '•';
+            color: #7ba3c0;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+        }
+
+        .specialist-list li:before {
+            content: '👨‍⚕️';
+            margin-right: 8px;
+            position: absolute;
+            left: 0;
+        }
+
+        .condition-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .condition-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Enhanced Details Section */
+        .details-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .details-main {
+            flex: 2;
+        }
+
+        .details-sidebar {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .details-section {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .details-header {
+            background-color: #f8f9fa;
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        .details-header:hover {
+            background-color: #e9ecef;
+        }
+
+        .details-header h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        .toggle-icon {
+            font-size: 18px;
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        .details-body {
+            padding: 15px 20px;
+            background: white;
+            display: none;
+        }
+
+        .details-body p {
+            margin: 0 0 10px;
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .read-more {
+            color: #2c5aa0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .diagnosis-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .diagnosis-section h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .diagnosis-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-yes {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-no {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-maybe {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .fact-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .fact-box h3 {
+            color: #2c5aa0;
+            margin-top: 0;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .fun-facts {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        .fun-facts li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            color: #495057;
+        }
+
+        .fact-highlight {
+            background: #e9f0ff;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #2c5aa0;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .details-container {
+                flex-direction: column;
+            }
+
+            .details-sidebar {
+                margin-top: 30px;
+                min-width: 100%;
+            }
+        }
+
+        .section-title {
+            color: #2c5aa0;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .section-content {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .tab-pane {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* INFO Tab */
+        .info-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-title {
+            font-size: 2.5rem;
+            color: #2c5aa0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .info-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .disclaimer-toggle {
+            cursor: pointer;
+            color: #2c5aa0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .disclaimer-content {
+            margin-top: 15px;
+            display: none;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .user-inputs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group input {
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 80px;
+            text-align: center;
+        }
+
+        .sex-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sex-btn {
+            padding: 10px 20px;
+            border: 2px solid #dee2e6;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .sex-btn.selected {
+            background: #17a2b8;
+            color: white;
+            border-color: #17a2b8;
+        }
+
+        .continue-btn {
+            background: #7ba3c0;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+
+        .continue-btn:hover {
+            background: #5d8aa8;
+        }
+
+        /* SYMPTOMS Tab */
+        .symptoms-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .symptoms-status {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .symptoms-categories {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        .category-sidebar {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-item {
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .category-item:hover {
+            background: #dee2e6;
+        }
+
+        .category-item.active {
+            background: #e7f1ff;
+            border-left-color: #2c5aa0;
+            color: #2c5aa0;
+            font-weight: 600;
+        }
+
+        .symptoms-content {
+            background: white;
+            border-radius: 6px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+        }
+
+        .symptoms-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #dee2e6;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: #2c5aa0;
+            color: white;
+            border-color: #2c5aa0;
+        }
+
+        .symptoms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .symptom-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .symptom-checkbox:hover {
+            background: #f8f9fa;
+        }
+
+        .symptom-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #2c5aa0;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: 2px solid #dee2e6;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.primary {
+            background: #7ba3c0;
+            color: white;
+            border-color: #7ba3c0;
+        }
+
+        .nav-btn:hover {
+            background: #dee2e6;
+        }
+
+        .nav-btn.primary:hover {
+            background: #5d8aa8;
+        }
+
+        .info-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            gap: 20px;
+        }
+
+        .info-step {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .info-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #7ba3c0;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0 auto 15px;
+        }
+
+        .info-step h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .info-step p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+
+        /* CONDITIONS Tab */
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .conditions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .condition-card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .condition-card:hover {
+            border-color: #7ba3c0;
+            box-shadow: 0 0 0 1px #7ba3c0;
+        }
+
+        .condition-card.selected {
+            background: #e7f1ff;
+            border-left-color: #2c5aa0;
+        }
+
+        .condition-match {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .match-strength {
+            height: 6px;
+            background: #dee2e6;
+            border-radius: 3px;
+            overflow: hidden;
+            flex: 1;
+            max-width: 100px;
+        }
+
+        .match-fill {
+            height: 100%;
+            transition: width 0.3s;
+            background: #7ba3c0;
+        }
+
+        .match-fill.strong {
+            background: #28a745;
+            width: 90%;
+        }
+
+        .match-fill.moderate {
+            background: #ffc107;
+            width: 60%;
+        }
+
+        .match-fill.fair {
+            background: #fd7e14;
+            width: 30%;
+        }
+
+        .condition-details {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid #dee2e6;
+        }
+
+        .condition-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .condition-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .detail-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .detail-tab {
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6c757d;
+            transition: all 0.3s;
+        }
+
+        .detail-tab.active {
+            color: #7ba3c0;
+            border-bottom-color: #7ba3c0;
+            background: white;
+        }
+
+        .condition-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .section-content {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .user-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .user-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .edit-btn {
+            color: #17a2b8;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .edit-btn:hover {
+            text-decoration: underline;
+        }
+
+        .symptoms-list {
+            color: #666;
+            font-style: italic;
+        }
+
+        .start-over-btn {
+            background: white;
+            border: 2px solid #dee2e6;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .start-over-btn:hover {
+            background: #f8f9fa;
+        }
+
+        /* Treatment Layout similar to Details */
+        .treatment-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .treatment-main {
+            flex: 2;
+        }
+
+        .treatment-sidebar {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .treatment-section {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .treatment-header {
+            background-color: #f8f9fa;
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        .treatment-header:hover {
+            background-color: #e9ecef;
+        }
+
+        .treatment-header h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        .treatment-body {
+            padding: 15px 20px;
+            background: white;
+            display: none;
+        }
+
+        .treatment-info-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .next-condition-btn {
+            background: #7ba3c0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        .next-condition-btn:hover {
+            background: #5d8aa8;
+        }
+
+        /* Print Button */
+        .print-section {
+            position: relative;
+            margin: 20px 0;
+            z-index: 1000;
+            background: #e8979a;
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .print-btn {
+            background: #7ba3c0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .print-btn:hover {
+            background: #e2888b;
+        }
+
+        .print-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
+            display: none;
+            min-width: 180px;
+            z-index: 1001;
+        }
+
+        .print-dropdown.show {
+            display: block;
+        }
+
+        .print-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #333;
+        }
+
+        .print-option:hover {
+            background: #e8979a;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #7ba3c0;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tab-navigation {
+                flex-wrap: wrap;
+            }
+
+            .tab-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .conditions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-inputs {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .symptoms-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+
+            .header,
+            .footer,
+            .print-section,
+            .tab-navigation {
+                display: none !important;
+            }
+
+            .container {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .tab-content {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            body {
+                background: white;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2c5aa0;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Plexus Care</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="Drugs_supl.html">Drugs & Supplements</a></li>
+                    <li><a href="Doctor.html">Find a Doctor</a></li>
+                    <li><a href="Symptom_Checker.html">Symptoms</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Print Section -->
+        <div class="print-section">
+            <button class="print-btn" onclick="togglePrintDropdown()">
+                🖨️ Print
+            </button>
+            <div class="print-dropdown" id="printDropdown">
+                <div class="print-option" onclick="printConditionDetails()"><i class="fas fa-print"></i> Condition
+                    Details</div>
+                <div class="print-option" onclick="printTreatmentOptions()"><i class="fas fa-print"></i> Treatment
+                    Options</div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('info')">INFO</button>
+            <button class="tab-btn" onclick="switchTab('symptoms')">SYMPTOMS</button>
+            <button class="tab-btn" onclick="switchTab('conditions')">CONDITIONS</button>
+            <button class="tab-btn" onclick="switchTab('details')">DETAILS</button>
+            <button class="tab-btn" onclick="switchTab('treatment')">TREATMENT</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- INFO Tab -->
+            <div class="tab-pane active" id="info">
+                <div class="info-content">
+                    <h1 class="info-title">Plexus Care Symptom Checker</h1>
+                    <p class="info-subtitle">Identify possible conditions and treatment related to your symptoms.</p>
+                    <div class="info-steps">
+                        <div class="info-step">
+                            <div class="step-number">1</div>
+                            <h3>Select your symptoms</h3>
+                            <p>Choose from our list of common symptoms or search for specific ones.</p>
+                        </div>
+                        <div class="info-step">
+                            <div class="step-number">2</div>
+                            <h3>Review possible conditions</h3>
+                            <p>See a list of conditions that match your symptoms.</p>
+                        </div>
+                        <div class="info-step">
+                            <div class="step-number">3</div>
+                            <h3>Get detailed information</h3>
+                            <p>Learn about symptoms, treatments, and when to see a doctor.</p>
+                        </div>
+                    </div>
+                    <div class="disclaimer">
+                        <strong>This tool does not provide medical advice.</strong>
+                        <a href="#" class="disclaimer-toggle" onclick="toggleDisclaimer()">See additional information
+                            ▼</a>
+                        <div class="disclaimer-content" id="disclaimerContent">
+                            This tool does not provide medical advice. This tool is not intended to be a substitute for
+                            professional medical advice, diagnosis, or treatment. Always read the label before taking
+                            any over-the-counter (OTC) medications. The label identifies the active ingredient(s) and
+                            contains other important information including warnings about possible drug interactions and
+                            side effects. Always seek the advice of your physician or other qualified health provider
+                            with any questions you may have regarding a medical condition. Never disregard professional
+                            medical advice or delay in seeking it because of something you have read in this site! If
+                            you think you may have a medical emergency, consult your doctor or seek medical attention
+                            immediately. We do not recommend or endorse any specific products or services. Reliance on
+                            any information provided by Plexus Care is solely at your own risk.
+                        </div>
+                    </div>
+
+                    <div class="user-inputs">
+                        <div class="input-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" value="25" min="1" max="120">
+                        </div>
+                        <div class="input-group">
+                            <label>Sex</label>
+                            <div class="sex-buttons">
+                                <button class="sex-btn" onclick="selectSex('male')">Male</button>
+                                <button class="sex-btn selected" onclick="selectSex('female')">Female</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="continue-btn" onclick="switchTab('symptoms')">Continue ➤</button>
+                </div>
+            </div>
+
+            <!-- SYMPTOMS Tab -->
+            <div class="tab-pane" id="symptoms">
+                <div class="symptoms-header">
+                    <h2>What are your symptoms?</h2>
+                </div>
+
+                <div class="symptoms-status">
+                    <span id="symptomCount">No symptoms added</span>
+                </div>
+
+                <div class="symptoms-categories">
+                    <div class="category-sidebar">
+                        <h3 style="margin-bottom: 15px; color: #333;">Browse Symptoms</h3>
+                        <ul class="category-list">
+                            <li class="category-item active" onclick="selectCategory('general')">General Symptoms</li>
+                            <li class="category-item" onclick="selectCategory('skin')">Skin Symptoms</li>
+                            <li class="category-item" onclick="selectCategory('head')">Head</li>
+                            <li class="category-item" onclick="selectCategory('neck')">Neck</li>
+                            <li class="category-item" onclick="selectCategory('chest')">Chest</li>
+                            <li class="category-item" onclick="selectCategory('arms')">Arms</li>
+                            <li class="category-item" onclick="selectCategory('abdomen')">Abdomen</li>
+                            <li class="category-item" onclick="selectCategory('pelvis')">Pelvis</li>
+                            <li class="category-item" onclick="selectCategory('back')">Back</li>
+                            <li class="category-item" onclick="selectCategory('buttocks')">Buttocks</li>
+                            <li class="category-item" onclick="selectCategory('legs')">Legs</li>
+                            <li class="category-item" onclick="selectCategory('all')">All Symptoms</li>
+                        </ul>
+                    </div>
+
+                    <div class="symptoms-content">
+                        <div class="symptoms-filter">
+                            <span style="font-weight: 600;">Symptoms</span>
+                            <button class="filter-btn active" onclick="toggleFilter('all')">All</button>
+                            <button class="filter-btn" onclick="toggleFilter('common')">Common</button>
+                        </div>
+
+                        <div class="symptoms-grid" id="symptomsGrid">
+                            <!-- Symptoms will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="switchTab('info')">Previous</button>
+                    <button class="nav-btn primary" onclick="switchTab('conditions')">Continue</button>
+                </div>
+            </div>
+
+            <!-- CONDITIONS Tab -->
+            <div class="tab-pane" id="conditions">
+                <div class="conditions-grid">
+                    <div>
+                        <div style="margin-bottom: 20px;">
+                            <h3>Conditions that match your symptoms</h3>
+                            <small style="color: #17a2b8; font-weight: 500;">UNDERSTANDING YOUR RESULTS ⓘ</small>
+                        </div>
+
+                        <div class="conditions-list" id="conditionsList">
+                            <div class="condition-card selected" onclick="selectCondition('tension')">
+                                <div class="condition-match">
+                                    <div class="match-strength">
+                                        <div class="match-fill strong"></div>
+                                    </div>
+                                    <span style="color: #28a745; font-weight: 600;">STRONG match</span>
+                                </div>
+                                <h4>Tension Headache</h4>
+                            </div>
+
+                            <div class="condition-card" onclick="selectCondition('migraine')">
+                                <div class="condition-match">
+                                    <div class="match-strength">
+                                        <div class="match-fill moderate"></div>
+                                    </div>
+                                    <span style="color: #ffc107; font-weight: 600;">Moderate match</span>
+                                </div>
+                                <h4>Migraine Headache (Adult)</h4>
+                            </div>
+
+                            <div class="condition-card" onclick="selectCondition('cluster')">
+                                <div class="condition-match">
+                                    <div class="match-strength">
+                                        <div class="match-fill fair"></div>
+                                    </div>
+                                    <span style="color: #fd7e14; font-weight: 600;">Fair match</span>
+                                </div>
+                                <h4>Cluster Headache</h4>
+                            </div>
+                        </div>
+
+                        <button class="start-over-btn" onclick="startOver()">
+                            🔄 Start Over
+                        </button>
+                    </div>
+
+                    <div class="condition-details" id="conditionDetails">
+                        <div class="user-info">
+                            <div class="user-info-row">
+                                <span><strong>Gender:</strong> Female</span>
+                                <span><strong>Age:</strong> 23</span>
+                                <a href="#" class="edit-btn" onclick="switchTab('info')">Edit</a>
+                            </div>
+                            <div class="user-info-row">
+                                <span><strong>My Symptoms</strong></span>
+                                <a href="#" class="edit-btn" onclick="switchTab('symptoms')">Edit</a>
+                            </div>
+                            <div class="symptoms-list" id="selectedSymptomsList">
+                                breast getting bigger, breast hurts, breast redness, breast skin feels like an orange
+                                peel, growth on nipple, infected lump or sore on breast
+                            </div>
+                        </div>
+
+                        <div class="condition-selection-prompt">
+                            <h3>Select a condition to view details</h3>
+                            <p>Click on any condition card to see detailed information and treatment options</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="switchTab('symptoms')">Previous</button>
+                    <button class="nav-btn primary" onclick="switchTab('details')">Continue</button>
+                </div>
+            </div>
+
+            <!-- DETAILS Tab -->
+            <div class="tab-pane" id="details">
+                <div class="tab-content-header">
+                    <h2 id="detailsTitle">Condition Details</h2>
+                    <p id="detailsSubtitle">Detailed information about your condition</p>
+                </div>
+                <div id="detailsContent" class="tab-content-body">
+                    <!-- Content will be loaded by JavaScript -->
+                </div>
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="switchTab('conditions')">Back to Conditions</button>
+                    <button class="nav-btn primary" onclick="switchTab('treatment')">View Treatment Options</button>
+                </div>
+            </div>
+
+            <!-- TREATMENT Tab -->
+            <div class="tab-pane" id="treatment">
+                <div class="tab-content-header">
+                    <h2 id="treatmentTitle">Treatment Options</h2>
+                    <p id="treatmentSubtitle">Recommended treatments and next steps</p>
+                </div>
+                <div id="treatmentContent" class="tab-content-body">
+                    <!-- Content will be loaded by JavaScript -->
+                </div>
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="switchTab('details')">Back to Details</button>
+                    <button class="nav-btn primary" onclick="startOver()">Start Over</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#about">About Us</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#careers">Careers</a>
+            </div>
+            <p>&copy; 2025 Plexus Care. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global state
+        let selectedSex = 'female';
+        let selectedSymptoms = [];
+        let currentCategory = 'general';
+        let currentFilter = 'all';
+        let selectedCondition = null;
+
+        // Symptoms data
+        const symptomsData = {
+            general: {
+                all: [
+                    'arm or leg is weak', 'arm or leg itching', 'bone pain', 'bone tenderness',
+                    'burning feeling in arm or leg', "can't move arm or leg", "can't move arm or leg for long period",
+                    'chills', 'chronic pain', 'cold sore', 'constant fever with varying temperatures',
+                    'dactylitis (finger or toe inflammation)', 'dehydration', 'dizziness', 'easily irritated',
+                    'easy bleeding', 'extremity asterixis', 'fatigue', 'fever', 'fever 103f to 104f',
+                    'fever below 100.4f', 'flaky bump(s) limited to elbows or knees', 'generalized muscle weakness',
+                    'hot flashes', 'hungry a lot more', 'impulsive behavior', 'insomnia', 'jittery',
+                    'joint warmth', 'lethargy', 'loss of appetite', 'loss of balance', 'muscle cramp',
+                    'muscle cramps at night', 'muscle pain all over', 'muscle weakness',
+                    'muscles getting weaker over time', 'nausea', 'night sweats',
+                    "not able to tell what's causing the fever", 'numbness', 'pain in arm or leg',
+                    'really sleepy during day', 'recurring fever', 'seizure', 'several painful glands in a region',
+                    'single flaky raised skin patch on elbows or knees', 'stiff arm or leg',
+                    'stiff knuckles in hands or toes', 'suddenly falling to the ground', 'tender glands',
+                    'tender muscle', 'tic', 'tingling or pricking of arm or leg', 'wake up feeling stiff',
+                    'weight gain', 'weight loss'
+                ],
+                common: [
+                    'fatigue', 'fever', 'chills', 'nausea', 'dizziness', 'muscle pain all over',
+                    'loss of appetite', 'weight loss', 'weight gain', 'insomnia', 'lethargy'
+                ]
+            },
+            skin: {
+                all: [
+                    'acne', 'rash', 'dry skin', 'itchy skin', 'skin discoloration', 'moles changing',
+                    'skin bumps', 'skin lesions', 'bruising easily', 'skin irritation', 'hives',
+                    'eczema', 'psoriasis patches', 'skin burning sensation'
+                ],
+                common: [
+                    'acne', 'rash', 'dry skin', 'itchy skin', 'bruising easily', 'hives'
+                ]
+            },
+            head: {
+                all: [
+                    'headache', 'migraine', 'scalp tenderness', 'hair loss', 'eye pain', 'blurred vision',
+                    'ear pain', 'hearing loss', 'nose congestion', 'runny nose', 'facial pain',
+                    'jaw pain', 'tooth pain', 'mouth sores', 'dry mouth'
+                ],
+                common: [
+                    'headache', 'eye pain', 'ear pain', 'nose congestion', 'jaw pain', 'tooth pain'
+                ]
+            },
+            neck: {
+                all: [
+                    'neck pain', 'neck stiffness', 'swollen lymph nodes', 'throat pain', 'difficulty swallowing',
+                    'hoarse voice', 'neck muscle spasm', 'limited neck movement'
+                ],
+                common: [
+                    'neck pain', 'neck stiffness', 'throat pain', 'swollen lymph nodes'
+                ]
+            },
+            chest: {
+                all: [
+                    'chest pain', 'shortness of breath', 'cough', 'wheezing', 'heart palpitations',
+                    'chest tightness', 'breast pain', 'breast lumps', 'chest burning sensation'
+                ],
+                common: [
+                    'chest pain', 'shortness of breath', 'cough', 'heart palpitations'
+                ]
+            },
+            arms: {
+                all: [
+                    'arm pain', 'arm weakness', 'arm numbness', 'arm swelling', 'elbow pain',
+                    'wrist pain', 'hand pain', 'finger pain', 'arm stiffness', 'shoulder pain'
+                ],
+                common: [
+                    'arm pain', 'shoulder pain', 'elbow pain', 'wrist pain', 'hand pain'
+                ]
+            },
+            abdomen: {
+                all: [
+                    'abdominal pain', 'stomach pain', 'nausea', 'vomiting', 'diarrhea', 'constipation',
+                    'bloating', 'gas', 'loss of appetite', 'abdominal swelling', 'heartburn'
+                ],
+                common: [
+                    'abdominal pain', 'nausea', 'diarrhea', 'constipation', 'bloating', 'heartburn'
+                ]
+            },
+            pelvis: {
+                all: [
+                    'pelvic pain', 'urinary frequency', 'painful urination', 'blood in urine',
+                    'pelvic pressure', 'menstrual irregularities', 'vaginal discharge', 'pelvic cramping'
+                ],
+                common: [
+                    'pelvic pain', 'urinary frequency', 'painful urination', 'menstrual irregularities'
+                ]
+            },
+            back: {
+                all: [
+                    'back pain', 'lower back pain', 'upper back pain', 'back stiffness',
+                    'back muscle spasm', 'sciatica', 'back numbness', 'back weakness'
+                ],
+                common: [
+                    'back pain', 'lower back pain', 'back stiffness', 'sciatica'
+                ]
+            },
+            buttocks: {
+                all: [
+                    'buttock pain', 'tailbone pain', 'sitting pain', 'buttock numbness',
+                    'buttock muscle spasm', 'hip pain radiating to buttock'
+                ],
+                common: [
+                    'buttock pain', 'tailbone pain', 'sitting pain', 'hip pain radiating to buttock'
+                ]
+            },
+            legs: {
+                all: [
+                    'leg pain', 'leg weakness', 'leg numbness', 'leg swelling', 'knee pain',
+                    'ankle pain', 'foot pain', 'leg cramps', 'varicose veins', 'leg stiffness'
+                ],
+                common: [
+                    'leg pain', 'knee pain', 'ankle pain', 'foot pain', 'leg cramps'
+                ]
+            },
+            all: {
+                all: [], // Will be populated by combining all categories
+                common: [] // Will be populated by combining common symptoms
+            }
+        };
+
+        // Conditions data with detailed information
+        const conditionsData = {
+            tension: {
+                title: 'Tension Headache',
+                subtitle: 'Stress headache | Muscle spasm headache',
+                match: 'strong',
+                symptoms: 'Tension headache symptoms include dull pain and pressure, tightness like a band around the head, mild sensitivity to noise or light, difficulty sleeping, and difficulty concentrating.',
+                howCommon: 'Among adults, 30% to 80% have occasional tension headaches.',
+                overview: 'Tension headaches are the most common type of headache, caused by muscle tension in the neck, face, jaw, or shoulders. Many people have occasional tension headaches, which often start in the middle of the day. For others, tension headaches occur every day.',
+                treatmentOptions: [
+                    'Over-the-counter pain relievers (e.g., paracetamol, ibuprofen)',
+                    'Stress management techniques',
+                    'Regular exercise and stretching',
+                    'Adequate sleep and hydration',
+                    'Relaxation techniques (deep breathing, meditation)'
+                ],
+                whenToSeeDoctor: 'If headaches become more frequent or severe, are accompanied by fever, neck stiffness, or neurological symptoms, or if they interfere with daily activities.',
+                estimatedCost: 'KSH 500 - 2,000 for initial consultation. Additional tests if needed: KSH 1,500 - 5,000.',
+                recommendedSpecialists: ['General Practitioner', 'Neurologist', 'Pain Management Specialist']
+            },
+            migraine: {
+                title: 'Migraine Headache',
+                subtitle: 'Vascular headache | Sick headache',
+                match: 'moderate',
+                symptoms: 'Throbbing or pulsing pain, usually on one side of the head, sensitivity to light and sound, nausea, vomiting, and visual disturbances (aura) in some cases.',
+                howCommon: 'Affects about 12% of the population, with women being three times more likely than men to experience migraines.',
+                overview: 'Migraines are a neurological condition that can cause severe throbbing pain or a pulsing sensation, usually on one side of the head. They can last for hours to days and can be so severe that the pain is disabling.',
+                treatmentOptions: [
+                    'Prescription medications (triptans, ergots, anti-nausea drugs)',
+                    'Pain-relieving medications (NSAIDs, acetaminophen)',
+                    'Preventive medications (beta blockers, antidepressants, anti-seizure drugs)',
+                    'Lifestyle changes and trigger avoidance',
+                    'Alternative therapies (acupuncture, biofeedback)'
+                ],
+                whenToSeeDoctor: 'For severe or unusual headaches, if you experience a sudden, severe headache, headache after head injury, or if your headache pattern changes.',
+                estimatedCost: 'KSH 1,500 - 5,000 for specialist consultation. MRI/CT scans if needed: KSH 15,000 - 30,000.',
+                recommendedSpecialists: ['Neurologist', 'Headache Specialist', 'Pain Management Specialist']
+            },
+            cluster: {
+                title: 'Cluster Headache',
+                subtitle: 'Horton\'s syndrome | Histamine headache',
+                match: 'fair',
+                symptoms: 'Severe burning or piercing pain behind or around one eye, restlessness, excessive tearing, redness in the eye, stuffy or runny nostril, and swelling around the eye.',
+                howCommon: 'Rare, affecting about 0.1% of the population, with men being more commonly affected than women.',
+                overview: 'Cluster headaches are one of the most painful types of headache. They occur in cyclical patterns or clusters, which gives the condition its name. Bouts of frequent attacks, known as cluster periods, can last from weeks to months, followed by remission periods when the headaches stop.',
+                treatmentOptions: [
+                    'Acute treatments (triptan injections, oxygen therapy, dihydroergotamine)',
+                    'Preventive treatments (calcium channel blockers, corticosteroids, lithium)',
+                    'Nerve blocks',
+                    'Nerve stimulation',
+                    'Surgery (in rare cases)'
+                ],
+                whenToSeeDoctor: 'Immediate medical attention is needed for severe headaches, especially if they differ from your usual pattern or are accompanied by confusion, fever, sensory changes, or stiff neck.',
+                estimatedCost: 'KSH 2,000 - 6,000 for specialist consultation. Oxygen therapy sessions: KSH 1,500 - 3,000 per session.',
+                recommendedSpecialists: ['Neurologist', 'Headache Specialist', 'Pain Management Specialist']
+            },
+            sinus: {
+                title: 'Sinus Headache',
+                subtitle: 'Sinusitis headache | Rhinosinusitis',
+                match: 'moderate',
+                symptoms: 'Deep, constant pain in the cheekbones, forehead, or bridge of the nose, pain that worsens with sudden head movement, facial swelling, nasal discharge, and fever.',
+                howCommon: 'Affects about 15% of the population annually, often associated with seasonal allergies or infections.',
+                overview: 'Sinus headaches are a symptom of sinus infections (sinusitis), which cause pressure and pain in your face. When you have a sinus infection, you may also have a fever, cough, sore throat, and other cold or flu-like symptoms.',
+                treatmentOptions: [
+                    'Antibiotics (if bacterial infection is present)',
+                    'Decongestants',
+                    'Nasal saline irrigation',
+                    'Antihistamines (for allergy-related sinusitis)',
+                    'Pain relievers and fever reducers'
+                ],
+                whenToSeeDoctor: 'If symptoms last more than 10 days, are severe, or are accompanied by high fever, vision changes, or confusion.',
+                estimatedCost: 'KSH 1,000 - 3,000 for consultation. Additional tests if needed: KSH 2,000 - 8,000.',
+                recommendedSpecialists: ['ENT Specialist', 'Allergist', 'General Practitioner']
+            }
+        };
+
+        // Toggle treatment section
+        function toggleTreatmentSection(sectionId) {
+            const content = document.getElementById(`${sectionId}-content`);
+            const icon = content.previousElementSibling.querySelector('.toggle-icon');
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.style.padding = '0';
+                icon.textContent = '+';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.padding = '15px 20px';
+                icon.textContent = '-';
+            }
+        }
+
+        // Toggle collapsible sections
+        function toggleSection(sectionId) {
+            const content = document.getElementById(`${sectionId}-content`);
+            const icon = content.previousElementSibling.querySelector('.toggle-icon');
+
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                icon.textContent = '+';
+            } else {
+                content.style.display = 'block';
+                icon.textContent = '-';
+            }
+        }
+
+        // Handle condition selection
+        function selectCondition(conditionKey) {
+            selectedCondition = conditionKey;
+
+            // Update active state of condition cards
+            document.querySelectorAll('.condition-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+
+            // Update the details and treatment tabs
+            updateConditionDetails();
+
+            // Switch to the details tab
+            switchTab('details');
+        }
+
+        // Navigate to next condition
+        function nextCondition() {
+            const conditions = Object.keys(conditionsData);
+            const currentIndex = conditions.indexOf(selectedCondition);
+            const nextIndex = (currentIndex + 1) % conditions.length;
+            selectCondition(conditions[nextIndex]);
+
+            // Scroll to top of details
+            document.querySelector('.tab-content').scrollTo(0, 0);
+        }
+
+        // Initialize the application
+        function init() {
+            populateAllSymptoms();
+
+            // Expand first section by default
+            setTimeout(() => {
+                const firstSection = document.querySelector('.details-section:first-child .details-body');
+                const firstIcon = document.querySelector('.details-section:first-child .toggle-icon');
+                if (firstSection) {
+                    firstSection.style.display = 'block';
+                    firstIcon.textContent = '-';
+                }
+            }, 100);
+            loadSymptoms('general');
+            updateSymptomCount();
+        }
+
+        // Populate all symptoms category
+        function populateAllSymptoms() {
+            let allSymptoms = [];
+            let commonSymptoms = [];
+
+            Object.keys(symptomsData).forEach(category => {
+                if (category !== 'all') {
+                    allSymptoms = allSymptoms.concat(symptomsData[category].all);
+                    commonSymptoms = commonSymptoms.concat(symptomsData[category].common);
+                }
+            });
+
+            symptomsData.all.all = [...new Set(allSymptoms)].sort();
+            symptomsData.all.common = [...new Set(commonSymptoms)].sort();
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target?.classList.add('active') || document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+
+            // If user jumps to details/treatment without selecting condition
+            if ((tabName === 'details' || tabName === 'treatment') && !selectedCondition) {
+                const targetDiv = tabName === 'details' ? document.getElementById('detailsContent') : document.getElementById('treatmentContent');
+                targetDiv.innerHTML = `
+            <div class="condition-selection-prompt">
+                <h3>Please select a symptom first</h3>
+                <p>You need to choose a symptom and condition before viewing ${tabName}.</p>
+            </div>
+        `;
+            }
+        }
+
+
+        // Sex selection
+        function selectSex(sex) {
+            selectedSex = sex;
+            document.querySelectorAll('.sex-btn').forEach(btn => btn.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+
+        // Disclaimer toggle
+        function toggleDisclaimer() {
+            const content = document.getElementById('disclaimerContent');
+            const toggle = document.querySelector('.disclaimer-toggle');
+
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                toggle.innerHTML = 'See additional information ▼';
+            } else {
+                content.style.display = 'block';
+                toggle.innerHTML = 'Hide additional information ▲';
+            }
+        }
+
+        // Category selection
+        function selectCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+            loadSymptoms(category);
+        }
+
+        // Filter toggle
+        function toggleFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            loadSymptoms(currentCategory);
+        }
+
+        // Load symptoms
+        function loadSymptoms(category) {
+            const grid = document.getElementById('symptomsGrid');
+            const symptoms = symptomsData[category]?.[currentFilter] || [];
+
+            grid.innerHTML = '';
+
+            symptoms.forEach(symptom => {
+                const div = document.createElement('div');
+                div.className = 'symptom-checkbox';
+                div.innerHTML = `
+                    <input type="checkbox" id="${symptom.replace(/\s+/g, '_')}" 
+                           ${selectedSymptoms.includes(symptom) ? 'checked' : ''}
+                           onchange="toggleSymptom('${symptom}')">
+                    <label for="${symptom.replace(/\s+/g, '_')}">${symptom}</label>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // Toggle symptom selection
+        function toggleSymptom(symptom) {
+            const index = selectedSymptoms.indexOf(symptom);
+            if (index > -1) {
+                selectedSymptoms.splice(index, 1);
+            } else {
+                selectedSymptoms.push(symptom);
+            }
+            updateSymptomCount();
+            updateSelectedSymptomsList();
+        }
+
+        // Update symptom count
+        function updateSymptomCount() {
+            const count = selectedSymptoms.length;
+            const countElement = document.getElementById('symptomCount');
+            countElement.textContent = count === 0 ? 'No symptoms added' : `${count} symptom${count > 1 ? 's' : ''} selected`;
+        }
+
+        // Update selected symptoms list in conditions tab
+        function updateSelectedSymptomsList() {
+            const listElement = document.getElementById('selectedSymptomsList');
+            listElement.textContent = selectedSymptoms.length > 0 ? selectedSymptoms.join(', ') : 'No symptoms selected';
+        }
+
+        // Condition selection
+        function selectCondition(conditionKey) {
+            selectedCondition = conditionKey;
+            document.querySelectorAll('.condition-card').forEach(card => card.classList.remove('selected'));
+            event.target.closest('.condition-card').classList.add('selected');
+
+            const condition = conditionsData[conditionKey];
+            if (condition) {
+                document.getElementById('detailsTitle').textContent = condition.title;
+                document.getElementById('detailsSubtitle').textContent = condition.subtitle;
+                document.getElementById('treatmentTitle').textContent = `Treatment for ${condition.title}`;
+                updateConditionDetails();
+                // Automatically switch to details tab
+                switchTab('details');
+            }
+        }
+
+        // Update condition details
+        function updateConditionDetails() {
+            const condition = conditionsData[selectedCondition];
+            const detailsContent = document.getElementById('detailsContent');
+            const treatmentContent = document.getElementById('treatmentContent');
+
+            // Update details tab content
+            detailsContent.innerHTML = `
+                <div class="details-container">
+                    <div class="details-main">
+                        <div class="details-section">
+                            <div class="details-header" onclick="toggleSection('symptoms')">
+                                <h3>Symptoms</h3>
+                                <span class="toggle-icon">+</span>
+                            </div>
+                            <div class="details-body" id="symptoms-content">
+                                <p>${condition.symptoms}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <div class="details-header" onclick="toggleSection('common')">
+                                <h3>How Common</h3>
+                                <span class="toggle-icon">+</span>
+                            </div>
+                            <div class="details-body" id="common-content">
+                                <p>${condition.howCommon}</p>
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <div class="details-header" onclick="toggleSection('overview')">
+                                <h3>Overview</h3>
+                                <span class="toggle-icon">+</span>
+                            </div>
+                            <div class="details-body" id="overview-content">
+                                <p>${condition.overview} <a href="#" class="read-more">read more</a></p>
+                            </div>
+                        </div>
+
+                        <div class="diagnosis-section">
+                            <h3>Do you think you have this condition?</h3>
+                            <div class="diagnosis-buttons">
+                                <button class="btn btn-yes">Yes</button>
+                                <button class="btn btn-no">No</button>
+                                <button class="btn btn-maybe">Maybe</button>
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <div class="details-header" onclick="toggleSection('diagnosed')">
+                                <h3>Diagnosed By</h3>
+                                <span class="toggle-icon">+</span>
+                            </div>
+                            <div class="details-body" id="diagnosed-content">
+                                <p>Your doctor can usually diagnose a tension headache by taking your medical history and doing a physical exam. If needed, the doctor will do other tests to determine what kind of headache you have.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="details-sidebar">
+                        <div class="fact-box">
+                            <h3>Did You Know?</h3>
+                            <p>Over the course of human history, headache treatments have ranged from cruel to curious.</p>
+                            <ul class="fun-facts">
+                                <li>Artaeus, a second century Greek physician, cured headaches by drawing blood from the nose with a goose feather.</li>
+                                <li>Maimoides, the 11th century Jewish philosopher, suggested bathing in warm, sweet water to help dissolve "sharp vapors" from the body.</li>
+                                <li>A letter to an 18th century Dutch journal described curing headaches with the touch of an electric eel.</li>
+                            </ul>
+                            <div class="fact-highlight">
+                                <strong>Fact:</strong> Women are two times more likely to have tension headaches than men.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Update treatment tab content
+            const treatmentOptionsList = condition.treatmentOptions.map(option =>
+                `<li>${option}</li>`
+            ).join('');
+
+            const recommendedSpecialists = condition.recommendedSpecialists.map(specialist =>
+                `<li>${specialist}</li>`
+            ).join('');
+
+            treatmentContent.innerHTML = `
+                <div class="treatment-container">
+                    <div class="treatment-main">
+                        <div class="treatment-section">
+                            <div class="treatment-header" onclick="toggleTreatmentSection('options')">
+                                <h3>Treatment Options</h3>
+                                <span class="toggle-icon">+</span>
+                            </div>
+                            <div class="treatment-body" id="options-content">
+                                <ul class="treatment-options">
+                                    ${treatmentOptionsList}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="treatment-section">
+                            <div class="treatment-header" onclick="toggleTreatmentSection('worsened')">
+                                <h3>Made Worse By</h3>
+                                <span class="toggle-icon">+</span>
+                            </div>
+                            <div class="treatment-body" id="worsened-content">
+                                <p>Stress, poor posture, hunger, lack of sleep, eye strain, and skipping meals.</p>
+                            </div>
+                        </div>
+
+                        <div class="treatment-section">
+                            <div class="treatment-header" onclick="toggleTreatmentSection('questions')">
+                                <h3>Questions To Ask Your Doctor</h3>
+                                <span class="toggle-icon">+</span>
+                            </div>
+                            <div class="treatment-body" id="questions-content">
+                                <ul class="doctor-questions">
+                                    <li>How long should I expect my symptoms to last?</li>
+                                    <li>What can I do to decrease how often I get headaches?</li>
+                                    <li>How should I take medications?</li>
+                                    <li>Is it possible to overuse medications?</li>
+                                    <li>Could this be something other than a tension headache?</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="treatment-section">
+                            <div class="treatment-header" onclick="toggleTreatmentSection('expectations')">
+                                <h3>What To Expect</h3>
+                                <span class="toggle-icon">+</span>
+                            </div>
+                            <div class="treatment-body" id="expectations-content">
+                                <p>Tension headaches start out slowly, with pain and pressure along the front, top, or sides of the head. The pain may feel vise-like. Tension headaches can migrate to the neck and shoulders and last anywhere from three hours to seven days.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="treatment-sidebar">
+                        <div class="treatment-info-box">
+                            <h3>When to See a Doctor</h3>
+                            <p>${condition.whenToSeeDoctor}</p>
+                        </div>
+
+                        <div class="treatment-info-box">
+                            <h3>Estimated Cost</h3>
+                            <p>${condition.estimatedCost}</p>
+                        </div>
+
+                        <div class="treatment-info-box">
+                            <h3>Recommended Specialists</h3>
+                            <ul class="specialist-list">
+                                ${recommendedSpecialists}
+                            </ul>
+                        </div>
+
+                        <button class="next-condition-btn" onclick="nextCondition()">
+                            Next Condition →
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Detail tabs switching - Simplified since content is now in separate tabs
+        function switchDetailTab(tabType) {
+            document.querySelectorAll('.detail-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Switch to the appropriate tab
+            if (tabType === 'treatment') {
+                switchTab('treatment');
+            } else {
+                switchTab('details');
+            }
+        }
+
+        // Print functionality
+        function togglePrintDropdown() {
+            const dropdown = document.getElementById('printDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function printConditionDetails() {
+            const originalContent = document.body.innerHTML;
+            const condition = conditionsData[selectedCondition];
+
+            const printContent = `
+                <div style="padding: 20px; font-family: Arial, sans-serif;">
+                    <h1 style="color: #2c5aa0; margin-bottom: 20px;">Condition Details - ${condition.title}</h1>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Patient Information:</strong><br>
+                        Age: ${document.getElementById('age').value}<br>
+                        Sex: ${selectedSex}<br>
+                        Symptoms: ${selectedSymptoms.join(', ') || 'None selected'}
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <h3>Symptoms</h3>
+                        <p>${condition.symptoms}</p>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <h3>How Common</h3>
+                        <p>${condition.howCommon}</p>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <h3>Overview</h3>
+                        <p>${condition.overview}</p>
+                    </div>
+                    <div style="margin-top: 30px; font-size: 12px; color: #666;">
+                        <p><strong>Disclaimer:</strong> This tool does not provide medical advice. Always consult with a healthcare professional for proper diagnosis and treatment.</p>
+                        <p>Generated on: ${new Date().toLocaleDateString()}</p>
+                    </div>
+                </div>
+            `;
+
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            init(); // Reinitialize after print
+        }
+
+        function printTreatmentOptions() {
+            const originalContent = document.body.innerHTML;
+            const condition = conditionsData[selectedCondition];
+
+            const printContent = `
+                <div style="padding: 20px; font-family: Arial, sans-serif;">
+                    <h1 style="color: #2c5aa0; margin-bottom: 20px;">Treatment Options - ${condition.title}</h1>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Patient Information:</strong><br>
+                        Age: ${document.getElementById('age').value}<br>
+                        Sex: ${selectedSex}<br>
+                        Symptoms: ${selectedSymptoms.join(', ') || 'None selected'}
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <h3>Treatment Options</h3>
+                        <p>Treatment typically includes over-the-counter pain relievers, stress management, regular sleep schedule, and relaxation techniques. For severe cases, prescription medications may be recommended.</p>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <h3>When to See a Doctor</h3>
+                        <p>Consult a healthcare provider if headaches become more frequent or severe, are accompanied by fever, neck stiffness, or neurological symptoms, or if they interfere with daily activities.</p>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <h3>Estimated Cost</h3>
+                        <p>Primary care visit: $150-$300. Specialist consultation: $250-$500. Diagnostic tests (if needed): $200-$800.</p>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <h3>Recommended Providers</h3>
+                        <p>Start with your primary care physician. If needed, referral to a neurologist or headache specialist may be recommended.</p>
+                    </div>
+                    <div style="margin-top: 30px; font-size: 12px; color: #666;">
+                        <p><strong>Disclaimer:</strong> This tool does not provide medical advice. Always consult with a healthcare professional for proper diagnosis and treatment.</p>
+                        <p>Generated on: ${new Date().toLocaleDateString()}</p>
+                    </div>
+                </div>
+            `;
+
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            init(); // Reinitialize after print
+        }
+
+        // Start over functionality
+        function startOver() {
+            selectedSymptoms = [];
+            selectedSex = 'female';
+            selectedCondition = null;
+            currentCategory = 'general';
+            currentFilter = 'all';
+
+            document.getElementById('age').value = '25';
+            document.querySelectorAll('.sex-btn').forEach(btn => btn.classList.remove('selected'));
+            document.querySelector('[onclick="selectSex(\'female\')"]').classList.add('selected');
+
+            updateSymptomCount();
+            updateSelectedSymptomsList();
+            loadSymptoms('general');
+            switchTab('info');
+        }
+
+        // Close print dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('printDropdown');
+            const printBtn = document.querySelector('.print-btn');
+
+            if (!printBtn.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>
