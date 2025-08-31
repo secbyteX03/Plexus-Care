@@ -91,10 +91,10 @@ function initElements() {
     }
 
     // Enable password toggle functionality for all toggle buttons
-    document.querySelectorAll('.toggle-password').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.toggle-password')) {
             e.preventDefault();
-
+            const btn = e.target.closest('.toggle-password');
             const targetId = btn.getAttribute('data-password');
             const input = document.getElementById(targetId);
             const icon = btn.querySelector('i');
@@ -104,9 +104,9 @@ function initElements() {
                 return;
             }
 
+            // Toggle password visibility
             if (input.type === 'password') {
                 input.type = 'text';
-                // update icon (Font Awesome classes)
                 if (icon) {
                     icon.classList.remove('fa-eye');
                     icon.classList.add('fa-eye-slash');
@@ -123,17 +123,9 @@ function initElements() {
                 btn.setAttribute('aria-pressed', 'false');
             }
 
-            // Keep the caret / focus on the input after toggling
-            try {
-                input.focus();
-                // move caret to end
-                const val = input.value;
-                input.value = '';
-                input.value = val;
-            } catch (err) {
-                // ignore
-            }
-        });
+            // Keep focus on the input
+            input.focus();
+        }
     });
 }
 
@@ -199,145 +191,98 @@ function showSuccessModal(title, message, duration = 6000) {
     if (modalTitle) modalTitle.textContent = title;
     if (modalMessage) modalMessage.textContent = message;
 
-    successModal.classList.add('active');
+    successModal.style.display = 'flex';
 
-    // Auto close after duration
-    setTimeout(() => {
-        successModal.classList.remove('active');
-    }, duration);
+    // Auto-hide after duration
+    setTimeout(closeSuccessModal, duration);
 }
 
 // Close modal
 function closeSuccessModal() {
-    if (successModal) successModal.classList.remove('active');
+    if (successModal) successModal.style.display = 'none';
 }
 
 // Handle login form submission
 async function handleLogin(event) {
     event.preventDefault();
-
-    const email = document.getElementById('login-email').value.trim();
+    
+    const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
     const loginBtn = document.getElementById('login-btn');
-
-    // Validate inputs
-    if (!email || !password) {
-        showError('Please fill in all fields');
-        return;
-    }
-
+    
     // Show loading state
-    if (loginBtn) {
-        loginBtn.disabled = true;
-        loginBtn.classList.add('btn-loading');
-    }
-
+    loginBtn.disabled = true;
+    loginBtn.classList.add('btn-loading');
+    
     try {
         const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password
         });
-
+        
         if (error) throw error;
-
-        // Check if profile is complete
-        const { data: profile, error: profileError } = await supabase
-            .from('users')
-            .select('profile_completed')
-            .eq('id', data.user.id)
-            .single();
-
-        if (profileError) throw profileError;
-
-        // Redirect based on profile completion status
-        if (!profile?.profile_completed) {
-            // Store current path to redirect back after profile completion
-            sessionStorage.setItem('postProfileRedirect', 'dashboard.html');
-            window.location.href = 'profile-completion.html';
-        } else {
-            window.location.href = 'dashboard.html';
-        }
+        
+        // Redirect to dashboard on successful login
+        window.location.href = 'dashboard.html';
     } catch (error) {
         console.error('Login error:', error);
-        showError(error.message || 'Failed to login. Please try again.');
+        showError(error.message || 'Invalid email or password');
     } finally {
         // Reset button state
-        if (loginBtn) {
-            loginBtn.disabled = false;
-            loginBtn.classList.remove('btn-loading');
-        }
+        loginBtn.disabled = false;
+        loginBtn.classList.remove('btn-loading');
     }
 }
 
 // Handle registration form submission
 async function handleRegister(event) {
     event.preventDefault();
-
-    const fullName = document.getElementById('register-name').value.trim();
-    const email = document.getElementById('register-email').value.trim();
+    
+    const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
     const confirmPassword = document.getElementById('register-confirm-password').value;
-    const termsCheckbox = document.getElementById('terms');
+    const fullName = document.getElementById('register-name').value;
     const registerBtn = document.getElementById('register-btn');
-
-    // Split full name into first and last name
-    const nameParts = fullName.split(' ').filter(Boolean);
-    const firstName = nameParts[0] || '';
-    const lastName = nameParts.slice(1).join(' ') || '';
-
-    // Validate inputs
-    if (!fullName || !email || !password || !confirmPassword) {
-        showError('Please fill in all fields');
-        return;
-    }
-
+    
+    // Basic validation
     if (password !== confirmPassword) {
         showError('Passwords do not match');
         return;
     }
-
-    if (password.length < 8) {
-        showError('Password must be at least 8 characters long');
+    
+    if (password.length < 6) {
+        showError('Password must be at least 6 characters long');
         return;
     }
-
-    if (!termsCheckbox || !termsCheckbox.checked) {
-        showError('You must accept the terms and conditions');
-        return;
-    }
-
+    
     // Show loading state
-    if (registerBtn) {
-        registerBtn.disabled = true;
-        registerBtn.classList.add('btn-loading');
-    }
-
+    registerBtn.disabled = true;
+    registerBtn.classList.add('btn-loading');
+    
     try {
-        // Create user in Auth
-        const { data: authData, error: authError } = await supabase.auth.signUp({
+        // 1. Create user in Auth
+        const { data: authData, error: signUpError } = await supabase.auth.signUp({
             email,
             password,
             options: {
                 data: {
-                    first_name: firstName,
-                    last_name: lastName
+                    full_name: fullName,
+                    avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=random`
                 },
-                emailRedirectTo: window.location.origin + '/auth.html'
+                emailRedirectTo: window.location.origin
             }
         });
-
-        if (authError) throw authError;
-
-        // If authData.user is not present, throw a meaningful error
-        if (!authData || !authData.user || !authData.user.id) {
-            throw new Error('Failed to create auth user.');
-        }
-
-        // Create user profile in the database
-        const { error: profileError } = await supabase
+        
+        if (signUpError) throw signUpError;
+        
+        // 2. Create user profile in the public.users table
+        const firstName = fullName.split(' ')[0];
+        const lastName = fullName.split(' ').slice(1).join(' ') || '';
+        
+        const { data: profileData, error: profileError } = await supabase
             .from('users')
             .insert([
-                {
+                { 
                     id: authData.user.id,
                     email,
                     first_name: firstName,
@@ -348,11 +293,11 @@ async function handleRegister(event) {
 
         if (profileError) throw profileError;
 
-        // ✅ Show improved success message (longer duration)
+        // ✅ Show success message
         showSuccessModal(
             'Registration Successful!',
-            'Registration successful! Please confirm your email before logging in.',
-            6000 // stay visible for 6 seconds
+            'Please check your email to verify your account before logging in.',
+            6000
         );
 
         // Reset form and switch to login after a short delay
@@ -361,7 +306,7 @@ async function handleRegister(event) {
 
         setTimeout(() => {
             switchTab('login');
-        }, 3200); // switch to login while modal is still visible
+        }, 3200);
 
     } catch (error) {
         console.error('Registration error:', error);
@@ -372,23 +317,6 @@ async function handleRegister(event) {
             registerBtn.disabled = false;
             registerBtn.classList.remove('btn-loading');
         }
-    }
-}
-
-// Handle social login
-async function handleSocialLogin(provider) {
-    try {
-        const { error } = await supabase.auth.signInWithOAuth({
-            provider,
-            options: {
-                redirectTo: window.location.origin + '/dashboard.html'
-            }
-        });
-
-        if (error) throw error;
-    } catch (error) {
-        console.error(`${provider} login error:`, error);
-        showError(`Failed to sign in with ${provider}. Please try again.`);
     }
 }
 
@@ -418,25 +346,21 @@ async function init() {
 // Run when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
 
-// Handle logout
-async function handleLogout() {
-    try {
-        const { error } = await supabase.auth.signOut();
-        if (error) throw error;
-        window.location.href = 'auth.html';
-    } catch (error) {
-        console.error('Logout error:', error);
-        showError('Failed to logout. Please try again.');
-    }
-}
-
 // Export for use in other scripts
 window.PlexusCareAuth = {
     supabase,
-    handleLogout,
-    checkAuth: () => {
-        return supabase.auth.getSession().then(({ data: { session } }) => {
-            return !!session;
-        });
+    handleLogout: async function() {
+        try {
+            const { error } = await supabase.auth.signOut();
+            if (error) throw error;
+            window.location.href = 'auth.html';
+        } catch (error) {
+            console.error('Logout error:', error);
+            showError('Failed to logout. Please try again.');
+        }
+    },
+    checkAuth: async function() {
+        const { data: { session } } = await supabase.auth.getSession();
+        return !!session;
     }
 };
