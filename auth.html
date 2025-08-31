@@ -4,126 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plexus Care - Authentication</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/auth.css">
 </head>
-<body class="auth-page">
-    <!-- Auth Container -->
-    <div class="auth-container">
-        <!-- Login Form -->
-        <div class="auth-card" id="loginCard">
-            <div class="auth-header">
-                <h2>Welcome Back</h2>
-                <p>Sign in to continue to Plexus Care</p>
-            </div>
-            
-            <div id="loginError" class="error-message" style="display: none;">
-                <i class="fas fa-exclamation-circle"></i>
-                <span id="loginErrorMessage">Invalid email or password</span>
-            </div>
-            
-            <form id="loginForm" class="auth-form">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" name="password" required>
-                    <div style="text-align: right; margin-top: 0.5rem;">
-                        <a href="#" style="font-size: 0.9rem; color: var(--primary);">Forgot password?</a>
-                    </div>
-                </div>
-                
-                <div class="auth-actions">
-                    <button type="submit" class="btn btn-primary btn-auth" id="loginBtn">
-                        <span>Sign In</span>
-                    </button>
-                    
-                    <div class="form-divider">
-                        <span>or</span>
-                    </div>
-                    
-                    <button type="button" class="btn btn-secondary btn-auth" id="showRegisterBtn">
-                        Create an account
-                    </button>
-                </div>
-            </form>
-            
-            <div class="toggle-form">
-                Don't have an account? <a href="#" id="showRegisterLink">Sign up</a>
-            </div>
+<body>
+    <div class="auth-page">
+        <!-- Background shapes -->
+        <div class="bg-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
         </div>
-        
-        <!-- Register Form (initially hidden) -->
-        <div class="auth-card" id="registerCard" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <div class="auth-header">
-                <h2>Create Account</h2>
-                <p>Join Plexus Care today</p>
-            </div>
-            
-            <div id="registerError" class="error-message" style="display: none;">
-                <i class="fas fa-exclamation-circle"></i>
-                <span id="registerErrorMessage">Error creating account</span>
-            </div>
-            
-            <form id="registerForm" class="auth-form">
-                <div class="form-group">
-                    <label for="registerFirstName">First Name</label>
-                    <input type="text" id="registerFirstName" name="firstName" required>
+
+        <div class="auth-container">
+            <div class="auth-card">
+                <!-- Tabs -->
+                <div class="form-tabs">
+                    <button class="tab-btn active" data-tab="login">Sign In</button>
+                    <button class="tab-btn" data-tab="register">Sign Up</button>
                 </div>
-                
-                <div class="form-group">
-                    <label for="registerLastName">Last Name</label>
-                    <input type="text" id="registerLastName" name="lastName" required>
+
+                <!-- Error Message -->
+                <div id="error-message" class="error-message">
+                    <span id="error-text"></span>
+                    <button class="close-error">&times;</button>
                 </div>
-                
-                <div class="form-group">
-                    <label for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="registerPassword">Password</label>
-                    <input type="password" id="registerPassword" name="password" minlength="6" required>
-                    <small style="display: block; margin-top: 0.25rem; color: var(--text-light); font-size: 0.8rem;">
-                        Must be at least 6 characters
-                    </small>
-                </div>
-                
-                <div class="auth-actions">
-                    <button type="submit" class="btn btn-primary btn-auth" id="registerBtn">
-                        <span>Create Account</span>
-                    </button>
-                    
-                    <div class="toggle-form">
-                        Already have an account? <a href="#" id="showLoginLink">Sign in</a>
+
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <input type="email" id="login-email" placeholder="Email" required>
                     </div>
-                </div>
-            </form>
+                    <div class="form-group password-group">
+                        <input type="password" id="login-password" placeholder="Password" required>
+                        <button type="button" class="toggle-password" data-password="login-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="login-btn">Sign In</button>
+                    <div class="form-footer">
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                        <p>Don't have an account? <a href="#" id="show-register-link">Sign up</a></p>
+                    </div>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <input type="text" id="register-name" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="register-email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group password-group">
+                        <input type="password" id="register-password" placeholder="Password" required>
+                        <button type="button" class="toggle-password" data-password="register-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="form-group password-group">
+                        <input type="password" id="register-confirm-password" placeholder="Confirm Password" required>
+                        <button type="button" class="toggle-password" data-password="register-confirm-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="register-btn">Create Account</button>
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="#" id="show-login-link">Sign in</a></p>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Success Modal -->
-    <div id="successModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-        <div style="background: white; padding: 2rem; border-radius: var(--border-radius-lg); text-align: center; max-width: 400px; width: 90%;">
-            <div style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h3 style="margin-bottom: 1rem;">Account Created Successfully!</h3>
-            <p style="margin-bottom: 1.5rem;">Your account has been created. Please check your email to verify your account.</p>
-            <button id="closeSuccessModal" class="btn btn-primary">Continue to Login</button>
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h3 id="modal-title">Success!</h3>
+            <p id="modal-message">Your account has been created successfully.</p>
         </div>
     </div>
 
-    <!-- Supabase and Custom JS -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/auth.js"></script>
+    <script type="module" src="js/config.js"></script>
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>
