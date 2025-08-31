@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,104 +11,146 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .dashboard-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: var(--spacing-lg) 0;
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .dashboard-content {
-            padding: var(--spacing-lg) 0;
-        }
-        
-        .welcome-section {
-            text-align: center;
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .welcome-section h1 {
-            color: var(--primary);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .welcome-section p {
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .dashboard-card {
-            background: white;
-            border-radius: var(--border-radius-lg);
-            padding: var(--spacing-md);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .dashboard-card h3 {
-            color: var(--primary);
-            margin-bottom: var(--spacing-sm);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .dashboard-card p {
-            color: var(--text-light);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .dashboard-card .btn {
-            width: 100%;
-            margin-top: var(--spacing-sm);
-        }
-        
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: var(--primary-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .user-info h2 {
-            margin: 0;
-            color: white;
-        }
-        
-        .user-info p {
-            margin: 0.25rem 0 0;
-            opacity: 0.9;
-        }
-    </style>
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
+
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Plexus Care</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-dropdown">
+                        Conditions
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="dropdown">
+                        <div class="mega-menu">
+                            <div class="mega-menu-section initial-items">
+                                <h4>Common Conditions</h4>
+                                <ul class="mega-menu-links">
+                                    <li><a href="#">ADD/ADHD</a></li>
+                                    <li><a href="#">Allergies</a></li>
+                                    <li><a href="#">Arthritis</a></li>
+                                    <li><a href="#">Atrial fibrillation</a></li>
+                                    <li><a href="#">Breast Cancer</a></li>
+                                    <li><a href="#">Cancer</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-section initial-items">
+                                <h4>Chronic Conditions</h4>
+                                <ul class="mega-menu-links">
+                                    <li><a href="#">Crohn's Disease</a></li>
+                                    <li><a href="#">Depression</a></li>
+                                    <li><a href="#">Diabetes</a></li>
+                                    <li><a href="#">DVT</a></li>
+                                    <li><a href="#">Eczema</a></li>
+                                    <li><a href="#">Eye Health</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-section initial-items">
+                                <h4>Other Conditions</h4>
+                                <ul class="mega-menu-links">
+                                    <li><a href="#">Heart Disease</a></li>
+                                    <li><a href="#">HIV & AIDS</a></li>
+                                    <li><a href="#">Lung Disease</a></li>
+                                    <li><a href="#">Lupus</a></li>
+                                    <li><a href="#">Mental Health</a></li>
+                                    <li><a href="#">Multiple Sclerosis</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-section initial-items">
+                                <h4>More Conditions</h4>
+                                <ul class="mega-menu-links">
+                                    <li><a href="#">Migraine</a></li>
+                                    <li><a href="#">Pain Management</a></li>
+                                    <li><a href="#">Psoriasis</a></li>
+                                    <li><a href="#">Psoriatic Arthritis</a></li>
+                                    <li><a href="#">Rheumatoid Arthritis</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-dropdown">Drugs & Supplements<span class="arrow"></span></a>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-item">Drugs</a>
+                        <a href="#" class="dropdown-item">Supplements</a>
+                        <a href="#" class="dropdown-item">Pill Identifier</a>
+                        <a href="#" class="dropdown-item">Interaction Checker</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link has-dropdown">
+                        Well-Being
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="dropdown">
+                        <div class="mega-menu">
+                            <div class="mega-menu-section initial-items">
+                                <h4>Health & Wellness</h4>
+                                <ul class="mega-menu-links">
+                                    <li><a href="#">Aging Well</a></li>
+                                    <li><a href="#">Diet & Weight Management</a></li>
+                                    <li><a href="#">Fitness & Exercise</a></li>
+                                    <li><a href="#">Food & Recipes</a></li>
+                                    <li><a href="#">Health & Balance</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-section initial-items">
+                                <h4>Life Stages</h4>
+                                <ul class="mega-menu-links">
+                                    <li><a href="#">Baby</a></li>
+                                    <li><a href="#">Children's Health</a></li>
+                                    <li><a href="#">Teen Health</a></li>
+                                    <li><a href="#">Men's Health</a></li>
+                                    <li><a href="#">Women's Health</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-section initial-items">
+                                <h4>Relationships</h4>
+                                <ul class="mega-menu-links">
+                                    <li><a href="#">Birth Control</a></li>
+                                    <li><a href="#">Parenting</a></li>
+                                    <li><a href="#">Pregnancy</a></li>
+                                    <li><a href="#">Sex & Relationships</a></li>
+                                    <li><a href="#">Healthy Beauty</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Symptom Checker</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Find a Doctor</a>
+                </li>
+                <li class="nav-item more-item">
+                    <a href="#" class="nav-link has-dropdown">
+                        More
+                        <span class="arrow"></span>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-item">News</a>
+                        <a href="#" class="dropdown-item">Blogs</a>
+                        <a href="#" class="dropdown-item">Newsletters</a>
+                        <a href="#" class="dropdown-item">Surveys</a>
+                        <a href="#" class="dropdown-item">Best Hospitals</a>
+                        <a href="#" class="dropdown-item">Support Groups</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Header -->
     <header class="dashboard-header">
         <div class="container">
@@ -130,27 +173,27 @@
                 <h1>Your Dashboard</h1>
                 <p>Welcome to Plexus Care. Here's what you can do today.</p>
             </div>
-            
+
             <div class="dashboard-grid">
                 <div class="dashboard-card">
                     <h3><i class="fas fa-comment-medical"></i> Start a Chat</h3>
                     <p>Connect with our AI assistant for immediate support and guidance.</p>
                     <button class="btn btn-primary" id="startChatBtn">Start Chat</button>
                 </div>
-                
+
                 <div class="dashboard-card">
                     <h3><i class="fas fa-calendar-check"></i> Book a Session</h3>
                     <p>Schedule a one-on-one session with a licensed psychologist.</p>
                     <button class="btn btn-secondary" id="bookSessionBtn">Book Now</button>
                 </div>
-                
+
                 <div class="dashboard-card">
                     <h3><i class="fas fa-book"></i> Journal</h3>
                     <p>Write down your thoughts and track your mood over time.</p>
                     <button class="btn btn-secondary" id="journalBtn">Write Entry</button>
                 </div>
             </div>
-            
+
             <div class="dashboard-card">
                 <h3><i class="fas fa-history"></i> Recent Activity</h3>
                 <div id="recentActivity">
@@ -160,96 +203,102 @@
         </div>
     </main>
 
-    <!-- Supabase and Custom JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        // Initialize Supabase
-        const supabaseUrl = 'https://vkfntjnhanpaiuhpkroh.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrZm50am5oYW5wYWl1aHBrcm9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1NjY0NzMsImV4cCI6MjA3MjE0MjQ3M30.aGURsdU6nVv6XDUioeGOvVnApBnNcMTiORrkl1N5KlI';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        // DOM Elements
-        const userName = document.getElementById('userName');
-        const userEmail = document.getElementById('userEmail');
-        const userAvatar = document.getElementById('userAvatar');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const startChatBtn = document.getElementById('startChatBtn');
-        const bookSessionBtn = document.getElementById('bookSessionBtn');
-        const journalBtn = document.getElementById('journalBtn');
-
-        // Check if user is logged in
-        async function checkAuth() {
-            const { data: { user }, error } = await supabase.auth.getUser();
+    <!-- Load navigation first since it's essential for mobile -->
+    <!-- Navigation Scripts -->
+    <script src="js/mobile-nav.js" defer></script>
+    
+    <!-- Main application script -->
+    <script type="module">
+        // Import Supabase client
+        import { supabase } from './js/init-supabase.js';
+        
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            // DOM Elements
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const userAvatar = document.getElementById('userAvatar');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const startChatBtn = document.getElementById('startChatBtn');
+            const bookSessionBtn = document.getElementById('bookSessionBtn');
+            const journalBtn = document.getElementById('journalBtn');
             
-            if (error || !user) {
-                window.location.href = 'auth.html';
-                return;
-            }
+            // Check authentication status
+            await checkAuth();
             
-            updateUI(user);
-        }
-
-        // Update UI with user data
-        function updateUI(user) {
-            const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
-            const email = user.email || '';
-            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
-            
-            userName.textContent = `Hello, ${name.split(' ')[0]}!`;
-            userEmail.textContent = email;
-            
-            // Set avatar with initials
-            userAvatar.innerHTML = initials || '<i class="fas fa-user"></i>';
-            
-            // Add event listeners
+            // Event listeners
             if (logoutBtn) {
                 logoutBtn.addEventListener('click', handleLogout);
             }
             
+            // Check if user is logged in
+            async function checkAuth() {
+                try {
+                    const { data: { user }, error } = await supabase.auth.getUser();
+
+                    if (error || !user) {
+                        window.location.href = 'auth.html';
+                        return;
+                    }
+
+                    updateUI(user);
+                } catch (error) {
+                    console.error('Authentication error:', error);
+                    window.location.href = 'auth.html';
+                }
+            }
+
+            // Update UI with user data
+            function updateUI(user) {
+                const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
+                const email = user.email || '';
+                const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+
+                if (userName) userName.textContent = `Hello, ${name.split(' ')[0]}!`;
+                if (userEmail) userEmail.textContent = email;
+
+                // Set avatar with initials
+                if (userAvatar) {
+                    userAvatar.innerHTML = initials || '<i class="fas fa-user"></i>';
+                }
+            }
+
+            // Handle logout
+            async function handleLogout() {
+                try {
+                    await supabase.auth.signOut();
+                    window.location.href = 'auth.html';
+                } catch (error) {
+                    console.error('Logout error:', error);
+                }
+            }
+
+            // Add event listeners for dashboard actions
             if (startChatBtn) {
                 startChatBtn.addEventListener('click', () => {
                     // Add chat functionality here
                     alert('Chat functionality will be implemented soon!');
                 });
             }
-            
+
             if (bookSessionBtn) {
                 bookSessionBtn.addEventListener('click', () => {
                     // Add booking functionality here
                     alert('Booking functionality will be implemented soon!');
                 });
             }
-            
+
             if (journalBtn) {
                 journalBtn.addEventListener('click', () => {
                     // Add journal functionality here
                     alert('Journal functionality will be implemented soon!');
                 });
             }
-        }
 
-        // Handle logout
-        async function handleLogout() {
-            const { error } = await supabase.auth.signOut();
-            if (!error) {
-                window.location.href = 'auth.html';
-            }
-        }
-
-        // Initialize the dashboard
-        document.addEventListener('DOMContentLoaded', () => {
-            checkAuth();
-            
-            // Add logout button functionality if it exists
-            const logoutBtn = document.createElement('button');
-            logoutBtn.id = 'logoutBtn';
-            logoutBtn.className = 'btn btn-secondary';
-            logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
-            logoutBtn.style.position = 'absolute';
-            logoutBtn.style.top = '20px';
-            logoutBtn.style.right = '20px';
-            document.body.appendChild(logoutBtn);
+            // Make updateUI available in global scope for other scripts
+            window.updateUI = updateUI;
         });
     </script>
 </body>
+
 </html>
