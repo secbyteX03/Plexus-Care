@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Plexus Care - Drugs & Supplements</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #7ba3c0 0%, #5a7c95 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #fff;
+            font-size: 56px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e8979a;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #7ba3c0, #e8979a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: white;
+            border: 2px solid #7ba3c0;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #7ba3c0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #7ba3c0, #e8979a);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search Section */
+        .search-section {
+            background: linear-gradient(135deg, #f8fbff, #e3f2fd);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e0e7ff;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e7ff;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #7ba3c0;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            background: linear-gradient(135deg, #7ba3c0, #e8979a);
+            border: none;
+            border-radius: 50px;
+            padding: 0 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Additional Options */
+        .additional-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #7ba3c0;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            color: #7ba3c0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            background: #7ba3c0;
+            color: white;
+        }
+
+        /* Pill Identifier Specific */
+        .pill-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-input,
+        .form-select {
+            padding: 0.8rem;
+            border: 2px solid #e0e7ff;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            border-color: #7ba3c0;
+        }
+
+        .result-btn {
+            background: linear-gradient(135deg, #7ba3c0, #e8979a);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .result-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Letter Grid */
+        .letter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+            gap: 0.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .letter-btn {
+            background: white;
+            border: 2px solid #7ba3c0;
+            padding: 1rem;
+            border-radius: 10px;
+            color: #7ba3c0;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .letter-btn:hover {
+            background: #7ba3c0;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Facts Sidebar */
+        .facts-sidebar {
+            background: linear-gradient(135deg, #fff8e1, #f3e5f5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid #e8979a;
+        }
+
+        .facts-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #7ba3c0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .fact-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 3px solid #e8979a;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .fact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .fact-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            cursor: pointer;
+            background: #f8fbff;
+            transition: background-color 0.3s ease;
+        }
+
+        .fact-header:hover {
+            background: #f0f8ff;
+        }
+
+        .fact-title {
+            font-weight: 600;
+            color: #7ba3c0;
+            margin: 0;
+        }
+
+        .expand-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7ba3c0, #e8979a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .fact-content {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .fact-content.expanded {
+            max-height: 200px;
+            padding: 0 1rem 1rem 1rem;
+        }
+
+        .fact-content p {
+            margin: 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #5a7c95 0%, #7ba3c0 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #e8979a;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #f0f8ff;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: #e8979a;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #ffffff20;
+            margin-top: 1rem;
+            color: #b0c4de;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+
+            .nav-tabs {
+                gap: 0.5rem;
+            }
+
+            .nav-tab {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Interaction Results */
+        .interaction-result {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .interaction-result.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .risk-level {
+            font-weight: bold;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-high {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .risk-moderate {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .risk-low {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-heartbeat"></i>
+                <span>Plexus Care</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="Symptom_Checker.html">Symptoms</a></li>
+                    <li><a href="#drugs">Drugs & Supplements</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1>Drugs & Supplements Hub</h1>
+            <p>Your comprehensive resource for medication information, interactions, and identification</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('drugs')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+                    <path
+                        d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12l.94 1H5.12z" />
+                </svg>
+                Drugs & Medications
+            </div>
+            <div class="nav-tab" onclick="showSection('supplements')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+                    <path
+                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z" />
+                </svg>
+                Vitamins & Supplements
+            </div>
+            <div class="nav-tab" onclick="showSection('identifier')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+                    <path
+                        d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                </svg>
+                Pill Identifier
+            </div>
+            <div class="nav-tab" onclick="showSection('checker')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem;">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM13 17h-2v-6h2v6zm0-8h-2V7h2v2z" />
+                </svg>
+                Interaction Checker
+            </div>
+        </div>
+
+        <!-- Drugs Section -->
+        <div id="drugs" class="content-section active">
+            <div class="search-section">
+                <h2 style="text-align: center; margin-bottom: 1.5rem; color: #7ba3c0;">Drugs & Medications A-Z</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666;">Your trusted source of information for
+                    prescription drugs and medications</p>
+
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Enter medication name to search"
+                        id="drugSearch">
+                    <button class="search-btn" onclick="searchDrug()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="additional-options">
+                    <a href="#" class="option-btn">Search Medications by Letter</a>
+                    <a href="#" class="option-btn">Search Medications by Condition</a>
+                    <a href="#" class="option-btn">Find Off-Market Medications</a>
+                </div>
+            </div>
+
+            <div class="letter-grid">
+                <div class="letter-btn" onclick="searchByLetter('A')">A</div>
+                <div class="letter-btn" onclick="searchByLetter('B')">B</div>
+                <div class="letter-btn" onclick="searchByLetter('C')">C</div>
+                <div class="letter-btn" onclick="searchByLetter('D')">D</div>
+                <div class="letter-btn" onclick="searchByLetter('E')">E</div>
+                <div class="letter-btn" onclick="searchByLetter('F')">F</div>
+                <div class="letter-btn" onclick="searchByLetter('G')">G</div>
+                <div class="letter-btn" onclick="searchByLetter('H')">H</div>
+                <div class="letter-btn" onclick="searchByLetter('I')">I</div>
+                <div class="letter-btn" onclick="searchByLetter('J')">J</div>
+                <div class="letter-btn" onclick="searchByLetter('K')">K</div>
+                <div class="letter-btn" onclick="searchByLetter('L')">L</div>
+                <div class="letter-btn" onclick="searchByLetter('M')">M</div>
+                <div class="letter-btn" onclick="searchByLetter('N')">N</div>
+                <div class="letter-btn" onclick="searchByLetter('O')">O</div>
+                <div class="letter-btn" onclick="searchByLetter('P')">P</div>
+                <div class="letter-btn" onclick="searchByLetter('Q')">Q</div>
+                <div class="letter-btn" onclick="searchByLetter('R')">R</div>
+                <div class="letter-btn" onclick="searchByLetter('S')">S</div>
+                <div class="letter-btn" onclick="searchByLetter('T')">T</div>
+                <div class="letter-btn" onclick="searchByLetter('U')">U</div>
+                <div class="letter-btn" onclick="searchByLetter('V')">V</div>
+                <div class="letter-btn" onclick="searchByLetter('W')">W</div>
+                <div class="letter-btn" onclick="searchByLetter('X')">X</div>
+                <div class="letter-btn" onclick="searchByLetter('Y')">Y</div>
+                <div class="letter-btn" onclick="searchByLetter('Z')">Z</div>
+            </div>
+        </div>
+
+        <!-- Supplements Section -->
+        <div id="supplements" class="content-section">
+            <div class="search-section">
+                <h2 style="text-align: center; margin-bottom: 1.5rem; color: #7ba3c0;">Vitamins & Supplements</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666;">Your trusted source of information for
+                    Vitamins and Supplements</p>
+
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Enter vitamin name to search"
+                        id="vitaminSearch">
+                    <button class="search-btn" onclick="searchVitamin()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="additional-options">
+                    <a href="#" class="option-btn">Search Vitamins by Letter</a>
+                    <a href="#" class="option-btn">Search Vitamins by Condition</a>
+                </div>
+            </div>
+
+            <div class="letter-grid">
+                <div class="letter-btn" onclick="searchVitaminByLetter('A')">A</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('B')">B</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('C')">C</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('D')">D</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('E')">E</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('F')">F</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('G')">G</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('H')">H</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('I')">I</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('J')">J</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('K')">K</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('L')">L</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('M')">M</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('N')">N</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('O')">O</div>
+                <div class="letter-btn" onclick="searchVitaminByLetter('P')">P</div>
+            </div>
+        </div>
+
+        <!-- Pill Identifier Section -->
+        <div id="identifier" class="content-section">
+            <div class="search-section">
+                <h2 style="text-align: center; margin-bottom: 1.5rem; color: #7ba3c0;">Pill Identifier</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666;">Identify unknown pills using physical
+                    characteristics</p>
+
+                <div class="pill-form">
+                    <div class="form-group">
+                        <label class="form-label">Enter Pill Imprint</label>
+                        <input type="text" class="form-input" placeholder="e.g., 377" id="pillImprint">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Select Color</label>
+                        <select class="form-select" id="pillColor">
+                            <option value="">Choose color...</option>
+                            <option value="white">White</option>
+                            <option value="blue">Blue</option>
+                            <option value="pink">Pink</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="green">Green</option>
+                            <option value="red">Red</option>
+                            <option value="orange">Orange</option>
+                            <option value="purple">Purple</option>
+                            <option value="brown">Brown</option>
+                            <option value="gray">Gray</option>
+                            <option value="black">Black</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Select Shape</label>
+                        <select class="form-select" id="pillShape">
+                            <option value="">Choose shape...</option>
+                            <option value="round">Round</option>
+                            <option value="oval">Oval</option>
+                            <option value="capsule">Capsule</option>
+                            <option value="square">Square</option>
+                            <option value="rectangle">Rectangle</option>
+                            <option value="triangle">Triangle</option>
+                            <option value="diamond">Diamond</option>
+                            <option value="pentagon">Pentagon</option>
+                            <option value="hexagon">Hexagon</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="result-btn" onclick="identifyPill()">View Result(s)</button>
+
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="#" style="color: #7ba3c0; text-decoration: none; margin-right: 1rem;">Help</a>
+                    <span style="color: #ccc;">|</span>
+                    <a href="#" style="color: #7ba3c0; text-decoration: none; margin-left: 1rem;">No Text on Pill?</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interaction Checker Section -->
+        <div id="checker" class="content-section">
+            <div class="search-section">
+                <h2 style="text-align: center; margin-bottom: 1.5rem; color: #7ba3c0;">Drug Interaction Checker</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666;">Check for interactions between
+                    medications.<br>Find out which meds may be unsafe to combine.</p>
+
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Enter two or more drugs (separate with commas)"
+                        id="interactionSearch">
+                    <button class="search-btn" onclick="checkInteractions()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H19V0h-2v2H7V0H5v2H4.5C3.11 2 2 3.11 2 4.5v15C2 20.89 3.11 22 4.5 22h15c1.39 0 2.5-1.11 2.5-2.5v-15C22 3.11 20.89 2 19.5 2zM20 19.5c0 .28-.22.5-.5.5h-15c-.28 0-.5-.22-.5-.5v-15c0-.28.22-.5.5-.5h15c.28 0 .5.22.5.5v15z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="interaction-result" id="interactionResult">
+                <div class="risk-level risk-moderate">Moderate Risk Interaction</div>
+                <h4>Potential Interaction Found</h4>
+                <p>The medications you entered may have interactions. Please consult with your healthcare provider
+                    before combining these medications.</p>
+            </div>
+        </div>
+
+        <!-- Facts Sidebar -->
+        <div class="facts-sidebar">
+            <div class="facts-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                </svg>
+                <span id="factsTitle">Drug Safety Facts</span>
+            </div>
+            <div id="factsContent">
+                <div class="fact-item">
+                    <div class="fact-title">Always Read Labels</div>
+                    <p>Check expiration dates and dosage instructions before taking any medication.</p>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-title">Store Properly</div>
+                    <p>Keep medications in cool, dry places away from direct sunlight and out of reach of children.</p>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-title">Report Side Effects</div>
+                    <p>Contact your healthcare provider if you experience unexpected side effects from any medication.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Plexus Care</h3>
+                <p>Comprehensive healthcare information at your fingertips. Making health management simple and
+                    accessible for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#symptoms">Symptoms Checker</a>
+                <a href="#drugs">Drug Information</a>
+                <a href="#supplements">Supplements Guide</a>
+                <a href="#emergency">Emergency Resources</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="#faq">FAQ</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+            </div>
+            <div class="footer-section">
+                <h3>Emergency</h3>
+                <p>For medical emergencies, call your local emergency number immediately.</p>
+                <p style="color: #e8979a; font-weight: bold;">This tool is for informational purposes only and does not
+                    replace professional medical advice.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Plexus Care. All rights reserved. | Empowering healthcare decisions through information.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Facts content for different sections
+        const factsData = {
+            drugs: {
+                title: "Drug Safety Facts",
+                facts: [
+                    {
+                        title: "Always Read Labels",
+                        content: "Check expiration dates and dosage instructions before taking any medication."
+                    },
+                    {
+                        title: "Store Properly",
+                        content: "Keep medications in cool, dry places away from direct sunlight and out of reach of children."
+                    },
+                    {
+                        title: "Report Side Effects",
+                        content: "Contact your healthcare provider if you experience unexpected side effects from any medication."
+                    },
+                    {
+                        title: "Generic vs Brand",
+                        content: "Generic medications contain the same active ingredients as brand-name drugs and are equally effective."
+                    }
+                ]
+            },
+            supplements: {
+                title: "Supplement Safety Facts",
+                facts: [
+                    {
+                        title: "FDA Regulation",
+                        content: "Dietary supplements are not regulated as strictly as prescription medications. Choose reputable brands."
+                    },
+                    {
+                        title: "Timing Matters",
+                        content: "Some vitamins are better absorbed with food, while others should be taken on an empty stomach."
+                    },
+                    {
+                        title: "Quality Matters",
+                        content: "Look for third-party tested supplements with verified potency and purity certifications."
+                    },
+                    {
+                        title: "Dosage Limits",
+                        content: "More isn't always better. Some vitamins can be toxic in high doses. Follow recommended dosages."
+                    }
+                ]
+            },
+            identifier: {
+                title: "Pill Identification Tips",
+                facts: [
+                    {
+                        title: "Imprint Codes",
+                        content: "Every prescription pill has unique markings that help identify the medication and manufacturer."
+                    },
+                    {
+                        title: "Never Guess",
+                        content: "If you can't identify a pill, don't take it. Consult a pharmacist or healthcare provider."
+                    },
+                    {
+                        title: "Document Everything",
+                        content: "Note the imprint, color, shape, and size. Take a photo if possible for reference."
+                    },
+                    {
+                        title: "Expired Medications",
+                        content: "Dispose of expired or unidentified medications safely through pharmacy take-back programs."
+                    }
+                ]
+            },
+            checker: {
+                title: "Drug Interaction Facts",
+                facts: [
+                    {
+                        title: "Common Interactions",
+                        content: "Blood thinners, heart medications, and antidepressants are among the most common drugs with interactions."
+                    },
+                    {
+                        title: "Food Interactions",
+                        content: "Some medications interact with foods. Grapefruit juice affects many drugs' absorption."
+                    },
+                    {
+                        title: "Timing is Key",
+                        content: "Some drugs can be taken together if spaced apart in time. Always follow professional guidance."
+                    },
+                    {
+                        title: "Hidden Interactions",
+                        content: "Over-the-counter medications and supplements can also interact with prescription drugs."
+                    }
+                ]
+            }
+        };
+
+        // Function to show different sections
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Update facts section
+            updateFacts(sectionName);
+        }
+
+        // Function to update facts based on current section
+        function updateFacts(section) {
+            const factsTitle = document.getElementById('factsTitle');
+            const factsContent = document.getElementById('factsContent');
+
+            const data = factsData[section];
+            factsTitle.textContent = data.title;
+
+            factsContent.innerHTML = '';
+            data.facts.forEach((fact, index) => {
+                const factItem = document.createElement('div');
+                factItem.className = 'fact-item';
+                factItem.innerHTML = `
+                    <div class="fact-header" onclick="toggleFact(${index})">
+                        <div class="fact-title">${fact.title}</div>
+                        <div class="expand-icon" id="icon-${index}">+</div>
+                    </div>
+                    <div class="fact-content" id="content-${index}">
+                        <p>${fact.content}</p>
+                    </div>
+                `;
+                factsContent.appendChild(factItem);
+            });
+        }
+
+        // Function to toggle fact expansion
+        function toggleFact(index) {
+            const content = document.getElementById(`content-${index}`);
+            const icon = document.getElementById(`icon-${index}`);
+
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.classList.remove('expanded');
+                icon.textContent = '+';
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('expanded');
+                icon.textContent = '−';
+            }
+        }
+
+        // Search functions
+        function searchDrug() {
+            const query = document.getElementById('drugSearch').value;
+            if (query.trim()) {
+                alert(`Searching for drug: ${query}`);
+                // Here you would implement actual search functionality
+            }
+        }
+
+        function searchVitamin() {
+            const query = document.getElementById('vitaminSearch').value;
+            if (query.trim()) {
+                alert(`Searching for vitamin/supplement: ${query}`);
+                // Here you would implement actual search functionality
+            }
+        }
+
+        function searchByLetter(letter) {
+            alert(`Showing drugs starting with letter: ${letter}`);
+            // Here you would implement actual letter-based search
+        }
+
+        function searchVitaminByLetter(letter) {
+            alert(`Showing vitamins starting with letter: ${letter}`);
+            // Here you would implement actual letter-based search
+        }
+
+        function identifyPill() {
+            const imprint = document.getElementById('pillImprint').value;
+            const color = document.getElementById('pillColor').value;
+            const shape = document.getElementById('pillShape').value;
+
+            if (imprint || color || shape) {
+                alert(`Identifying pill with:\nImprint: ${imprint || 'Not specified'}\nColor: ${color || 'Not specified'}\nShape: ${shape || 'Not specified'}`);
+                // Here you would implement actual pill identification
+            } else {
+                alert('Please enter at least one characteristic to identify the pill.');
+            }
+        }
+
+        function checkInteractions() {
+            const drugs = document.getElementById('interactionSearch').value;
+            const result = document.getElementById('interactionResult');
+
+            if (drugs.trim()) {
+                result.classList.add('show');
+                // Here you would implement actual interaction checking
+
+                // Simulate different risk levels based on input
+                const riskLevel = drugs.split(',').length > 2 ? 'risk-high' : 'risk-moderate';
+                const riskText = drugs.split(',').length > 2 ? 'High Risk Interaction' : 'Moderate Risk Interaction';
+
+                result.querySelector('.risk-level').className = `risk-level ${riskLevel}`;
+                result.querySelector('.risk-level').textContent = riskText;
+            } else {
+                alert('Please enter at least two medications to check for interactions.');
+            }
+        }
+
+        // Initialize with drugs section
+        document.addEventListener('DOMContentLoaded', function () {
+            updateFacts('drugs');
+        });
+
+        // Add smooth scrolling and enhanced interactivity
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add keyboard navigation for search
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const activeElement = document.activeElement;
+                if (activeElement.id === 'drugSearch') {
+                    searchDrug();
+                } else if (activeElement.id === 'vitaminSearch') {
+                    searchVitamin();
+                } else if (activeElement.id === 'interactionSearch') {
+                    checkInteractions();
+                }
+            }
+        });
+
+        // Add hover effects for interactive elements
+        document.querySelectorAll('.letter-btn, .option-btn, .result-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function () {
+                this.style.transform = 'scale(1.05)';
+            });
+
+            btn.addEventListener('mouseleave', function () {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+
+</html>
