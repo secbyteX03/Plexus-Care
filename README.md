@@ -28,6 +28,15 @@ Plexus Care is an innovative healthcare platform that leverages AI and modern we
 - Secure video calling integration
 - Digital prescriptions and medical records
 
+### 💊 Drugs & Supplements Hub
+- Comprehensive drug information database
+- Pill identification using physical characteristics
+- Drug interaction checker
+- A-Z navigation for easy browsing
+- Vitamin and supplement information
+- Safety facts and guidelines
+- Responsive design for all devices
+
 ### 📱 Mobile-First Design
 - Fully responsive interface for all devices
 - Offline functionality for low-connectivity areas
@@ -39,6 +48,7 @@ Plexus Care is an innovative healthcare platform that leverages AI and modern we
 - **HTML5, CSS3, JavaScript (ES6+)** - Core web technologies
 - **Tailwind CSS** - Utility-first CSS framework
 - **Alpine.js** - Lightweight JavaScript framework for reactive interfaces
+- **Interactive UI Components** - For drug search, pill identification, and interaction checking
 
 ### Backend
 - **Supabase** - Backend-as-a-Service (Authentication, Database, Storage)
