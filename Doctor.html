@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Doctors - Plexus Care</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKB4Imkb9JYhi3aYfF4yBVVzYhvvxXrXKZw6Z/8C9kuP4yFvErM7k6IQZ2vjDv5ZB1z0tbh7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #7ba3c0, #6a94b3);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e8979a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #97b8f7;
+            /* heartbeat color */
+            font-size: 56px;
+            /* icon size */
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #97b8f7;
+        }
+
+        .nav-cta {
+            background: #97b8f7;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #7ba3c0, #6a94b3);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 2rem 0 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .search-form {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            align-items: flex-end;
+            position: relative;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group select,
+        .form-group input {
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .search-btn {
+            background: #e8979a;
+            color: white;
+            padding: 0 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.3), 0 2px 4px -1px rgba(236, 72, 153, 0.2);
+            height: 45px;
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(236, 72, 153, 0.5), 0 4px 6px -2px rgba(236, 72, 153, 0.3);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px -1px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            background: white;
+            border-radius: 20px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 100;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Filters Sidebar */
+        .filters {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-section {
+            margin-bottom: 2rem;
+        }
+
+        .filter-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-option input[type="checkbox"],
+        .filter-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+        }
+
+        .filter-option label {
+            font-size: 0.9rem;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        /* Doctor Cards */
+        .doctors-section {
+            flex: 1;
+            padding: 2rem;
+            background: #fdfdfd;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin: 2rem auto;
+
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        /* Sorting Section */
+        .sorting {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 2rem;
+        }
+
+        .sorting label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #34495e;
+        }
+
+        /* Dropdown Styling */
+        .sorting select {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            border: 1px solid #dcdde1;
+            background: #fff;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sorting select:hover {
+            border-color: #ff6b81;
+            box-shadow: 0 0 6px rgba(255, 107, 129, 0.3);
+        }
+
+        .sorting select:focus {
+            outline: none;
+            border-color: #ff4757;
+            box-shadow: 0 0 6px rgba(255, 71, 87, 0.3);
+        }
+
+        /* Button inside sorting (if you add one later) */
+        .sorting button {
+            padding: 0.6rem 1.2rem;
+            background: #ff6b81;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sorting button:hover {
+            background: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(255, 71, 87, 0.3);
+        }
+
+        .doctor-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .doctor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            background: #97b8f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .doctor-info {
+            flex: 1;
+        }
+
+        .doctor-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .doctor-title {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-text {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .doctor-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+        }
+
+        .detail-item strong {
+            color: #1f2937;
+        }
+
+        .waiting-time {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .booking-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-width: 200px;
+        }
+
+        .availability-slots {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .time-slot {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .time-slot.available {
+            background: #ecfdf5;
+            border-color: #e8979a;
+            color: #e8979a;
+        }
+
+        .time-slot.available:hover {
+            background: #d1fae5;
+        }
+
+        .book-btn {
+            background: #e8979a;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .book-btn.unavailable {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .fees {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: #e8979a;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #3b82f6;
+            font-size: 1.8rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            background: #374151;
+            padding: 0.5rem;
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #97b8f7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: -30px;
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                gap: 1.5rem;
+            }
+
+            .doctor-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Newsletter */
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 12px 14px;
+            border: 2px solid #97b8f7;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .newsletter-form input[type="email"]:focus {
+            border-color: #3b82f6;
+            /* blue highlight */
+            box-shadow: 0 0 6px rgba(59, 130, 246, 0.4);
+        }
+
+        .newsletter-form button {
+            padding: 12px 20px;
+            background: #6a94b3;
+            /* main button color */
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #3b82f6;
+            /* darker blue on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e8979a;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 8px 30px rgba(123, 163, 192, 0.4);
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+
+        .chat-main {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .chat-sub {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Plexus Care</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="Drugs_supl.html">Drugs & Supplements</a></li>
+                <li><a href="Doctor.html">Find a Doctor</a></li>
+                <li><a href="food_recipes.html">Meal Planner</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#hospitals">Hospitals</a></li>
+            </ul>
+            <a href="auth.html" class="nav-cta">Sign In</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Choose the Healthcare That is Right for You</h1>
+            <p>Find qualified doctors, book appointments online, and access award-winning healthcare services across
+                Kenya</p>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Physician Profiles</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Online Booking</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">200+</span>
+                    <span class="stat-label">Verified Hospitals</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <form class="search-form" id="doctorSearchForm">
+                <div class="form-group">
+                    <label for="specialty">
+                        <i data-lucide="stethoscope"></i>
+                        Select a specialty
+                    </label>
+                    <select id="specialty" name="specialty">
+                        <option value="">Choose specialty</option>
+                        <option value="family-medicine">Family Medicine</option>
+                        <option value="dentist">Dentist</option>
+                        <option value="ob-gyn">OB-GYN</option>
+                        <option value="dermatologist">Dermatologist</option>
+                        <option value="psychiatrist">Psychiatrist</option>
+                        <option value="eye-doctor">Eye Doctor</option>
+                        <option value="cardiologist">Cardiologist</option>
+                        <option value="pediatrician">Pediatrician</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="county">
+                        <i data-lucide="map-pin"></i>
+                        In this county
+                    </label>
+                    <select id="county" name="county">
+                        <option value="">Choose county</option>
+                        <option value="nairobi">Nairobi</option>
+                        <option value="mombasa">Mombasa</option>
+                        <option value="kisumu">Kisumu</option>
+                        <option value="nakuru">Nakuru</option>
+                        <option value="eldoret">Uasin Gishu</option>
+                        <option value="kiambu">Kiambu</option>
+                        <option value="machakos">Machakos</option>
+                        <option value="meru">Meru</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="city">
+                        <i data-lucide="building"></i>
+                        In this city
+                    </label>
+                    <select id="city" name="city">
+                        <option value="">Choose city</option>
+                        <option value="nairobi-cbd">Nairobi CBD</option>
+                        <option value="westlands">Westlands</option>
+                        <option value="karen">Karen</option>
+                        <option value="kileleshwa">Kileleshwa</option>
+                        <option value="upperhill">Upper Hill</option>
+                        <option value="parklands">Parklands</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="insurance">
+                        <i data-lucide="shield-check"></i>
+                        My insurance is
+                    </label>
+                    <select id="insurance" name="insurance">
+                        <option value="">Choose insurance</option>
+                        <option value="nhif">NHIF</option>
+                        <option value="aap">AAR</option>
+                        <option value="jubilee">Jubilee Insurance</option>
+                        <option value="madison">Madison Insurance</option>
+                        <option value="britam">Britam</option>
+                        <option value="uap">UAP Insurance</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="doctor-name">
+                        <i data-lucide="user-search"></i>
+                        Or search by name
+                    </label>
+                    <input type="text" id="doctor-name" name="doctor-name" placeholder="Doctor name or hospital">
+                </div>
+                <button type="submit" class="search-btn">
+                    <i data-lucide="search"></i>
+                    Search
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Filters Sidebar -->
+        <aside class="filters">
+            <div class="filter-section">
+                <h3 class="filter-title">
+                    <i data-lucide="filter"></i>
+                    Filters
+                </h3>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">Title</h4>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="professor" value="professor">
+                        <label for="professor">Professor</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="consultant" value="consultant">
+                        <label for="consultant">Consultant</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="specialist" value="specialist">
+                        <label for="specialist">Specialist</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">
+                    <i data-lucide="users"></i>
+                    Sub Specialties
+                </h4>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="all" value="all" checked>
+                        <label for="all">All</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="adult-dermatology" value="adult-dermatology">
+                        <label for="adult-dermatology">Adult Dermatology</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="pediatric-dermatology" value="pediatric-dermatology">
+                        <label for="pediatric-dermatology">Pediatric Dermatology</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="cosmetic-dermatology" value="cosmetic-dermatology">
+                        <label for="cosmetic-dermatology">Cosmetic Dermatology and Laser</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="genital-dermatology" value="genital-dermatology">
+                        <label for="genital-dermatology">Genital Dermatology</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">
+                    <i data-lucide="user"></i>
+                    Gender
+                </h4>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="radio" id="any-gender" name="gender" value="any" checked>
+                        <label for="any-gender">Any</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">
+                    <i data-lucide="calendar"></i>
+                    Availability
+                </h4>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="today" value="today">
+                        <label for="today">Available Today</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="tomorrow" value="tomorrow">
+                        <label for="tomorrow">Available Tomorrow</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="this-week" value="this-week">
+                        <label for="this-week">Available This Week</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">
+                    <i data-lucide="dollar-sign"></i>
+                    Examination Fee
+                </h4>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="radio" id="any-price" name="price" value="any" checked>
+                        <label for="any-price">Any</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="under-2000" name="price" value="under-2000">
+                        <label for="under-2000">Less than 2,000 KES</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="2000-5000" name="price" value="2000-5000">
+                        <label for="2000-5000">2,000 - 5,000 KES</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="5000-10000" name="price" value="5000-10000">
+                        <label for="5000-10000">5,000 - 10,000 KES</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="radio" id="over-10000" name="price" value="over-10000">
+                        <label for="over-10000">Greater than 10,000 KES</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">
+                    <i data-lucide="building-2"></i>
+                    Entity
+                </h4>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="hospital" value="hospital">
+                        <label for="hospital">Hospital</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="clinic" value="clinic">
+                        <label for="clinic">Clinic</label>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Doctors Section -->
+        <section class="doctors-section">
+            <div class="section-header">
+                <h2 class="section-title">Dermatology • 14 Doctors</h2>
+                <div class="sorting">
+                    <label for="sort">Sorting:</label>
+                    <select id="sort">
+                        <option value="best-match">Best Match</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="experience">Most Experienced</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Doctor Cards -->
+            <div class="doctors-list">
+                <!-- Doctor 1 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">GM</div>
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">
+                            Clinic Gichinah Mukuria
+                            <span class="doctor-title">MBChB,MMed(Paeds)(Nbi) /MSc Derma (London) FAM (New
+                                Del...)</span>
+                        </h3>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-text">Overall Rating From 152 Visitors</span>
+                        </div>
+                        <div class="doctor-details">
+                            <div class="detail-item">
+                                <i data-lucide="stethoscope"></i>
+                                <span><strong>Dermatologist</strong> Specialized in Genital Dermatology, Adult
+                                    Dermatology</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="map-pin"></i>
+                                <span>Upper Hill • Mara Road</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="dollar-sign"></i>
+                                <span><strong>Fees:</strong> 4,000 KES</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="clock"></i>
+                                <span class="waiting-time">Waiting Time: 25 Minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="booking-section">
+                        <div class="availability-slots">
+                            <div class="time-slot">No Available Appointments</div>
+                        </div>
+                        <button class="book-btn unavailable">No Available Appointments</button>
+                        <div class="fees">4,000 KES</div>
+                    </div>
+                </div>
+
+                <!-- Doctor 3 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">SK</div>
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">
+                            Doctor Samson Kimaiyo Kiprono
+                            <span class="doctor-title">MBChB(Moi); M.Med (Dermatology) (KCMC) Specialist
+                                Dermatologist</span>
+                        </h3>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-text">Overall Rating From 20 Visitors</span>
+                        </div>
+                        <div class="doctor-details">
+                            <div class="detail-item">
+                                <i data-lucide="stethoscope"></i>
+                                <span><strong>Dermatologist</strong> Specialized in Genital Dermatology, Adult
+                                    Dermatology</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="map-pin"></i>
+                                <span>Eldoret • Makasembo Rd</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="dollar-sign"></i>
+                                <span><strong>Fees:</strong> 2,000 KES</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="clock"></i>
+                                <span class="waiting-time">Waiting Time: 34 Minutes</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="building-2"></i>
+                                <span>OASIS HEALTHCARE AND HEALTH SERVICES Clinics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="booking-section">
+                        <div class="availability-slots">
+                            <div class="time-slot">No Available Appointments</div>
+                        </div>
+                        <button class="book-btn unavailable">No Available Appointments</button>
+                        <div class="fees">2,000 KES</div>
+                    </div>
+                </div>
+
+                <!-- Doctor 4 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">JK</div>
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">
+                            Doctor Jacqueline Kavete
+                            <span class="doctor-title">MBChB (UON), MSc Dermatology(UK) Consultant Dermatologist</span>
+                        </h3>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="rating-text">Overall Rating From 13 Visitors</span>
+                        </div>
+                        <div class="doctor-details">
+                            <div class="detail-item">
+                                <i data-lucide="stethoscope"></i>
+                                <span><strong>Dermatologist</strong> Specialized in Adult Dermatology, Cosmetic
+                                    Dermatology</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="map-pin"></i>
+                                <span>Upper Hill • Mara Road</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="dollar-sign"></i>
+                                <span><strong>Fees:</strong> 4,000 KES</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="clock"></i>
+                                <span class="waiting-time">Waiting Time: 23 Minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="booking-section">
+                        <div class="availability-slots">
+                            <div class="time-slot">No Available Appointments</div>
+                        </div>
+                        <button class="book-btn unavailable">No Available Appointments</button>
+                        <div class="fees">4,000 KES</div>
+                    </div>
+                </div>
+
+                <!-- Doctor 5 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">DM</div>
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">
+                            Doctor Daniel Mwangi
+                            <span class="doctor-title">MBChB (UON), MSc Dermatology Consultant Dermatologist</span>
+                        </h3>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-text">Overall Rating From 89 Visitors</span>
+                        </div>
+                        <div class="doctor-details">
+                            <div class="detail-item">
+                                <i data-lucide="stethoscope"></i>
+                                <span><strong>Dermatologist</strong> Specialized in Adult Dermatology, Pediatric
+                                    Dermatology</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="map-pin"></i>
+                                <span>Karen • Karen Hospital</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="dollar-sign"></i>
+                                <span><strong>Fees:</strong> 6,000 KES</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="clock"></i>
+                                <span class="waiting-time">Waiting Time: 15 Minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="booking-section">
+                        <div class="availability-slots">
+                            <div class="time-slot available">Today<br>2:00 PM<br>to 5:00 PM</div>
+                            <div class="time-slot available">Tomorrow<br>9:00 AM<br>to 12:00 PM</div>
+                        </div>
+                        <button class="book-btn">BOOK</button>
+                        <div class="fees">6,000 KES</div>
+                        <small>Walk-in appointments welcome</small>
+                    </div>
+                </div>
+
+                <!-- Doctor 6 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">AM</div>
+                    <div class="doctor-info">
+                        <h3 class="doctor-name">
+                            Doctor Ann Mwangi
+                            <span class="doctor-title">MBChB (UON), Dip Dermatology Specialist Dermatologist</span>
+                        </h3>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="rating-text">Overall Rating From 67 Visitors</span>
+                        </div>
+                        <div class="doctor-details">
+                            <div class="detail-item">
+                                <i data-lucide="stethoscope"></i>
+                                <span><strong>Dermatologist</strong> Specialized in Cosmetic Dermatology, Adult
+                                    Dermatology</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="map-pin"></i>
+                                <span>Westlands • Westgate Mall Medical Centre</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="dollar-sign"></i>
+                                <span><strong>Fees:</strong> 3,500 KES</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="clock"></i>
+                                <span class="waiting-time">Waiting Time: 30 Minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="booking-section">
+                        <div class="availability-slots">
+                            <div class="time-slot available">Tomorrow<br>11:00 AM<br>to 3:00 PM</div>
+                            <div class="time-slot available">Wed 09/03<br>10:00 AM<br>to 2:00 PM</div>
+                        </div>
+                        <button class="book-btn">BOOK</button>
+                        <div class="fees">3,500 KES</div>
+                        <small>Online consultation available</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <button
+                    style="background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; margin: 0 0.25rem; cursor: pointer;">1</button>
+                <button
+                    style="background: #f3f4f6; color: #333; border: 1px solid #d1d5db; padding: 0.5rem 1rem; border-radius: 5px; margin: 0 0.25rem; cursor: pointer;">2</button>
+                <button
+                    style="background: #f3f4f6; color: #333; border: 1px solid #d1d5db; padding: 0.5rem 1rem; border-radius: 5px; margin: 0 0.25rem; cursor: pointer;">3</button>
+                <button
+                    style="background: #f3f4f6; color: #333; border: 1px solid #d1d5db; padding: 0.5rem 1rem; border-radius: 5px; margin: 0 0.25rem; cursor: pointer;">Next</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Plexus Care</h3>
+                <p>Your trusted healthcare partner providing quality medical services and connecting patients with
+                    experienced healthcare professionals.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Find Doctors</a></li>
+                    <li><a href="Symptom_Checker.html">Symptom Checker</a></li>
+                    <li><a href="#">Appointments</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><i data-lucide="map-pin"></i> 123 Health Street, Nairobi, Kenya</p>
+                <p><i data-lucide="phone"></i> +254 700 000000</p>
+                <p><i data-lucide="mail"></i> info@plexuscare.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Subscribe to our newsletter for health tips and updates.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div
+                style="max-width: 1200px;color: white; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <p>&copy; 2025 Plexus Care. All rights reserved. Licensed Healthcare Platform in Kenya.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-main">24/7 Medical Support</div>
+        <div class="chat-sub">
+            <i class="fas fa-comment-medical"></i>Chat with a Doctor Now
+        </div>
+    </div>
+    <!-- Add Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // DOM Elements
+        const doctorsList = document.querySelector('.doctors-list');
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'loading';
+        loadingIndicator.innerHTML = '<div class="spinner"></div><p>Loading doctors...</p>';
+        loadingIndicator.style.display = 'none';
+        doctorsList.parentNode.insertBefore(loadingIndicator, doctorsList);
+
+        // Form handling
+        document.getElementById('doctorSearchForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Handle search form submission
+            const formData = new FormData(e.target);
+            const searchData = Object.fromEntries(formData);
+            console.log('Search data:', searchData);
+            // Here you would typically send the data to your backend
+        });
+
+        // Filter handling
+        const filterInputs = document.querySelectorAll('.filters input');
+        filterInputs.forEach(input => {
+            input.addEventListener('change', function () {
+                // Handle filter changes
+                console.log('Filter changed:', this.value, this.checked);
+                // Here you would update the displayed doctors based on filters
+            });
+        });
+
+        // County and city dependency
+        const countySelect = document.getElementById('county');
+        const citySelect = document.getElementById('city');
+
+        const cityOptions = {
+            'nairobi': [
+                { value: 'nairobi-cbd', text: 'Nairobi CBD' },
+                { value: 'westlands', text: 'Westlands' },
+                { value: 'karen', text: 'Karen' },
+                { value: 'kileleshwa', text: 'Kileleshwa' },
+                { value: 'upperhill', text: 'Upper Hill' },
+                { value: 'parklands', text: 'Parklands' }
+            ],
+            'mombasa': [
+                { value: 'mombasa-island', text: 'Mombasa Island' },
+                { value: 'nyali', text: 'Nyali' },
+                { value: 'bamburi', text: 'Bamburi' },
+                { value: 'likoni', text: 'Likoni' }
+            ],
+            'kisumu': [
+                { value: 'kisumu-central', text: 'Kisumu Central' },
+                { value: 'kondele', text: 'Kondele' },
+                { value: 'milimani', text: 'Milimani' }
+            ]
+        };
+
+        countySelect.addEventListener('change', function () {
+            const selectedCounty = this.value;
+            citySelect.innerHTML = '<option value="">Choose city</option>';
+
+            if (cityOptions[selectedCounty]) {
+                cityOptions[selectedCounty].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city.value;
+                    option.textContent = city.text;
+                    citySelect.appendChild(option);
+                });
+            }
+        });
+
+        // Book appointment handling
+        const bookButtons = document.querySelectorAll('.book-btn:not(.unavailable)');
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                alert('Booking system would open here. This would redirect to appointment booking form.');
+                // Here you would open a booking modal or redirect to booking page
+            });
+        });
+
+        // Time slot selection
+        const timeSlots = document.querySelectorAll('.time-slot.available');
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', function () {
+                // Remove active class from all slots in this card
+                const card = this.closest('.doctor-card');
+                card.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+
+                // Add active class to clicked slot
+                this.classList.add('selected');
+
+                // Update the book button
+                const bookBtn = card.querySelector('.book-btn');
+                bookBtn.textContent = 'BOOK SELECTED TIME';
+                bookBtn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+            });
+        });
+
+        // Add selected time slot styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .time-slot.selected {
+                background: #3b82f6 !important;
+                color: white !important;
+                border-color: #2563eb !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Sorting functionality
+        document.getElementById('sort').addEventListener('change', function () {
+            const sortBy = this.value;
+            console.log('Sorting by:', sortBy);
+            // Here you would re-sort the doctors list based on the selected criteria
+        });
+
+        // Mobile menu toggle (for responsive design)
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Add mobile menu button if screen is small
+        if (window.innerWidth <= 768) {
+            const nav = document.querySelector('.nav-container');
+            const mobileMenuBtn = document.createElement('button');
+            mobileMenuBtn.innerHTML = '<i data-lucide="menu"></i>';
+            mobileMenuBtn.style.cssText = 'background: none; border: none; font-size: 1.5rem; cursor: pointer;';
+            mobileMenuBtn.onclick = toggleMobileMenu;
+            nav.appendChild(mobileMenuBtn);
+            lucide.createIcons();
+        }
+    </script>
+
+
+
+    <script>
+        // Chat widget click handler
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatWidget = document.querySelector(".chat-widget");
+            if (chatWidget) {
+                chatWidget.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    // Visual feedback
+                    this.style.transform = "translateY(-3px) scale(0.95)";
+                    setTimeout(() => this.style.transform = "translateY(-3px) scale(1)", 150);
+
+                    // Create chat modal
+                    const chatModal = document.createElement('div');
+                    chatModal.className = 'chat-modal';
+                    chatModal.innerHTML = `
+                        <div class="chat-modal-content">
+                            <div class="chat-header">
+                                <h3>Medical Support Chat</h3>
+                                <span class="close-chat">&times;</span>
+                            </div>
+                            <div class="chat-messages">
+                                <div class="chat-message bot">
+                                    <div class="message-avatar">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div class="message-content">
+                                        <p>Hello! I'm your Plexus Care assistant. How can I help you today?</p>
+                                        <div class="quick-options">
+                                            <button class="quick-option">Schedule an appointment</button>
+                                            <button class="quick-option">Talk to a doctor</button>
+                                            <button class="quick-option">Prescription refill</button>
+                                            <button class="quick-option">Billing question</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-input-container">
+                                <input type="text" placeholder="Type your message..." class="chat-input">
+                                <button class="send-button">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <style>
+                            .chat-widget {
+                                position: fixed;
+                                bottom: 30px;
+                                right: 30px;
+                                background: #4F46E5;
+                                color: white;
+                                padding: 15px 25px;
+                                border-radius: 50px;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+                                z-index: 999;
+                                transition: all 0.3s ease;
+                            }
+                            .chat-widget:hover {
+                                transform: translateY(-3px);
+                                color:#97b8f7;
+                                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+                            }
+                            .chat-main {
+                                font-weight: 600;
+                                margin-right: 10px;
+                            }
+                            .chat-sub {
+                                display: flex;
+                                align-items: center;
+                                font-size: 14px;
+                                opacity: 0.9;
+                            }
+                            .chat-sub i {
+                                margin-right: 5px;
+                            }
+                            .chat-modal {
+                                position: fixed;
+                                bottom: 20px;
+                                right: 20px;
+                                width: 350px;
+                                height: 500px;
+                                background: white;
+                                border-radius: 10px;
+                                box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+                                display: flex;
+                                flex-direction: column;
+                                z-index: 1000;
+                                overflow: hidden;
+                                transform: translateY(20px);
+                                opacity: 0;
+                                animation: modalFadeIn 0.3s forwards;
+                            }
+                            @keyframes modalFadeIn {
+                                to { transform: translateY(0); opacity: 1; }
+                            }
+                            .chat-modal-content {
+                                display: flex;
+                                flex-direction: column;
+                                height: 100%;
+                            }
+                            .chat-header {
+                                background: #97b8f7;
+                                color: white;
+                                padding: 15px;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                            }
+                            .chat-header h3 {
+                                margin: 0;
+                                font-size: 1.1rem;
+                            }
+                            .close-chat {
+                                cursor: pointer;
+                                font-size: 1.5rem;
+                                line-height: 1;
+                            }
+                            .chat-messages {
+                                flex: 1;
+                                padding: 15px;
+                                overflow-y: auto;
+                                background: #f8f9fa;
+                            }
+                            .chat-message {
+                                display: flex;
+                                margin-bottom: 15px;
+                            }
+                            .message-avatar {
+                                width: 36px;
+                                height: 36px;
+                                border-radius: 50%;
+                                background: #e9ecef;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-right: 10px;
+                                flex-shrink: 0;
+                            }
+                            .message-content {
+                                max-width: 80%;
+                            }
+                            .message-content p {
+                                background: white;
+                                padding: 10px 15px;
+                                border-radius: 18px;
+                                margin: 0 0 10px 0;
+                                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                            }
+                            .chat-message.bot .message-content p {
+                                border-top-left-radius: 4px;
+                                background: #e9f5ff;
+                            }
+                            .quick-options {
+                                display: flex;
+                                flex-wrap: wrap;
+                                gap: 8px;
+                                margin-top: 10px;
+                            }
+                            .quick-option {
+                                background: #f1f5f9;
+                                border: 1px solid #e2e8f0;
+                                border-radius: 15px;
+                                padding: 5px 12px;
+                                font-size: 0.8rem;
+                                cursor: pointer;
+                                transition: all 0.2s;
+                            }
+                            .quick-option:hover {
+                                background: #e2e8f0;
+                            }
+                            .chat-input-container {
+                                display: flex;
+                                padding: 15px;
+                                background: white;
+                                border-top: 1px solid #e9ecef;
+                            }
+                            .chat-input {
+                                flex: 1;
+                                padding: 10px 15px;
+                                border: 1px solid #dee2e6;
+                                border-radius: 20px;
+                                outline: none;
+                        }
+                            .chat-input:focus {
+                                border-color: #97b8f7;
+                                box-shadow: 0 0 5px rgba(151, 184, 247, 0.5);
+                            }
+                            .send-button {
+                                background: #97b8f7;
+                                color: white;
+                                border: none;
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50%;
+                                margin-left: 10px;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                           .send-button:hover {
+                                    background: #e8979a;
+                                }
+                        </style>
+                    `;
+
+                    document.body.appendChild(chatModal);
+
+                    // Close button functionality
+                    const closeBtn = chatModal.querySelector('.close-chat');
+                    closeBtn.addEventListener('click', function () {
+                        chatModal.style.animation = 'modalFadeOut 0.3s forwards';
+                        setTimeout(() => chatModal.remove(), 300);
+                    });
+
+                    // Add animation for when the modal is removed
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes modalFadeOut {
+                            from { transform: translateY(0); opacity: 1; }
+                            to { transform: translateY(20px); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+
+                    // Quick option buttons
+                    const quickOptions = chatModal.querySelectorAll('.quick-option');
+                    quickOptions.forEach(option => {
+                        option.addEventListener('click', function () {
+                            const messagesContainer = chatModal.querySelector('.chat-messages');
+                            const userMessage = document.createElement('div');
+                            userMessage.className = 'chat-message user';
+                            userMessage.innerHTML = `
+                                <div class="message-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="message-content">
+                                    <p>${this.textContent}</p>
+                                </div>
+                            `;
+                            messagesContainer.appendChild(userMessage);
+                            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                            // Simulate bot response
+                            setTimeout(() => {
+                                const botResponse = document.createElement('div');
+                                botResponse.className = 'chat-message bot';
+                                botResponse.innerHTML = `
+                                    <div class="message-avatar">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div class="message-content">
+                                        <p>I'll connect you with a healthcare professional who can assist with that. One moment please...</p>
+                                    </div>
+                                `;
+                                messagesContainer.appendChild(botResponse);
+                                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                            }, 1000);
+                        });
+                    });
+
+                    // Send message functionality
+                    const chatInput = chatModal.querySelector('.chat-input');
+                    const sendButton = chatModal.querySelector('.send-button');
+
+                    function sendMessage() {
+                        const message = chatInput.value.trim();
+                        if (message) {
+                            const messagesContainer = chatModal.querySelector('.chat-messages');
+                            const userMessage = document.createElement('div');
+                            userMessage.className = 'chat-message user';
+                            userMessage.innerHTML = `
+                                <div class="message-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="message-content">
+                                    <p>${message}</p>
+                                </div>
+                            `;
+                            messagesContainer.appendChild(userMessage);
+                            chatInput.value = '';
+                            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                            // Simulate bot response
+                            setTimeout(() => {
+                                const botResponse = document.createElement('div');
+                                botResponse.className = 'chat-message bot';
+                                botResponse.innerHTML = `
+                                    <div class="message-avatar">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div class="message-content">
+                                        <p>Thanks for your message. A healthcare professional will respond shortly. In the meantime, is there anything else I can help you with?</p>
+                                    </div>
+                                `;
+                                messagesContainer.appendChild(botResponse);
+                                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                            }, 1000);
+                        }
+                    }
+
+                    sendButton.addEventListener('click', sendMessage);
+                    chatInput.addEventListener('keypress', function (e) {
+                        if (e.key === 'Enter') {
+                            sendMessage();
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
