@@ -5,14 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Plexus Care</title>
+    <link rel="icon" href="data:,"> <!-- Prevents favicon.ico 404 error -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Load Font Awesome only once (using the latest version) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Load custom styles -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navigation.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
@@ -20,7 +24,10 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="nav-logo">Plexus Care</a>
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Plexus Care</span>
+            </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -32,54 +39,63 @@
                     </a>
                     <div class="dropdown">
                         <div class="mega-menu">
+
                             <div class="mega-menu-section initial-items">
-                                <h4>Common Conditions</h4>
+                                <h4>Infectious Diseases</h4>
                                 <ul class="mega-menu-links">
-                                    <li><a href="#">ADD/ADHD</a></li>
-                                    <li><a href="#">Allergies</a></li>
-                                    <li><a href="#">Arthritis</a></li>
-                                    <li><a href="#">Atrial fibrillation</a></li>
-                                    <li><a href="#">Breast Cancer</a></li>
-                                    <li><a href="#">Cancer</a></li>
+                                    <li><a href="Info Resources/malaria.html">Malaria</a></li>
+                                    <li><a href="Info Resources/typhoid.html">Typhoid</a></li>
+                                    <li><a href="Info Resources/tb.html">Tuberculosis (TB)</a></li>
+                                    <li><a href="Info Resources/hiv.html">HIV & AIDS</a></li>
+                                    <li><a href="Info Resources/pneumonia.html">Pneumonia</a></li>
+                                    <li><a href="Info Resources/diarrhea.html">Diarrheal Diseases</a></li>
                                 </ul>
                             </div>
+
                             <div class="mega-menu-section initial-items">
-                                <h4>Chronic Conditions</h4>
+                                <h4>Lifestyle & Chronic Conditions</h4>
                                 <ul class="mega-menu-links">
-                                    <li><a href="#">Crohn's Disease</a></li>
-                                    <li><a href="#">Depression</a></li>
-                                    <li><a href="#">Diabetes</a></li>
-                                    <li><a href="#">DVT</a></li>
-                                    <li><a href="#">Eczema</a></li>
-                                    <li><a href="#">Eye Health</a></li>
+                                    <li><a href="Info Resources/diabetes.html">Diabetes</a></li>
+                                    <li><a href="Info Resources/hypertension.html">Hypertension (High Blood
+                                            Pressure)</a></li>
+                                    <li><a href="Info Resources/cancer.html">Cancer</a></li>
+                                    <li><a href="Info Resources/asthma.html">Asthma</a></li>
+                                    <li><a href="Info Resources/heart_disease.html">Heart Disease</a></li>
+                                    <li><a href="Info Resources/chronic_kidney_disease.html">Chronic Kidney Disease</a>
+                                    </li>
                                 </ul>
                             </div>
+
                             <div class="mega-menu-section initial-items">
-                                <h4>Other Conditions</h4>
+                                <h4>Maternal & Child Health</h4>
                                 <ul class="mega-menu-links">
-                                    <li><a href="#">Heart Disease</a></li>
-                                    <li><a href="#">HIV & AIDS</a></li>
-                                    <li><a href="#">Lung Disease</a></li>
-                                    <li><a href="#">Lupus</a></li>
-                                    <li><a href="#">Mental Health</a></li>
-                                    <li><a href="#">Multiple Sclerosis</a></li>
+                                    <li><a href="#">Pregnancy & Antenatal Care</a></li>
+                                    <li><a href="#">Safe Delivery</a></li>
+                                    <li><a href="#">Postpartum Health</a></li>
+                                    <li><a href="#">Child Nutrition</a></li>
+                                    <li><a href="#">Vaccination & Immunization</a></li>
+                                    <li><a href="#">Common Childhood Illnesses</a></li>
                                 </ul>
                             </div>
+
                             <div class="mega-menu-section initial-items">
-                                <h4>More Conditions</h4>
+                                <h4>Mental Health & Everyday Issues</h4>
                                 <ul class="mega-menu-links">
-                                    <li><a href="#">Migraine</a></li>
-                                    <li><a href="#">Pain Management</a></li>
-                                    <li><a href="#">Psoriasis</a></li>
-                                    <li><a href="#">Psoriatic Arthritis</a></li>
-                                    <li><a href="#">Rheumatoid Arthritis</a></li>
+                                    <li><a href="Info Resources/adhd.html">ADHD</a></li>
+                                    <li><a href="#">Depression & Anxiety</a></li>
+                                    <li><a href="#">Substance Abuse</a></li>
+                                    <li><a href="#">Sexually Transmitted Infections (STIs)</a></li>
+                                    <li><a href="#">Ulcers & Stomach Disorders</a></li>
+                                    <li><a href="#">Back Pain & Joint Problems</a></li>
+                                    <li><a href="#">Headaches & Migraines</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link has-dropdown">Drugs & Supplements<span class="arrow"></span></a>
+                    <a href="Drugs_supl.html" class="nav-link has-dropdown">Drugs & Supplements<span
+                            class="arrow"></span></a>
                     <div class="dropdown">
                         <a href="#" class="dropdown-item">Drugs</a>
                         <a href="#" class="dropdown-item">Supplements</a>
@@ -97,11 +113,11 @@
                             <div class="mega-menu-section initial-items">
                                 <h4>Health & Wellness</h4>
                                 <ul class="mega-menu-links">
-                                    <li><a href="#">Aging Well</a></li>
-                                    <li><a href="#">Diet & Weight Management</a></li>
-                                    <li><a href="#">Fitness & Exercise</a></li>
-                                    <li><a href="#">Food & Recipes</a></li>
-                                    <li><a href="#">Health & Balance</a></li>
+                                    <li><a href="wellness.html">Aging Well</a></li>
+                                    <li><a href="food_recipes.html">Diet & Weight Management</a></li>
+                                    <li><a href="wellness.html">Fitness & Exercise</a></li>
+                                    <li><a href="food_recipes.html">Food & Recipes</a></li>
+                                    <li><a href="wellness.html">Health & Balance</a></li>
                                 </ul>
                             </div>
                             <div class="mega-menu-section initial-items">
@@ -128,10 +144,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Symptom Checker</a>
+                    <a href="Symptom_Checker.html" class="nav-link">Symptom Checker</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Find a Doctor</a>
+                    <a href="Doctor.html" class="nav-link">Find a Doctor</a>
                 </li>
                 <li class="nav-item more-item">
                     <a href="#" class="nav-link has-dropdown">
@@ -155,13 +171,18 @@
     <header class="dashboard-header">
         <div class="container">
             <div class="user-profile">
-                <div class="user-avatar" id="userAvatar">
-                    <i class="fas fa-user"></i>
+                <div class="user-basic-info">
+                    <div class="user-avatar" id="userAvatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <h2 id="userName">Welcome back!</h2>
+                        <p id="userEmail">Loading your profile...</p>
+                    </div>
                 </div>
-                <div class="user-info">
-                    <h2 id="userName">Welcome back!</h2>
-                    <p id="userEmail">Loading your profile...</p>
-                </div>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
         </div>
     </header>
@@ -169,49 +190,300 @@
     <!-- Main Content -->
     <main class="dashboard-content">
         <div class="container">
+            <!-- Welcome Section -->
             <div class="welcome-section">
-                <h1>Your Dashboard</h1>
-                <p>Welcome to Plexus Care. Here's what you can do today.</p>
+                <h1>Your Health Dashboard</h1>
+                <p id="welcomeMessage">Managing your health journey with personalized insights and care.</p>
             </div>
 
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-comment-medical"></i> Start a Chat</h3>
-                    <p>Connect with our AI assistant for immediate support and guidance.</p>
-                    <button class="btn btn-primary" id="startChatBtn">Start Chat</button>
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <h4>Profile Completion</h4>
+                    <div class="stat-value" id="profileCompletion">75%</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>Complete your profile</span>
+                    </div>
                 </div>
-
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-calendar-check"></i> Book a Session</h3>
-                    <p>Schedule a one-on-one session with a licensed psychologist.</p>
-                    <button class="btn btn-secondary" id="bookSessionBtn">Book Now</button>
+                <div class="stat-card">
+                    <h4>Health Score</h4>
+                    <div class="stat-value" id="healthScore">8.2</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>Improving</span>
+                    </div>
                 </div>
-
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-book"></i> Journal</h3>
-                    <p>Write down your thoughts and track your mood over time.</p>
-                    <button class="btn btn-secondary" id="journalBtn">Write Entry</button>
+                <div class="stat-card">
+                    <h4>Next Appointment</h4>
+                    <div class="stat-value" id="nextAppointment">3 days</div>
+                    <div class="stat-change">
+                        <i class="fas fa-calendar"></i>
+                        <span>Dr. Smith - Checkup</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h4>Medications</h4>
+                    <div class="stat-value" id="activeMedications">2</div>
+                    <div class="stat-change">
+                        <i class="fas fa-pills"></i>
+                        <span>Active prescriptions</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="dashboard-card">
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="action-group">
+                    <h3><i class="fas fa-rocket"></i> Quick Actions</h3>
+                    <div class="action-list">
+                        <div class="action-item" id="startChatAction">
+                            <div class="action-info">
+                                <div class="action-icon" style="background: #3b82f6;">
+                                    <i class="fas fa-comment-medical"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">Start AI Chat</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">Get instant health guidance</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                        <div class="action-item" id="symptomCheckerAction">
+                            <div class="action-info">
+                                <div class="action-icon" style="background: #10b981;">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">Symptom Checker</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">Assess your symptoms</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                        <div class="action-item" id="findDoctorAction">
+                            <div class="action-info">
+                                <div class="action-icon" style="background: #8b5cf6;">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">Find Doctor</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">Locate healthcare providers</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-group">
+                    <h3><i class="fas fa-heart"></i> Wellness Tools</h3>
+                    <div class="action-list">
+                        <div class="action-item" id="wellnessAction">
+                            <div class="action-info">
+                                <div class="action-icon" style="background: #f59e0b;">
+                                    <i class="fas fa-spa"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">Wellness Hub</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">Fitness, nutrition & balance</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                        <div class="action-item" id="recipesAction">
+                            <div class="action-info">
+                                <div class="action-icon" style="background: #ef4444;">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">Healthy Recipes</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">Nutrition-focused meals</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                        <div class="action-item" id="drugsAction">
+                            <div class="action-info">
+                                <div class="action-icon" style="background: #06b6d4;">
+                                    <i class="fas fa-pills"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 500;">Drug Information</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">Medications & supplements</div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color: #9ca3af;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Summary -->
+            <div class="health-summary">
+                <h3><i class="fas fa-chart-line"></i> Health Summary</h3>
+                <div class="health-metrics">
+                    <div class="metric">
+                        <div class="metric-value">120/80</div>
+                        <div class="metric-label">Blood Pressure</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">72 bpm</div>
+                        <div class="metric-label">Heart Rate</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">98.6°F</div>
+                        <div class="metric-label">Temperature</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">BMI 22.5</div>
+                        <div class="metric-label">Body Mass Index</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="recent-activities">
                 <h3><i class="fas fa-history"></i> Recent Activity</h3>
                 <div id="recentActivity">
-                    <p>Your recent activity will appear here.</p>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: #3b82f6;">
+                            <i class="fas fa-notes-medical"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Viewed Diabetes Information</div>
+                            <div class="activity-time">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: #10b981;">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Used Symptom Checker</div>
+                            <div class="activity-time">1 day ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: #8b5cf6;">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Searched for Cardiologist</div>
+                            <div class="activity-time">3 days ago</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+    <!-- Footer Section-->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-grid">
+                    <!-- Company Info -->
+                    <div class="footer-section">
+                        <div class="footer-logo">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Plexus Care</span>
+                        </div>
+                        <p class="footer-description">
+                            Empowering your health journey with comprehensive medical information, expert guidance, and
+                            personalized care solutions.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
 
+                    <!-- Health Resources -->
+                    <div class="footer-section">
+                        <h4 class="footer-title">Health Resources</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Conditions A-Z</a></li>
+                            <li><a href="#">Symptom Checker</a></li>
+                            <li><a href="#">Drug Information</a></li>
+                            <li><a href="#">Health Calculator</a></li>
+                            <li><a href="#">First Aid Guide</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Services -->
+                    <div class="footer-section">
+                        <h4 class="footer-title">Our Services</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Find a Doctor</a></li>
+                            <li><a href="#">Telemedicine</a></li>
+                            <li><a href="#">Health Screening</a></li>
+                            <li><a href="#">Wellness Programs</a></li>
+                            <li><a href="#">Emergency Care</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Support -->
+                    <div class="footer-section">
+                        <h4 class="footer-title">Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Accessibility</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="footer-section">
+                        <h4 class="footer-title">Get in Touch</h4>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+254 700 123 456</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>support@plexuscare.ke</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Nairobi, Kenya</span>
+                            </div>
+                        </div>
+                        <div class="emergency-notice">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>For medical emergencies, call 999</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Plexus Care. All rights reserved.</p>
+                    <div class="footer-badges">
+                        <span class="badge">HIPAA Compliant</span>
+                        <span class="badge">ISO 27001</span>
+                        <span class="badge">SSL Secured</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Load navigation first since it's essential for mobile -->
     <!-- Navigation Scripts -->
     <script src="js/mobile-nav.js" defer></script>
-    
+
     <!-- Main application script -->
     <script type="module">
         // Import Supabase client
         import { supabase } from './js/init-supabase.js';
-        
+
         // Wait for DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', async () => {
             // DOM Elements
@@ -222,15 +494,15 @@
             const startChatBtn = document.getElementById('startChatBtn');
             const bookSessionBtn = document.getElementById('bookSessionBtn');
             const journalBtn = document.getElementById('journalBtn');
-            
+
             // Check authentication status
             await checkAuth();
-            
+
             // Event listeners
             if (logoutBtn) {
                 logoutBtn.addEventListener('click', handleLogout);
             }
-            
+
             // Check if user is logged in
             async function checkAuth() {
                 try {
@@ -299,6 +571,24 @@
             window.updateUI = updateUI;
         });
     </script>
+    <script>
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                // Sign out from Supabase
+                const { error } = await supabaseClient.auth.signOut();
+                if (error) throw error;
+
+                // Redirect to homepage after logout
+                window.location.href = "index.html";
+            } catch (err) {
+                console.error("Logout failed:", err.message);
+                alert("Error logging out, please try again.");
+            }
+        });
+    </script>
+
 </body>
 
 </html>
