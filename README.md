@@ -232,27 +232,39 @@ npx serve
 
 ```
 Plexus-Care/
-├── index.html              # Main application entry point
-├── assets/                 # Static assets
-│   ├── images/            # Application images and screenshots
-│   └── styles/            # CSS stylesheets
-├── js/                    # JavaScript modules
-│   ├── config.js          # Application configuration
-│   ├── symptom_checker.js # Symptom checker functionality
-│   ├── symptom-checker-db.js # Symptom database
-│   └── Symptom_Checker.js # Main symptom checker logic
-├── components/            # Reusable UI components
-└── README.md             # Project documentation
+├── index.html                 # Main landing page
+├── auth.html                  # Authentication page
+├── dashboard.html             # User dashboard
+├── profile.html               # User profile management
+├── profile-completion.html    # Profile completion wizard
+├── Symptom_Checker.html       # Symptom checker with AI assistant
+├── Drugs_supl.html            # Drugs and supplements information
+├── food_recipes.html          # Meal planning and recipes
+├── wellness.html              # Wellness tracking
+├── Doctor.html                # Healthcare provider directory
+├── assets/
+│   └── images/                # Application images and screenshots
+├── css/                       # Stylesheets
+├── js/                        # JavaScript modules
+│   ├── config.js              # Application configuration
+│   ├── symptom_checker.js     # Symptom checker functionality
+│   ├── symptom-checker-db.js  # Symptom database
+│   ├── Symptom_Checker.js     # Main symptom checker logic
+│   └── payment.js             # Payment processing with Intersend
+├── .gitignore                 # Git ignore file
+└── README.md                  # Project documentation
 ```
 
 ### Key Pages
-- **Home**: Overview of all features and platform introduction
-- **Dashboard**: Personalized user health dashboard
-- **Drugs & Supplements**: Comprehensive medication information
-- **Symptom Checker**: AI-powered health assessment tool
-- **Nutrition**: Meal plans, recipes, and nutrition tracking
-- **Wellness**: Health tracking and wellness tips
-- **Info Resources**: Extensive health information library
+- **Home (index.html)**: Overview of all features and platform introduction
+- **Dashboard (dashboard.html)**: Personalized user health dashboard
+- **Drugs & Supplements (Drugs_supl.html)**: Comprehensive medication information
+- **Symptom Checker (Symptom_Checker.html)**: AI-powered health assessment tool
+- **Nutrition (food_recipes.html)**: Meal plans, recipes, and nutrition tracking
+- **Wellness (wellness.html)**: Health tracking and wellness tips
+- **Info Resources (Doctor.html)**: Healthcare provider directory
+- **Authentication (auth.html)**: User registration and login
+- **Profile (profile.html)**: User profile management
 
 ## 📝 License
 
