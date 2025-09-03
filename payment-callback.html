@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - Plexus Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f8f3f0 0%, #faf7f4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .success-icon:after {
+            content: '✓';
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        h1 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        p {
+            color: #5a6976;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .btn {
+            background: linear-gradient(135deg, #97b8f7, #f4a5a5);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(151, 184, 247, 0.3);
+        }
+        .order-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon"></div>
+        <h1>Payment Successful!</h1>
+        <p>Thank you for subscribing to Plexus Care. Your payment has been processed successfully.</p>
+        
+        <div class="order-details">
+            <p><strong>Order ID:</strong> <span id="orderId"></span></p>
+            <p><strong>Plan:</strong> <span id="planName"></span></p>
+            <p><strong>Amount:</strong> <span id="amount"></span></p>
+        </div>
+        
+        <p>You will receive a confirmation email shortly. If you have any questions, please contact our support team.</p>
+        <a href="dashboard.html" class="btn">Go to Dashboard</a>
+    </div>
+
+    <script>
+        // Parse URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order_id') || 'N/A';
+        const planName = urlParams.get('plan') || 'N/A';
+        const amount = urlParams.get('amount') ? `KES ${parseInt(urlParams.get('amount')).toLocaleString()}` : 'N/A';
+
+        // Update the DOM with order details
+        document.getElementById('orderId').textContent = orderId;
+        document.getElementById('planName').textContent = planName;
+        document.getElementById('amount').textContent = amount;
+
+        // In a real app, you would also verify the payment with your backend
+    </script>
+</body>
+</html>
