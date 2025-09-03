@@ -299,9 +299,8 @@
             <!-- Messages will be added here dynamically -->
         </div>
         <div class="chat-input-container">
-            <input type="text" class="chat-input" id="chatInput" 
-                   placeholder="Describe your symptoms..." 
-                   aria-label="Type your message">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Describe your symptoms..."
+                aria-label="Type your message">
             <button class="chat-send" id="chatSend" aria-label="Send message">
                 <i class="fas fa-paper-plane"></i>
             </button>
@@ -313,9 +312,9 @@
     <script src="js/Symptom_Checker.js"></script>
     <script>
         // Wait for the DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM fully loaded');
-            
+
             // Get chat elements
             const chatBotButton = document.getElementById('chatBotButton');
             const chatContainer = document.getElementById('chatContainer');
@@ -323,7 +322,7 @@
             const chatMessages = document.getElementById('chatMessages');
             const chatInput = document.getElementById('chatInput');
             const chatSend = document.getElementById('chatSend');
-            
+
             // Log elements to console for debugging
             console.log('Chat elements:', {
                 chatBotButton,
@@ -333,7 +332,7 @@
                 chatInput,
                 chatSend
             });
-            
+
             // Toggle chat window
             function toggleChat(e) {
                 e.stopPropagation(); // Prevent event bubbling
@@ -384,12 +383,12 @@
             // Add bot message with typing effect
             function addBotMessage(text) {
                 const typingIndicator = showTypingIndicator();
-                
+
                 // Simulate typing delay
                 setTimeout(() => {
                     hideTypingIndicator();
                     const messageDiv = addMessage('', false);
-                    
+
                     // Type the message character by character
                     let i = 0;
                     const typingInterval = setInterval(() => {
@@ -407,64 +406,161 @@
             // Generate AI response based on user input
             function generateAIResponse(userInput) {
                 const lowerInput = userInput.toLowerCase();
-                
+
                 // Check for emergency keywords
                 const emergencyKeywords = ['emergency', 'chest pain', 'can\'t breathe', 'severe pain', 'passing out'];
                 const isEmergency = emergencyKeywords.some(keyword => lowerInput.includes(keyword));
-                
+
                 if (isEmergency) {
                     return {
                         message: "I'm really sorry to hear you're experiencing this. Based on your symptoms, this could be serious. Please seek immediate medical attention or call emergency services right away.",
                         isEmergency: true
                     };
                 }
-                
-                // Check for common symptoms and provide guidance
+
+                // Define symptom responses with severity and related symptoms
                 const symptomResponses = {
-                    'headache': 'Headaches can have many causes, including stress, dehydration, or tension. Try drinking water, resting in a quiet room, and applying a cool compress to your forehead. If the headache is severe or persistent, consult a healthcare professional.',
-                    'fever': 'A fever is often a sign that your body is fighting an infection. Make sure to stay hydrated, get plenty of rest, and monitor your temperature. If your fever is above 103°F (39.4°C) or lasts more than 3 days, please see a doctor.',
-                    'cough': 'A cough can be caused by various factors like cold, allergies, or irritation. Stay hydrated, use a humidifier, and try honey with warm water. If your cough is severe, lasts more than 3 weeks, or is accompanied by difficulty breathing, seek medical attention.',
-                    'stomach pain': 'For mild stomach pain, try drinking clear fluids, eating bland foods, and resting. Avoid dairy, caffeine, and fatty foods. If the pain is severe, persistent, or accompanied by vomiting, fever, or blood, seek medical help immediately.'
+                    'headache': {
+                        advice: 'Headaches can have many causes, including stress, dehydration, or tension. Try drinking water, resting in a quiet room, and applying a cool compress to your forehead.',
+                        warning: 'If the headache is severe, persistent, or accompanied by vision problems, confusion, or fever, please seek medical attention immediately.',
+                        related: ['migraine', 'tension', 'eye strain']
+                    },
+                    'fever': {
+                        advice: 'A fever is often a sign that your body is fighting an infection. Make sure to stay hydrated, get plenty of rest, and monitor your temperature.',
+                        warning: 'If your fever is above 103°F (39.4°C), lasts more than 3 days, or is accompanied by a rash, confusion, or difficulty breathing, please see a doctor.',
+                        related: ['temperature', 'chills', 'sweating']
+                    },
+                    'cough': {
+                        advice: 'A cough can be caused by various factors like cold, allergies, or irritation. Stay hydrated, use a humidifier, and try honey with warm water.',
+                        warning: 'If your cough is severe, lasts more than 3 weeks, produces blood, or is accompanied by difficulty breathing, seek medical attention.',
+                        related: ['throat', 'chest', 'congestion']
+                    },
+                    'stomach pain': {
+                        advice: 'For mild stomach pain, try drinking clear fluids, eating bland foods, and resting. Avoid dairy, caffeine, and fatty foods.',
+                        warning: 'If the pain is severe, persistent, or accompanied by vomiting, fever, blood in stool, or sudden weight loss, seek medical help immediately.',
+                        related: ['nausea', 'indigestion', 'cramps']
+                    },
+                    'sore throat': {
+                        advice: 'A sore throat can be soothed with warm tea with honey, throat lozenges, and rest. Gargling with warm salt water may also help.',
+                        warning: 'If your sore throat is severe, lasts more than a week, or is accompanied by difficulty swallowing, high fever, or swollen glands, please see a doctor.',
+                        related: ['throat', 'swallowing', 'hoarseness']
+                    },
+                    'fatigue': {
+                        advice: 'Fatigue can be managed by getting adequate sleep, staying hydrated, eating balanced meals, and engaging in light exercise.',
+                        warning: 'If fatigue is persistent, severe, or accompanied by unexplained weight loss, fever, or depression, consult a healthcare provider.',
+                        related: ['tiredness', 'weakness', 'low energy']
+                    },
+                    'dizziness': {
+                        advice: 'For dizziness, try sitting or lying down immediately, drinking water, and avoiding sudden movements. Deep breathing exercises may help.',
+                        warning: 'If dizziness is severe, persistent, or accompanied by chest pain, fainting, or difficulty speaking, seek immediate medical attention.',
+                        related: ['lightheaded', 'vertigo', 'unsteady']
+                    },
+                    'nausea': {
+                        advice: 'Nausea can be eased by sipping clear fluids, eating small bland meals, and avoiding strong odors. Ginger tea may also help.',
+                        warning: 'If nausea is severe, persistent, or accompanied by severe pain, high fever, or signs of dehydration, see a doctor.',
+                        related: ['vomiting', 'upset stomach', 'queasy']
+                    },
+                    'shortness of breath': {
+                        advice: 'For mild shortness of breath, try sitting upright, taking slow deep breaths, and staying calm. Avoid triggers like smoke or allergens.',
+                        warning: 'If you experience sudden or severe difficulty breathing, chest pain, or blue lips/fingernails, call emergency services immediately.',
+                        related: ['breathing', 'wheezing', 'chest tightness']
+                    },
+                    'back pain': {
+                        advice: 'For mild back pain, try gentle stretching, applying heat or cold packs, and maintaining good posture. Over-the-counter pain relievers may help.',
+                        warning: 'If back pain is severe, persists for more than a few weeks, or is accompanied by leg weakness, numbness, or loss of bladder/bowel control, seek medical attention.',
+                        related: ['muscle ache', 'stiffness', 'sciatica']
+                    }
                 };
+
+
+                // Find all matching symptoms in the user's input
+                const matchedSymptoms = [];
+                const allSymptoms = Object.keys(symptomResponses);
                 
-                // Find matching symptom
-                for (const [symptom, response] of Object.entries(symptomResponses)) {
+                // First pass: look for exact matches
+                for (const symptom of allSymptoms) {
                     if (lowerInput.includes(symptom)) {
-                        return {
-                            message: response,
-                            showSelfCare: true,
-                            symptom: symptom
-                        };
+                        // Check if this is part of a larger word (e.g., 'head' in 'ahead')
+                        const regex = new RegExp(`\\b${symptom}\\b`, 'i');
+                        if (regex.test(userInput)) {
+                            matchedSymptoms.push(symptom);
+                        }
                     }
                 }
                 
-                // Default response for unrecognized symptoms
-                return {
-                    message: "I understand you're not feeling well. Could you provide more details about your symptoms? For example, how long you've been experiencing them and their severity would be helpful for better assistance.",
-                    needsMoreInfo: true
-                };
+                // Second pass: look for related terms if no exact matches found
+                if (matchedSymptoms.length === 0) {
+                    for (const [symptom, data] of Object.entries(symptomResponses)) {
+                        const allTerms = [symptom, ...data.related];
+                        if (allTerms.some(term => lowerInput.includes(term))) {
+                            matchedSymptoms.push(symptom);
+                        }
+                    }
+                }
+                
+                // Remove duplicates
+                const uniqueSymptoms = [...new Set(matchedSymptoms)];
+                
+                // Generate response based on number of matched symptoms
+                if (uniqueSymptoms.length === 0) {
+                    return {
+                        message: "I understand you're not feeling well. Could you provide more details about your symptoms? For example, describing the type of discomfort, location, and duration would help me provide better guidance.",
+                        needsMoreInfo: true
+                    };
+                } else if (uniqueSymptoms.length === 1) {
+                    const symptom = uniqueSymptoms[0];
+                    return {
+                        message: `I see you mentioned ${symptom}. ${symptomResponses[symptom].advice} ${symptomResponses[symptom].warning}`,
+                        showSelfCare: true,
+                        symptom: symptom
+                    };
+                } else {
+                    // Multiple symptoms detected
+                    const symptomList = uniqueSymptoms.join(', ').replace(/, ([^,]*)$/, ', and $1');
+                    let combinedAdvice = `I notice you mentioned ${symptomList}. Here's what I recommend:\n\n`;
+                    
+                    // Add specific advice for each symptom
+                    uniqueSymptoms.forEach((symptom, index) => {
+                        combinedAdvice += `• For ${symptom}: ${symptomResponses[symptom].advice}\n`;
+                    });
+                    
+                    // Add combined warnings
+                    combinedAdvice += '\nImportant: ';
+                    const allWarnings = uniqueSymptoms.map(s => symptomResponses[s].warning);
+                    combinedAdvice += [...new Set(allWarnings)].join(' Also, ');
+                    
+                    // Add general advice for multiple symptoms
+                    combinedAdvice += '\n\nSince you have multiple symptoms, it\'s important to monitor them closely. ';
+                    combinedAdvice += 'If any symptom worsens or new symptoms appear, please consult a healthcare professional.';
+                    
+                    return {
+                        message: combinedAdvice,
+                        showSelfCare: true,
+                        symptom: 'multiple symptoms'
+                    };
+                }
             }
 
             // Handle user sending a message
             function handleUserMessage() {
                 const message = chatInput.value.trim();
                 if (message === '') return;
-                
+
                 // Add user message to chat
                 addMessage(message, true);
                 chatInput.value = '';
-                
+
                 // Generate and add AI response
                 const response = generateAIResponse(message);
-                
+
                 if (response.isEmergency) {
                     addBotMessage(response.message);
                     addBotMessage("🚨 **This is important:** Please call emergency services or go to the nearest emergency room immediately if you haven't already.");
                     return;
                 }
-                
+
                 addBotMessage(response.message);
-                
+
                 // Add self-care recommendations if applicable
                 if (response.showSelfCare) {
                     setTimeout(() => {
@@ -484,7 +580,7 @@
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                     }, 500);
                 }
-                
+
                 // Add professional help notice if needed
                 if (Math.random() > 0.7 || response.isEmergency) {
                     setTimeout(() => {
@@ -510,31 +606,31 @@
             // Initialize event listeners
             function initChat() {
                 console.log('Initializing chat...');
-                
+
                 // Add event listeners
                 if (chatBotButton) chatBotButton.addEventListener('click', toggleChat);
                 if (chatClose) chatClose.addEventListener('click', toggleChat);
                 if (chatSend) chatSend.addEventListener('click', handleUserMessage);
-                
+
                 // Send message on Enter key
                 if (chatInput) {
-                    chatInput.addEventListener('keypress', function(e) {
+                    chatInput.addEventListener('keypress', function (e) {
                         if (e.key === 'Enter') {
                             handleUserMessage();
                         }
                     });
                 }
-                
+
                 // Close chat when clicking outside
-                document.addEventListener('click', function(e) {
+                document.addEventListener('click', function (e) {
                     if (chatContainer && !chatContainer.contains(e.target) && e.target !== chatBotButton) {
                         chatContainer.classList.remove('open');
                     }
                 });
-                
+
                 console.log('Chat initialized');
             }
-            
+
             // Initialize the chat
             initChat();
         });
