@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malaria Resource Center - Plexus Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
+            --primary-light: #fadbd8;
+            --secondary: #f39c12;
+            --accent: #e67e22;
+            --background: #fdfefe;
+            --white: #ffffff;
+            --text: #2c3e50;
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --line-height-base: 1.6;
+            --transition: all 0.3s ease;
+            --border-radius-sm: 5px;
+            --border-radius-md: 10px;
+            --border-radius-lg: 15px;
+            --border-radius-full: 50px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: var(--line-height-base);
+            color: var(--text);
+            background-color: var(--background);
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-nav {
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .site-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .site-logo:hover {
+            color: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .back-to-dashboard {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .back-to-dashboard:hover {
+            color: var(--secondary);
+            transform: translateX(-5px);
+        }
+
+        .back-to-dashboard i {
+            margin-right: 8px;
+        }
+
+        .me-2 {
+            margin-right: 0.5rem;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .header-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .header-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .malaria-icon {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-info li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary);
+            margin-top: 3px;
+        }
+
+        .navigation-tabs {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-full);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .nav-tab:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .section-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 20px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--border-radius-md);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .card:hover {
+            background: var(--primary-light);
+            border-left-width: 6px;
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .symptoms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .symptom-item {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .prevention-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: #e74c3c;
+            border-radius: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 15px;
+            width: 2px;
+            height: calc(100% - 15px);
+            background: #ddd;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+        }
+
+        .quiz-button {
+            background: white;
+            color: var(--primary);
+            padding: 15px 30px;
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 10px;
+        }
+
+        .quiz-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-questions {
+            margin: 30px 0;
+            display: none;
+        }
+
+        .question-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .answer-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .answer-option {
+            background: white;
+            color: var(--primary);
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 80px;
+        }
+
+        .answer-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .answer-option.selected {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .quiz-results {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-results h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .results-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .score-display {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-md);
+        }
+
+        .recommendation {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            margin-top: 15px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            padding: 25px;
+            border-radius: var(--border-radius-lg);
+            color: white;
+            text-align: center;
+        }
+
+        .tip-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .resources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-item {
+            background: var(--white);
+            border: 2px solid var(--primary-light);
+            padding: 25px;
+            border-radius: var(--border-radius-md);
+            transition: var(--transition);
+        }
+
+        .resource-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 50px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            padding: 15px 40px;
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .urgency-card {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            border-radius: var(--border-radius-lg);
+            border: 3px solid #fff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .urgency-card h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .emergency-symptoms {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            margin: 20px 0;
+        }
+
+        .emergency-symptoms h4 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .emergency-symptoms ul {
+            color: #856404;
+            margin-left: 20px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .newsletter-form .form-control,
+            .newsletter-form .btn {
+                width: 100%;
+                border-radius: 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                text-align: center;
+            }
+
+            .footer-section h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-bottom .row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .legal-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .newsletter-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            .nav-tabs {
+                justify-content: center;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .malaria-icon {
+                width: 200px;
+                height: 200px;
+                font-size: 5rem;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 4rem 0 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-light), var(--secondary));
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-logo h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .text-muted {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-link[aria-label="Facebook"] {
+            background-color: #1877F2;
+        }
+
+        .social-link[aria-label="Twitter"] {
+            background-color: #1DA1F2;
+        }
+
+        .social-link[aria-label="Instagram"] {
+            background-color: #E1306C;
+        }
+
+        .social-link[aria-label="LinkedIn"] {
+            background-color: #0A66C2;
+        }
+
+        .newsletter-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .newsletter-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .form-control {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            max-width: 350px;
+            flex: 1;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+        }
+
+        .col-md-6 {
+            flex: 1;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-md-start {
+            text-align: left;
+        }
+
+        .legal-links {
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 1rem;
+        }
+
+        .legal-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .legal-links a:hover {
+            color: var(--secondary);
+        }
+
+        .list-unstyled {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        .mt-3 {
+            margin-top: 1rem;
+        }
+
+        .mt-5 {
+            margin-top: 3rem;
+        }
+
+        .pt-4 {
+            padding-top: 1.5rem;
+        }
+
+        .border-top {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .border-secondary {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-nav">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="/" class="site-logo">Plexus Care</a>
+                    <a href="/dashboard.html" class="back-to-dashboard">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Malaria Resource Center</h1>
+                <p>Comprehensive information about malaria prevention, symptoms, treatment, and recovery. Your guide to
+                    understanding and protecting yourself from this mosquito-borne disease.</p>
+            </div>
+            <div class="header-image">
+                <div class="malaria-icon">🦟</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="navigation-tabs">
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <a href="#overview" class="nav-tab">Overview</a>
+                <a href="#symptoms" class="nav-tab">Symptoms</a>
+                <a href="#prevention" class="nav-tab">Prevention</a>
+                <a href="#treatment" class="nav-tab">Treatment</a>
+                <a href="#living-with" class="nav-tab">Recovery & Care</a>
+                <a href="#resources" class="nav-tab">Resources</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Emergency Notice -->
+        <div class="urgency-card">
+            <h3>⚠️ Medical Emergency</h3>
+            <p><strong>Seek immediate medical attention if experiencing severe symptoms.</strong> Malaria can be
+                life-threatening without prompt treatment. This resource is for educational purposes only and should not
+                replace professional medical care.</p>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview" class="section">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2>Understanding Malaria</h2>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>What is Malaria?</h3>
+                    <p>Malaria is a serious and sometimes fatal disease caused by parasites transmitted through bites
+                        from infected Anopheles mosquitoes. The parasites multiply in the liver and then attack red
+                        blood cells.</p>
+                </div>
+                <div class="card">
+                    <h3>Types of Malaria</h3>
+                    <p><strong>P. falciparum:</strong> Most deadly form<br>
+                        <strong>P. vivax:</strong> Most widespread type<br>
+                        <strong>P. ovale:</strong> Similar to P. vivax<br>
+                        <strong>P. malariae:</strong> Long-term chronic infection<br>
+                        <strong>P. knowlesi:</strong> Rare zoonotic type
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Global Impact</h3>
+                    <p>Malaria affects over 240 million people worldwide annually, with over 600,000 deaths reported
+                        each year. It's most prevalent in tropical and subtropical regions, particularly sub-Saharan
+                        Africa.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Symptoms Section -->
+        <div id="symptoms" class="section">
+            <div class="section-header">
+                <div class="section-icon">🌡️</div>
+                <h2>Malaria Symptoms</h2>
+            </div>
+
+            <div class="emergency-symptoms">
+                <h4>🚨 Severe Malaria Symptoms - Seek Emergency Care Immediately:</h4>
+                <ul>
+                    <li>High fever (over 39°C/102°F)</li>
+                    <li>Severe headache and confusion</li>
+                    <li>Difficulty breathing</li>
+                    <li>Seizures or loss of consciousness</li>
+                    <li>Severe anemia</li>
+                    <li>Kidney failure</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-bottom: 20px;">Early Symptoms (appear 10-15 days after infection)</h3>
+            <div class="symptoms-grid">
+                <div class="symptom-item">Fever and chills</div>
+                <div class="symptom-item">Headache</div>
+                <div class="symptom-item">Muscle aches</div>
+                <div class="symptom-item">Fatigue and weakness</div>
+                <div class="symptom-item">Nausea and vomiting</div>
+                <div class="symptom-item">Sweating</div>
+            </div>
+
+            <h3 style="margin: 30px 0 20px 0;">Progressive Symptoms</h3>
+            <div class="symptoms-grid">
+                <div class="symptom-item">Abdominal pain</div>
+                <div class="symptom-item">Diarrhea</div>
+                <div class="symptom-item">Enlarged spleen</div>
+                <div class="symptom-item">Anemia</div>
+                <div class="symptom-item">Yellow skin (jaundice)</div>
+                <div class="symptom-item">Dark urine</div>
+            </div>
+        </div>
+
+        <!-- Risk Assessment Quiz -->
+        <div class="section">
+            <div class="quiz-container">
+                <h2>Malaria Risk Assessment</h2>
+                <p>Take our quick assessment to evaluate your risk factors and symptoms. This is not a diagnostic tool
+                    but can help you understand when to seek medical attention.</p>
+
+                <div id="quiz-container" style="display: none;">
+                    <div id="quiz-progress" class="mb-4">
+                        <div class="progress"
+                            style="height: 10px; border-radius: 5px; background: rgba(255,255,255,0.1);">
+                            <div id="progress-bar" class="progress-bar"
+                                style="width: 0%; height: 100%; background: var(--secondary); border-radius: 5px; transition: width 0.3s ease;">
+                            </div>
+                        </div>
+                        <div class="text-end mt-1 text-muted" id="question-counter">Question 1 of 8</div>
+                    </div>
+
+                    <div id="quiz-questions" class="quiz-questions">
+                        <!-- Questions will be populated by JavaScript -->
+                    </div>
+
+                    <div class="quiz-navigation mt-4">
+                        <button id="prev-button" class="quiz-button me-2" onclick="prevQuestion()"
+                            style="display: none;">
+                            <i class="fas fa-arrow-left me-1"></i> Previous
+                        </button>
+                        <button id="next-button" class="quiz-button" onclick="nextQuestion()" style="display: none;">
+                            Next <i class="fas fa-arrow-right ms-1"></i>
+                        </button>
+                        <button id="submit-quiz-button" class="quiz-button" onclick="submitQuiz()"
+                            style="display: none;">
+                            Submit Assessment
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-results" class="quiz-results" style="display: none;">
+                    <h3>Your Risk Assessment Results</h3>
+                    <div id="results-content"></div>
+                    <button class="quiz-button mt-3" onclick="restartQuiz()">
+                        <i class="fas fa-redo me-1"></i> Take Again
+                    </button>
+                </div>
+
+                <button id="start-button" class="quiz-button" onclick="startQuiz()">
+                    <i class="fas fa-play me-1"></i> Start Assessment
+                </button>
+            </div>
+        </div>
+
+        <!-- Prevention Section -->
+        <div id="prevention" class="section">
+            <div class="section-header">
+                <div class="section-icon">🛡️</div>
+                <h2>Prevention Methods</h2>
+            </div>
+
+            <div class="prevention-timeline">
+                <div class="timeline-item">
+                    <h3>Step 1: Use Insect Repellent</h3>
+                    <p>Apply DEET-based repellents (20-30% concentration) to exposed skin. Reapply every 4-6 hours or as
+                        directed on the product label.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 2: Sleep Under Bed Nets</h3>
+                    <p>Use insecticide-treated nets (ITNs) or long-lasting insecticidal nets (LLINs) every night,
+                        especially in endemic areas.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 3: Wear Protective Clothing</h3>
+                    <p>Cover arms and legs with long-sleeved shirts and pants, especially during evening and night hours
+                        when mosquitoes are most active.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 4: Eliminate Breeding Sites</h3>
+                    <p>Remove standing water around your home - empty containers, clean gutters, and maintain swimming
+                        pools properly.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 5: Take Preventive Medication</h3>
+                    <p>Consult a healthcare provider about antimalarial prophylaxis if traveling to high-risk areas.
+                        Start medication before travel as directed.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Treatment Section -->
+        <div id="treatment" class="section">
+            <div class="section-header">
+                <div class="section-icon">💊</div>
+                <h2>Treatment Options</h2>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Artemisinin-based Therapies</h3>
+                    <p><strong>ACTs (Artemisinin Combination Therapies):</strong> First-line treatment for uncomplicated
+                        P. falciparum malaria. Includes artemether-lumefantrine and artesunate-amodiaquine combinations.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Severe Malaria Treatment</h3>
+                    <p><strong>Artesunate IV:</strong> WHO-recommended treatment for severe malaria. Requires immediate
+                        hospitalization and intensive monitoring by medical professionals.</p>
+                </div>
+                <div class="card">
+                    <h3>Supportive Care</h3>
+                    <p>Management of fever, prevention of seizures, treatment of anemia, and maintenance of fluid
+                        balance. May require blood transfusion in severe cases.</p>
+                </div>
+                <div class="card">
+                    <h3>Species-Specific Treatment</h3>
+                    <p><strong>P. vivax/P. ovale:</strong> Requires primaquine to eliminate liver stages. <strong>P.
+                            malariae:</strong> Chloroquine is often effective. Treatment varies by parasite type and
+                        drug resistance patterns.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recovery & Care Section -->
+        <div id="living-with" class="section">
+            <div class="section-header">
+                <div class="section-icon">🌟</div>
+                <h2>Recovery & Post-Treatment Care</h2>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <h3>Complete Treatment</h3>
+                    <p>Take all prescribed medication even if you feel better. Incomplete treatment can lead to drug
+                        resistance and recurrence.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <h3>Monitor Symptoms</h3>
+                    <p>Watch for returning fever, chills, or other symptoms. Some forms of malaria can relapse weeks or
+                        months later.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <h3>Gradual Activity Return</h3>
+                    <p>Slowly return to normal activities as your strength improves. Allow your body time to recover
+                        fully from the infection.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <h3>Nutritional Support</h3>
+                    <p>Maintain a balanced diet rich in iron, vitamins, and proteins to help rebuild your strength and
+                        blood cells.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">5</div>
+                    <h3>Stay Hydrated</h3>
+                    <p>Drink plenty of fluids to prevent dehydration and support your body's recovery process.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">6</div>
+                    <h3>Follow-up Care</h3>
+                    <p>Attend all follow-up appointments and blood tests to ensure the parasite has been completely
+                        eliminated.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <div id="resources" class="section">
+            <div class="section-header">
+                <div class="section-icon">📚</div>
+                <h2>Additional Resources</h2>
+            </div>
+
+            <div class="resources-list">
+                <div class="resource-item">
+                    <h3>🏥 Find Treatment Centers</h3>
+                    <p>Locate malaria treatment facilities and specialists in your area through our healthcare provider
+                        directory.</p>
+                </div>
+                <div class="resource-item">
+                    <h3>🗺️ Malaria Risk Maps</h3>
+                    <p>Access current malaria risk maps and transmission data for different regions worldwide.</p>
+                </div>
+                <div class="resource-item">
+                    <h3>💉 Vaccination Information</h3>
+                    <p>Learn about the RTS,S/AS01 malaria vaccine and its availability in your region.</p>
+                </div>
+                <div class="resource-item">
+                    <h3>✈️ Travel Guidance</h3>
+                    <p>Get pre-travel health advice, prophylaxis recommendations, and country-specific malaria
+                        information.</p>
+                </div>
+                <div class="resource-item">
+                    <h3>📱 Prevention Apps</h3>
+                    <p>Download apps for malaria prevention reminders, symptom tracking, and treatment adherence.</p>
+                </div>
+                <div class="resource-item">
+                    <h3>👨‍👩‍👧‍👦 Community Support</h3>
+                    <p>Connect with local malaria prevention programs and community health initiatives.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2>Protect Yourself and Your Community</h2>
+            <p>Malaria is preventable and treatable with prompt action. Don't wait - take steps to protect yourself and
+                seek immediate medical care if symptoms develop.</p>
+            <button class="cta-button" onclick="findDoctor()">Find a Doctor</button>
+            <button class="cta-button" onclick="contactSupport()">Get Support</button>
+            <button class="cta-button" onclick="emergencyInfo()">Emergency Info</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Main Footer Content -->
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <div class="footer-logo">
+                            <h3 class="text-white mb-3">🏥 Plexus Care</h3>
+                            <p class="text-muted">Comprehensive healthcare resources and support for better living.</p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="social-link" aria-label="Facebook"><i
+                                        class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" class="social-link" aria-label="Twitter"><i
+                                        class="fa-brands fa-twitter"></i></a>
+                                <a href="#" class="social-link" aria-label="Instagram"><i
+                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="#" class="social-link" aria-label="LinkedIn"><i
+                                        class="fa-brands fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4 class="text-white mb-3">Malaria Resources</h4>
+                        <ul class="footer-links">
+                            <li><a href="#overview">Understanding Malaria</a></li>
+                            <li><a href="#symptoms">Symptoms & Signs</a></li>
+                            <li><a href="#prevention">Prevention Methods</a></li>
+                            <li><a href="#treatment">Treatment Options</a></li>
+                            <li><a href="#living-with">Recovery & Care</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4 class="text-white mb-3">Health Conditions</h4>
+                        <ul class="footer-links">
+                            <li><a href="/infectious-diseases">Infectious Diseases</a></li>
+                            <li><a href="/chronic-conditions">Chronic Conditions</a></li>
+                            <li><a href="/mental-health">Mental Health</a></li>
+                            <li><a href="/maternal-child">Maternal & Child</a></li>
+                            <li><a href="/everyday-issues">Everyday Health</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4 class="text-white mb-3">Contact Us</h4>
+                        <ul class="contact-info">
+                            <li class="mb-2"><i class="fas fa-phone-alt me-2"></i> +254 700 123 456</li>
+                            <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@plexuscare.com</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> Nairobi, Kenya</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="newsletter-section mt-5">
+                    <div class="newsletter-content text-center">
+                        <h3 class="text-white mb-3">Stay Updated</h3>
+                        <p class="text-muted mb-4">Subscribe to our newsletter for the latest health tips and updates.
+                        </p>
+                        <form class="newsletter-form d-flex justify-content-center">
+                            <input type="email" placeholder="Your email address" class="form-control me-2"
+                                style="max-width: 350px;" required>
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Footer Bottom -->
+                <div class="footer-bottom mt-5 pt-4 border-top border-secondary">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p class="text-muted mb-0">&copy; 2025 Plexus Care. All rights reserved.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <ul
+                                class="legal-links d-flex justify-content-center justify-content-md-end list-unstyled mb-0">
+                                <li class="me-3"><a href="/privacy" class="text-muted">Privacy Policy</a></li>
+                                <li class="me-3"><a href="/terms" class="text-muted">Terms</a></li>
+                                <li><a href="/disclaimer" class="text-muted">Disclaimer</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Quiz functionality for malaria risk assessment
+        (function () {
+            window.startQuiz = function () {
+                currentQuestion = 0;
+                currentAnswers = {};
+                document.getElementById('start-button').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                document.getElementById('quiz-results').style.display = 'none';
+                showQuestion(0);
+            };
+
+            let currentQuestion = 0;
+            let currentAnswers = {};
+            const questions = [
+                "Have you recently traveled to or lived in a malaria-endemic area?",
+                "Are you experiencing fever, chills, or flu-like symptoms?",
+                "Do you have severe headaches or body aches?",
+                "Are you experiencing nausea, vomiting, or diarrhea?",
+                "Have you noticed unusual fatigue or weakness?",
+                "Are you taking or have you taken malaria prevention medication?",
+                "Do you regularly use insect repellent and bed nets?",
+                "Have you had malaria before or been exposed to infected individuals?"
+            ];
+
+            window.showQuestion = function (questionIndex) {
+                const questionsContainer = document.getElementById('quiz-questions');
+                const prevButton = document.getElementById('prev-button');
+                const nextButton = document.getElementById('next-button');
+                const submitButton = document.getElementById('submit-quiz-button');
+                const progressBar = document.getElementById('progress-bar');
+
+                // Update progress bar and counter
+                const progress = ((questionIndex + 1) / questions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                document.getElementById('question-counter').textContent = `Question ${questionIndex + 1} of ${questions.length}`;
+
+                // Update navigation buttons
+                prevButton.style.display = questionIndex === 0 ? 'none' : 'inline-block';
+                nextButton.style.display = questionIndex < questions.length - 1 ? 'inline-block' : 'none';
+                submitButton.style.display = questionIndex === questions.length - 1 ? 'inline-block' : 'none';
+
+                // Display current question with appropriate answer options
+                let answerOptions = '';
+                if (questionIndex === 0 || questionIndex === 5 || questionIndex === 6 || questionIndex === 7) {
+                    // Yes/No questions for travel, prevention measures, and exposure
+                    answerOptions = `
+                        <button class="answer-option ${currentAnswers[questionIndex] === 1 ? 'selected' : ''}" 
+                                data-value="1" onclick="window.selectAnswer(${questionIndex}, 1, this)">
+                            Yes
+                        </button>
+                        <button class="answer-option ${currentAnswers[questionIndex] === 0 ? 'selected' : ''}" 
+                                data-value="0" onclick="window.selectAnswer(${questionIndex}, 0, this)">
+                            No
+                        </button>
+                    `;
+                } else {
+                    // Severity questions for symptoms
+                    answerOptions = `
+                        <button class="answer-option ${currentAnswers[questionIndex] === 0 ? 'selected' : ''}" 
+                                data-value="0" onclick="window.selectAnswer(${questionIndex}, 0, this)">
+                            No
+                        </button>
+                        <button class="answer-option ${currentAnswers[questionIndex] === 1 ? 'selected' : ''}" 
+                                data-value="1" onclick="window.selectAnswer(${questionIndex}, 1, this)">
+                            Mild
+                        </button>
+                        <button class="answer-option ${currentAnswers[questionIndex] === 2 ? 'selected' : ''}" 
+                                data-value="2" onclick="window.selectAnswer(${questionIndex}, 2, this)">
+                            Moderate
+                        </button>
+                        <button class="answer-option ${currentAnswers[questionIndex] === 3 ? 'selected' : ''}" 
+                                data-value="3" onclick="window.selectAnswer(${questionIndex}, 3, this)">
+                            Severe
+                        </button>
+                    `;
+                }
+
+                questionsContainer.innerHTML = `
+                    <div class="question-item">
+                        <div class="question-text">${questionIndex + 1}. ${questions[questionIndex]}</div>
+                        <div class="answer-options">
+                            ${answerOptions}
+                        </div>
+                    </div>
+                `;
+            };
+
+            window.nextQuestion = function () {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    window.showQuestion(currentQuestion);
+                }
+            };
+
+            window.prevQuestion = function () {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    window.showQuestion(currentQuestion);
+                }
+            };
+
+            window.selectAnswer = function (questionIndex, value, button) {
+                // Remove selected class from all options for this question
+                const questionOptions = button.parentElement.querySelectorAll('.answer-option');
+                questionOptions.forEach(option => option.classList.remove('selected'));
+
+                // Add selected class to clicked option and save answer
+                button.classList.add('selected');
+                currentAnswers[questionIndex] = value;
+
+                // Auto-advance to next question if not the last one
+                if (currentQuestion < questions.length - 1) {
+                    setTimeout(window.nextQuestion, 300);
+                }
+            };
+
+            window.submitQuiz = function () {
+                const totalQuestions = questions.length;
+                const answeredQuestions = Object.keys(currentAnswers).length;
+
+                if (answeredQuestions < totalQuestions) {
+                    for (let i = 0; i < totalQuestions; i++) {
+                        if (currentAnswers[i] === undefined) {
+                            currentQuestion = i;
+                            window.showQuestion(i);
+                            document.getElementById('quiz-questions').scrollIntoView({ behavior: 'smooth' });
+                            alert(`Please answer question ${i + 1} before submitting.`);
+                            return;
+                        }
+                    }
+                }
+
+                // Calculate risk score
+                let riskScore = 0;
+
+                // Travel/exposure history (high weight)
+                if (currentAnswers[0] === 1) riskScore += 3; // Recent travel
+                if (currentAnswers[7] === 1) riskScore += 2; // Previous exposure
+
+                // Symptoms (moderate weight)
+                riskScore += (currentAnswers[1] || 0); // Fever/chills
+                riskScore += (currentAnswers[2] || 0); // Headaches
+                riskScore += (currentAnswers[3] || 0); // GI symptoms
+                riskScore += (currentAnswers[4] || 0); // Fatigue
+
+                // Prevention measures (negative weight - reduces risk)
+                if (currentAnswers[5] === 1) riskScore -= 1; // Taking prevention meds
+                if (currentAnswers[6] === 1) riskScore -= 1; // Using protection
+
+                const maxScore = 17; // Maximum possible risk score
+                const percentage = Math.max(0, (riskScore / maxScore) * 100);
+
+                document.getElementById('quiz-container').style.display = 'none';
+                document.getElementById('quiz-results').style.display = 'block';
+
+                let resultMessage = "";
+                let recommendation = "";
+                let urgency = "";
+
+                if (percentage >= 60) {
+                    resultMessage = "Your responses suggest a HIGH risk for malaria.";
+                    recommendation = "SEEK IMMEDIATE MEDICAL ATTENTION. Your symptoms and risk factors strongly suggest possible malaria infection.";
+                    urgency = "🚨 URGENT: Do not delay seeking medical care. Malaria can be life-threatening without prompt treatment.";
+                } else if (percentage >= 35) {
+                    resultMessage = "Your responses indicate a MODERATE risk for malaria.";
+                    recommendation = "Consult a healthcare provider as soon as possible for proper evaluation and testing.";
+                    urgency = "⚠️ Important: Schedule a medical appointment within 24 hours if experiencing symptoms.";
+                } else if (percentage >= 15) {
+                    resultMessage = "Your responses show a LOW to MODERATE risk for malaria.";
+                    recommendation = "Monitor your symptoms closely. If you develop fever or other concerning symptoms, seek medical attention.";
+                    urgency = "💡 Advisory: Stay alert for symptom changes and maintain prevention measures.";
+                } else {
+                    resultMessage = "Your responses suggest a LOW risk for malaria.";
+                    recommendation = "Continue using prevention measures if in endemic areas. Seek medical attention if symptoms develop.";
+                    urgency = "✅ Good: Keep up prevention practices and stay informed about malaria risks.";
+                }
+
+                document.getElementById('results-content').innerHTML = `
+                    <div class="score-display">
+                        Risk Assessment: ${Math.round(percentage)}% Risk Level
+                    </div>
+                    <div class="results-content">
+                        <p><strong>${resultMessage}</strong></p>
+                        <div class="recommendation" style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <strong style="color: #fff;">${urgency}</strong>
+                        </div>
+                        <div class="recommendation">
+                            <strong>Recommendation:</strong> ${recommendation}
+                        </div>
+                        <p class="mt-3 text-muted">
+                            <strong>Important:</strong> This assessment is for informational purposes only and cannot replace professional medical diagnosis. Malaria symptoms can appear similar to other illnesses, and proper testing is essential for accurate diagnosis.
+                        </p>
+                    </div>
+                `;
+
+                // Scroll to results
+                document.getElementById('quiz-results').scrollIntoView({ behavior: 'smooth' });
+            };
+
+            window.restartQuiz = function () {
+                currentQuestion = 0;
+                currentAnswers = {};
+                document.getElementById('start-button').style.display = 'inline-block';
+                document.getElementById('quiz-container').style.display = 'none';
+                document.getElementById('quiz-results').style.display = 'none';
+            };
+        })();
+
+        // Add active state to navigation tabs based on scroll position
+        window.addEventListener('scroll', function () {
+            const sections = document.querySelectorAll('.section');
+            const navTabs = document.querySelectorAll('.nav-tab');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navTabs.forEach(tab => {
+                tab.style.background = '';
+                tab.style.color = '#e74c3c';
+                if (tab.getAttribute('href') === '#' + current) {
+                    tab.style.background = '#e74c3c';
+                    tab.style.color = 'white';
+                }
+            });
+        });
+
+        // Placeholder functions for CTA buttons
+        function findDoctor() {
+            alert('This would redirect to a doctor finder tool or directory.');
+        }
+
+        function contactSupport() {
+            alert('This would open a support contact form or chat system.');
+        }
+
+        function emergencyInfo() {
+            alert('Emergency contacts and nearest hospital information would be displayed here.');
+        }
+    </script>
+</body>
+
+</html>
