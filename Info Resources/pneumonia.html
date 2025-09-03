@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia - Plexus Care</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        :root { 
+            --primary: #1e88e5; 
+            --primary-dark: #1565c0; 
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero-content { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .hero-content h1 { font-size: 2.5rem; margin-bottom: 20px; }
+        
+        /* Navigation */
+        .nav-tabs {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .nav-tab {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab:hover, .nav-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .section-icon {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 0;
+            text-align: center;
+            color: #666;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Pneumonia</h1>
+            <p>Comprehensive resource center for information and support</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <div class="nav-container">
+            <a href="#overview" class="nav-tab active">Overview</a>
+            <a href="#symptoms" class="nav-tab">Symptoms</a>
+            <a href="#causes" class="nav-tab">Causes</a>
+            <a href="#treatment" class="nav-tab">Treatment</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Overview Section -->
+        <div id="overview" class="section">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2>Overview</h2>
+            </div>
+            <div class="section-content">
+                <p>Pneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid or pus. It can range in seriousness from mild to life-threatening.</p>
+                
+                <h3>Key Facts</h3>
+                <ul>
+                    <li>Can be caused by viruses, bacteria, or fungi</li>
+                    <li>Leading cause of death in children under 5 years old</li>
+                    <li>Accounted for 14% of all deaths of children under 5 years old in 2019</li>
+                    <li>Can be prevented by vaccines, adequate nutrition, and addressing environmental factors</li>
+                    <li>Most common in South Asia and sub-Saharan Africa</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Symptoms Section -->
+        <div id="symptoms" class="section">
+            <div class="section-header">
+                <div class="section-icon">⚠️</div>
+                <h2>Symptoms</h2>
+            </div>
+            <div class="section-content">
+                
+        <p>Common symptoms of Pneumonia include:</p>
+        <ul>
+            <li>Cough with phlegm or pus</li>
+            <li>Fever, sweating and shaking chills</li>
+            <li>Shortness of breath</li>
+            <li>Chest pain when breathing or coughing</li>
+            <li>Fatigue</li>
+            <li>Nausea, vomiting or diarrhea</li>
+            <li>Confusion (especially in older adults)</li>
+        </ul>
+            </div>
+        </div>
+
+        <!-- Causes Section -->
+        <div id="causes" class="section">
+            <div class="section-header">
+                <div class="section-icon">🔍</div>
+                <h2>Causes & Risk Factors</h2>
+            </div>
+            <div class="section-content">
+                <p>Pneumonia can be caused by a variety of organisms, including bacteria, viruses, and fungi. The most common are: Streptococcus pneumoniae, Respiratory syncytial virus (RSV), and in some cases, the virus that causes COVID-19.</p>
+            </div>
+        </div>
+
+        <!-- Treatment Section -->
+        <div id="treatment" class="section">
+            <div class="section-header">
+                <div class="section-icon">💊</div>
+                <h2>Treatment</h2>
+            </div>
+            <div class="section-content">
+                <p>Treatment depends on the type of pneumonia you have, how severe your symptoms are, your age, and your overall health. Many cases can be treated at home with rest, antibiotics if it's bacterial, and by drinking plenty of fluids.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 Plexus Care. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Update active tab on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-tab');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = '#' + section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
