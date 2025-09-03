@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Previous head and body content remains the same until the end of the Popular Topics section -->
+<!-- ... existing head and body content ... -->
+
+        <!-- Popular Topics -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6">Popular Parenting Topics</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-moon text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Sleep Training Methods</h3>
+                    <p class="text-gray-600 mb-4">Gentle approaches to help your baby sleep through the night.</p>
+                    <a href="#sleep-training" class="text-indigo-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-utensils text-green-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Nutrition & Picky Eaters</h3>
+                    <p class="text-gray-600 mb-4">Healthy eating habits and dealing with food aversions.</p>
+                    <a href="#nutrition" class="text-green-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Child Development</h3>
+                    <p class="text-gray-600 mb-4">Milestones and activities to support growth.</p>
+                    <a href="#development" class="text-blue-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Discipline Strategies</h3>
+                    <p class="text-gray-600 mb-4">Positive discipline techniques for every age.</p>
+                    <a href="#discipline" class="text-yellow-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-mobile-alt text-red-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Screen Time Guidelines</h3>
+                    <p class="text-gray-600 mb-4">Balancing technology use for children of all ages.</p>
+                    <a href="#screentime" class="text-red-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-heart text-purple-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Parental Self-Care</h3>
+                    <p class="text-gray-600 mb-4">Taking care of yourself while raising children.</p>
+                    <a href="#selfcare" class="text-purple-600 font-medium hover:underline">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <section class="bg-indigo-50 rounded-xl p-8 md:p-12 mb-16">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Get Parenting Tips & Resources</h2>
+                <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Sign up for our weekly newsletter to receive age-appropriate parenting advice, activity ideas, and exclusive resources.</p>
+                
+                <form id="newsletter-form" class="max-w-md mx-auto">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="email" id="email" placeholder="Your email address" required
+                               class="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                               aria-label="Email address">
+                        <button type="submit" class="btn-primary px-6 py-3 rounded-lg font-medium whitespace-nowrap">
+                            <span class="flex items-center justify-center">
+                                <span id="submit-text">Subscribe</span>
+                                <span id="submit-spinner" class="hidden ml-2">
+                                    <div class="spinner w-5 h-5 border-2"></div>
+                                </span>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="mt-3 text-sm text-gray-500">
+                        We respect your privacy. Unsubscribe at any time.
+                    </div>
+                    <div id="form-message" class="mt-4 p-3 rounded hidden"></div>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Emergency Resources -->
+        <section class="mb-16">
+            <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-lg">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exclamation-triangle text-red-400 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-red-800">Emergency Resources</h3>
+                        <div class="mt-2 text-sm text-red-700">
+                            <p class="mb-2">If you're in crisis or concerned about your child's immediate safety:</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Call emergency services (911 in the U.S.) for immediate help</li>
+                                <li>Contact the National Parent Helpline at 1-855-427-2736</li>
+                                <li>Text HOME to 741741 to connect with a crisis counselor</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Plexus Care</h3>
+                    <p class="text-gray-400">Providing trusted health and wellness resources for individuals and families.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Parenting</a></li>
+                        <li><a href="pregnancy.html" class="text-gray-400 hover:text-white transition">Pregnancy</a></li>
+                        <li><a href="sex-relationships.html" class="text-gray-400 hover:text-white transition">Sex & Relationships</a></li>
+                        <li><a href="birth-control.html" class="text-gray-400 hover:text-white transition">Birth Control</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Glossary</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition" aria-label="Pinterest">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">Subscribe to our newsletter for the latest updates and resources.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-10 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 Plexus Care. All rights reserved. | <a href="#" class="hover:text-white transition">Privacy Policy</a> | <a href="#" class="hover:text-white transition">Terms of Service</a></p>
+                <p class="mt-2"><em>This website is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment.</em></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+        <span class="sr-only">Back to top</span>
+    </button>
+    
+    <!-- Modal -->
+    <div id="disclaimer-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4 py-6 hidden">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Important Disclaimer</h3>
+                    <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="prose max-w-none">
+                    <p><strong>Medical Disclaimer:</strong> The information provided on this website is for educational and informational purposes only and is not intended as medical advice. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition or health objectives.</p>
+                    <p class="mt-4"><strong>Not Medical Advice:</strong> The content on this site is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Never disregard professional medical advice or delay in seeking it because of something you have read on this website.</p>
+                    <p class="mt-4"><strong>Parenting Information:</strong> Parenting advice and child development information provided on this site are general guidelines and may not apply to all children or family situations. Always consider your child's individual needs and consult with appropriate professionals when needed.</p>
+                    <p class="mt-4"><strong>External Links:</strong> This website may contain links to external websites that are not provided or maintained by or in any way affiliated with Plexus Care. Please note that we do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.</p>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <div class="flex items-start">
+                            <input type="checkbox" id="understand-checkbox" class="mt-1">
+                            <label for="understand-checkbox" class="ml-2 text-sm text-gray-700">I understand and agree to the terms above</label>
+                        </div>
+                        <button id="accept-disclaimer" class="btn-primary mt-4 px-6 py-2 rounded-md font-medium disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            Continue to Website
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('block');
+            });
+        }
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        if (backToTopButton) {
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        
+        // Newsletter form submission
+        const newsletterForm = document.getElementById('newsletter-form');
+        const emailInput = document.getElementById('email');
+        const submitText = document.getElementById('submit-text');
+        const submitSpinner = document.getElementById('submit-spinner');
+        const formMessage = document.getElementById('form-message');
+        
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const email = emailInput.value.trim();
+                
+                // Simple email validation
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showFormMessage('Please enter a valid email address', 'error');
+                    return;
+                }
+                
+                // Show loading state
+                submitText.textContent = 'Subscribing...';
+                submitSpinner.classList.remove('hidden');
+                emailInput.disabled = true;
+                
+                try {
+                    // Simulate API call
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    // Show success message
+                    showFormMessage('Thank you for subscribing to our newsletter!', 'success');
+                    newsletterForm.reset();
+                    
+                    // Track signup in analytics
+                    if (window.gtag) {
+                        gtag('event', 'sign_up', {
+                            'event_category': 'engagement',
+                            'event_label': 'Newsletter Subscription',
+                            'value': 1
+                        });
+                    }
+                } catch (error) {
+                    console.error('Subscription error:', error);
+                    showFormMessage('An error occurred. Please try again later.', 'error');
+                    
+                    // Track error in analytics
+                    if (window.gtag) {
+                        gtag('event', 'exception', {
+                            'description': 'Newsletter subscription failed',
+                            'fatal': false
+                        });
+                    }
+                } finally {
+                    // Reset form state
+                    submitText.textContent = 'Subscribe';
+                    submitSpinner.classList.add('hidden');
+                    emailInput.disabled = false;
+                    emailInput.focus();
+                }
+            });
+        }
+        
+        function showFormMessage(message, type) {
+            if (!formMessage) return;
+            
+            formMessage.textContent = message;
+            formMessage.className = 'mt-4 p-3 rounded';
+            
+            // Remove all previous classes
+            formMessage.classList.remove('hidden', 'error-message', 'success-message', 'warning-message');
+            
+            // Add appropriate class based on type
+            if (type === 'error') {
+                formMessage.classList.add('error-message');
+            } else if (type === 'success') {
+                formMessage.classList.add('success-message');
+            } else if (type === 'warning') {
+                formMessage.classList.add('warning-message');
+            }
+            
+            formMessage.classList.remove('hidden');
+        }
+        
+        // Disclaimer modal
+        const disclaimerModal = document.getElementById('disclaimer-modal');
+        const closeModal = document.getElementById('close-modal');
+        const acceptDisclaimer = document.getElementById('accept-disclaimer');
+        const understandCheckbox = document.getElementById('understand-checkbox');
+        
+        // Show modal on page load if not previously accepted
+        document.addEventListener('DOMContentLoaded', () => {
+            const disclaimerAccepted = localStorage.getItem('disclaimerAccepted');
+            
+            if (!disclaimerAccepted && disclaimerModal) {
+                disclaimerModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+        
+        // Close modal when clicking the close button
+        if (closeModal && disclaimerModal) {
+            closeModal.addEventListener('click', () => {
+                disclaimerModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        // Close modal when clicking outside the modal content
+        if (disclaimerModal) {
+            disclaimerModal.addEventListener('click', (e) => {
+                if (e.target === disclaimerModal) {
+                    disclaimerModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+        
+        // Toggle accept button state based on checkbox
+        if (understandCheckbox && acceptDisclaimer) {
+            understandCheckbox.addEventListener('change', (e) => {
+                acceptDisclaimer.disabled = !e.target.checked;
+            });
+        }
+        
+        // Handle accept disclaimer
+        if (acceptDisclaimer && disclaimerModal) {
+            acceptDisclaimer.addEventListener('click', () => {
+                localStorage.setItem('disclaimerAccepted', 'true');
+                disclaimerModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+    </script>
+</body>
+</html>
