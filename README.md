@@ -5,11 +5,23 @@
 [![Deployed with Netlify](https://img.shields.io/badge/Deployed%20with-Netlify-00C7B7?logo=netlify)](https://www.netlify.com/)
 
 <div align="center">
-  <img src="assets/images/home.PNG" alt="Plexus Care Preview" width="800"/>
+  <img src="assets/images/readme.jpg" alt="Plexus Care Preview" width="800"/>
   <p><strong>Live Demo:</strong> <a href="https://plexus-care.netlify.app/">https://plexus-care.netlify.app/</a></p>
 </div>
 
-## 🌟 Revolutionizing Personal Healthcare
+## Table of Contents
+- [Project Overview](#-project-overview)
+- [Key Features](#-key-features)
+- [How Plexus Care Works](#-how-plexus-care-works)
+- [Technical Implementation](#-technical-implementation)
+- [Getting Started](#-getting-started)
+- [Project Structure](#-project-structure)
+- [Symptom Checker & AI Health Assistant](#-symptom-checker--ai-health-assistant)
+- [License](#-license)
+- [Acknowledgments](#-acknowledgments)
+- [Contact](#-contact)
+
+## 🌟 Project Overview
 
 Plexus Care is an all-in-one digital health companion designed to empower individuals in managing their health and wellness journey. Our platform seamlessly integrates AI-powered health tools with intuitive interfaces, making professional-grade healthcare resources accessible to everyone, everywhere.
 
@@ -21,6 +33,32 @@ Plexus Care is an all-in-one digital health companion designed to empower indivi
 - **User-Centric Design**: Intuitive interfaces for users of all technical abilities
 
 Whether you're managing chronic conditions, pursuing wellness goals, or simply taking a proactive approach to your health, Plexus Care provides the tools and insights you need to make informed decisions about your wellbeing.
+
+## 🚀 Key Features
+
+### 🍽️ Smart Meal Planning
+- Dietary profile setup with personalized nutrition goals
+- Customized weekly meal plans with portion adjustments
+- Auto-generated shopping lists with budget tracking
+- Comprehensive nutrition tracking and insights
+
+### 🌿 Wellness Tracking
+- Daily wellness check-ins for mood, energy, and stress
+- Sleep quality and physical activity monitoring
+- AI-powered analysis of wellness trends
+- Community challenges and progress tracking
+
+### 💊 Medication Management
+- AI-powered pill identification from photos
+- Custom medication schedules with reminders
+- Complete medication history and interaction alerts
+- Emergency health information access
+
+### 🤖 AI Health Assistant
+- Chat-based symptom assessment
+- Intelligent health recommendations
+- Symptom pattern tracking and alerts
+- Professional care guidance
 
 ## 🧠 How Plexus Care Works
 
@@ -110,45 +148,163 @@ Whether you're managing chronic conditions, pursuing wellness goals, or simply t
    - Receive alerts for concerning patterns
    - Share reports with your healthcare provider
 
+## 🛠 Technical Implementation
+
+### Technical Architecture
+Plexus Care is built on a modern, scalable architecture that ensures reliability and performance:
+
+#### Core Technologies
+- **Frontend**: HTML, CSS, JavaScript with responsive design
+- **Backend Services**: Supabase for database and authentication
+- **AI/ML Integration**: Custom AI models for health insights
+- **Email Services**: Intersend for notifications and reminders
+- **Deployment**: Netlify for hosting and continuous deployment
+
+#### Key Technical Features
+- **Real-time Data Sync**: Health data is always up-to-date across devices
+- **Secure Authentication**: JWT-based authentication with Supabase
+- **Responsive Design**: Works on all devices and screen sizes
+- **Offline Support**: Critical features available without internet connection
+- **Cross-Browser Compatibility**: Supports all modern browsers
+
+### Database Schema
+The application uses Supabase PostgreSQL database with tables for:
+- User profiles and preferences
+- Medication records and schedules
+- Symptom tracking history
+- Meal plans and nutrition data
+- Wellness check-in records
+
 ## 🚀 Getting Started
 
+### Prerequisites
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+- Internet connection for full functionality
+- Email account for registration
+
+### Using the Live Demo
 1. Visit our [live demo](https://plexus-care.netlify.app/)
-2. Create your free account
-3. Set up your health profile
+2. Create your free account using email registration
+3. Set up your health profile through the onboarding process
 4. Start exploring our health and wellness tools
 
-## 📱 Stay Connected
+### Local Development
+To run Plexus Care locally:
 
-- [GitHub Repository](https://github.com/secbyteX03/Plexus-Care.git)
-- [Report Issues](https://github.com/secbyteX03/Plexus-Care/issues)
-- [Contribute](https://github.com/secbyteX03/Plexus-Care/pulls)
+1. Clone the repository:
+```bash
+git clone https://github.com/secbyteX03/Plexus-Care.git
+cd Plexus-Care
+```
+
+2. Set up environment variables for Supabase:
+- Create a `.env` file based on `.env.example`
+- Add your Supabase URL and API key
+
+3. Open `index.html` in your browser or use a local server:
+```bash
+# Using Python
+python -m http.server 8000
+
+# Using Node.js
+npx serve
+```
+
+4. Access the application at `http://localhost:8000`
+
+## 📁 Project Structure
+
+```
+Plexus-Care/
+├── index.html              # Main application entry point
+├── assets/                 # Static assets
+│   ├── images/            # Application images and screenshots
+│   └── styles/            # CSS stylesheets
+├── js/                    # JavaScript modules
+│   ├── config.js          # Application configuration
+│   ├── symptom_checker.js # Symptom checker functionality
+│   ├── symptom-checker-db.js # Symptom database
+│   └── Symptom_Checker.js # Main symptom checker logic
+├── components/            # Reusable UI components
+└── README.md             # Project documentation
+```
+
+### Key Pages
+- **Home**: Overview of all features and platform introduction
+- **Dashboard**: Personalized user health dashboard
+- **Drugs & Supplements**: Comprehensive medication information
+- **Symptom Checker**: AI-powered health assessment tool
+- **Nutrition**: Meal plans, recipes, and nutrition tracking
+- **Wellness**: Health tracking and wellness tips
+- **Info Resources**: Extensive health information library
+
+## 🤖 Symptom Checker & AI Health Assistant
+
+The Symptom Checker is a comprehensive tool that guides users through a structured health assessment process:
+
+### Symptom Assessment Flow
+1. **Information Tab**: Collect user demographics (age, gender)
+2. **Symptoms Tab**: Browse and select symptoms by body area
+3. **Conditions Tab**: View potential conditions matching symptoms
+4. **Details Tab**: Read detailed information about selected conditions
+5. **Treatment Tab**: Explore treatment options and next steps
+
+### AI Chat Interface
+The integrated AI Health Assistant provides:
+- Natural language symptom description
+- Intelligent response generation based on symptom keywords
+- Emergency detection for critical symptoms
+- Personalized self-care recommendations
+- Guidance on when to seek professional help
+
+```javascript
+// Example of AI response generation
+function generateAIResponse(userInput) {
+    const lowerInput = userInput.toLowerCase();
+    
+    // Emergency detection
+    const emergencyKeywords = ['emergency', 'chest pain', 'can\'t breathe'];
+    if (emergencyKeywords.some(keyword => lowerInput.includes(keyword))) {
+        return "I'm really sorry to hear you're experiencing this. Please seek immediate medical attention or call emergency services right away.";
+    }
+    
+    // Symptom-specific advice
+    const symptomResponses = {
+        'headache': 'Headaches can have many causes. Try drinking water, resting, and applying a cool compress.',
+        'fever': 'A fever often indicates infection. Stay hydrated, rest, and monitor your temperature.',
+        // ... more symptom responses
+    };
+    
+    // Find matching symptoms and provide advice
+    for (const [symptom, advice] of Object.entries(symptomResponses)) {
+        if (lowerInput.includes(symptom)) {
+            return advice;
+        }
+    }
+    
+    return "I understand you're not feeling well. Could you provide more details about your symptoms?";
+}
+```
+
+### Symptom Database
+The application includes a comprehensive symptom database organized by body areas:
+- General Symptoms
+- Skin Symptoms
+- Head and Neck
+- Chest and Abdomen
+- Back and Pelvis
+- Arms and Legs
 
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-   - AI identifies the pill and provides detailed information
-   - Get alerts for potential interactions with other medications
 
-2. **Medication Tracking**
-   - Set up custom medication schedules
-   - Receive timely reminders for each dose
-   - Track adherence and refill needs
+## 🙏 Acknowledgments
 
-3. **Health Profile**
-   - Maintain a complete medication history
-   - Share information with healthcare providers
-   - Emergency access to critical health information
-
-### 🤖 AI Health Assistant
-1. **Symptom Assessment**
-   - Chat-based interface for describing symptoms
-   - AI analyzes patterns and provides guidance
-   - Recommendations for self-care or professional help
-
-2. **Health Monitoring**
-   - Track symptoms over time
-   - Receive alerts for concerning patterns
-   - Share reports with your healthcare provider
+- [Supabase](https://supabase.com/) for backend services and authentication
+- [Netlify](https://www.netlify.com/) for hosting and deployment
+- [Font Awesome](https://fontawesome.com/) for icons
+- All open-source libraries and resources that made this project possible
 
 ## 🌍 Our Mission
 
@@ -163,54 +319,15 @@ Plexus Care is committed to making healthcare information accessible to everyone
 - **User-Centric Design**: Intuitive interface for all age groups
 - **Regular Updates**: Continuously expanding content and features
 
-## 📊 Technical Implementation
-
-## 🛠 Technical Architecture
-
-Plexus Care is built on a modern, scalable architecture that ensures reliability and performance:
-
-### Core Technologies
-- **Frontend**: React.js with Tailwind CSS for responsive, accessible interfaces
-- **Backend**: Node.js with Express.js for robust API services
-- **Database**: Supabase for secure, real-time data management
-- **AI/ML**: Integration with leading AI models for health insights
-- **Authentication**: Secure user management with JWT and OAuth
-
-### Key Features
-- **Real-time Data Sync**: Your health data is always up-to-date across devices
-- **End-to-End Encryption**: Enterprise-grade security for your sensitive health information
-- **Offline Support**: Access critical features even without an internet connection
-- **Cross-Platform**: Responsive design works on all devices and screen sizes
-
-## 🚀 Getting Started
-
-### Live Demo
-[Plexus Care Live Demo](https://plexus-care.netlify.app/)
-
-### Local Development
-1. Clone the repository
-2. Install dependencies with `npm install`
-3. Set up your environment variables
-4. Run `npm run dev` to start the development server
-
-### Key Pages
-- **Home**: Overview of all features
-- **Dashboard**: User health dashboard
-- **Drugs & Supplements**: Comprehensive medication information
-- **Symptom Checker**: AI-powered health assessment
-- **Nutrition**: Meal plans and recipes
-- **Wellness**: Health tracking and tips
-- **Info Resources**: Extensive health information library
-
-## 📝 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-- [Supabase](https://supabase.com/) for the amazing backend services
-- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
-- [Netlify](https://www.netlify.com/) for hosting and deployment
-- [Chart.js](https://www.chartjs.org/) for data visualization
-- All open-source libraries and resources that made this project possible possible
-
 ## 📬 Contact
-For inquiries or feedback, please contact [faithmagret10@gmail.com](mailto:faithmagret10@gmail.com)
+
+For inquiries, feedback, or support:
+- **Email**: [faithmagret10@gmail.com](mailto:faithmagret10@gmail.com)
+- **GitHub**: [https://github.com/secbyteX03/Plexus-Care](https://github.com/secbyteX03/Plexus-Care)
+- **Live Demo**: [https://plexus-care.netlify.app/](https://plexus-care.netlify.app/)
+
+---
+
+<div align="center">
+  <p>Made with ❤️ for better healthcare accessibility</p>
+</div>
