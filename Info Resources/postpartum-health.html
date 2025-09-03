@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postpartum Health - Plexus Care</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        :root { --primary: #1e88e5; --primary-dark: #1565c0; }
+        .hero-section { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+                       color: white; padding: 20px 0; text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 40px 0; }
+        .section-header { margin-bottom: 20px; }
+        .nav-tabs { background: #f8f9fa; padding: 15px 0; }
+        .nav-tab { padding: 10px 20px; text-decoration: none; color: #555; }
+        .nav-tab.active { background: var(--primary); color: white; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="container">
+            <h1>Postpartum Health</h1>
+            <p>Resource Center</p>
+        </div>
+    </div>
+
+    <div class="nav-tabs">
+        <div class="container">
+            <a href="#overview" class="nav-tab active">Overview</a>
+            <a href="#symptoms" class="nav-tab">Symptoms</a>
+            <a href="#causes" class="nav-tab">Causes</a>
+            <a href="#treatment" class="nav-tab">Treatment</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div id="overview" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Overview</h2>
+                </div>
+                <div class="section-content">
+                    <p>Content for Postpartum Health overview will be added here.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="symptoms" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Symptoms</h2>
+                </div>
+                <div class="section-content">
+                    <p>Symptoms of Postpartum Health will be listed here.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="causes" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Causes & Risk Factors</h2>
+                </div>
+                <div class="section-content">
+                    <p>Information about causes and risk factors for Postpartum Health.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="treatment" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Treatment</h2>
+                </div>
+                <div class="section-content">
+                    <p>Treatment options for Postpartum Health will be detailed here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: #f8f9fa; padding: 20px 0; text-align: center; margin-top: 40px;">
+        <div class="container">
+            <p>© 2023 Plexus Care. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple tab functionality
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
