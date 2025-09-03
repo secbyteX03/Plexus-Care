@@ -265,10 +265,119 @@
 
     /* Meal Results */
     .meal-results {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
       margin-top: 2rem;
+      padding: 1.5rem;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .meal-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .meal-card {
+      flex: 1 1 300px;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .meal-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .meal-card .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .meal-card .card-body {
+      padding: 1.25rem;
+    }
+
+    .meal-card .card-title {
+      color: #2c3e50;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .meal-card .price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2ecc71;
+      margin: 0.5rem 0;
+    }
+
+    .meal-card .ingredients {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 1rem;
+    }
+
+    .meal-instructions {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      border-left: 4px solid #3b82f6;
+    }
+
+    .meal-instructions h6 {
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .fadeIn {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn-outline-secondary.toggle-instructions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .meal-results h3 {
+      color: #2c3e50;
+      font-weight: 700;
+      border-bottom: 2px solid #f1f1f1;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .alert-warning {
+      background-color: #fff3cd;
+      border-color: #ffeeba;
+      color: #856404;
+      padding: 1rem;
+      border-radius: 6px;
+    }
     }
 
     .meal-card {
@@ -931,10 +1040,11 @@
       </div>
       <ul class="nav-links">
         <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="#meal-planner">Meal Planner</a></li>
-        <li><a href="#diet-tracker">Diet Tracker</a></li>
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#premium">Premium</a></li>
+        <li><a href="Symptom_Checker.html">Symptoms Checker</a></li>
+        <li><a href="Drugs_supl.html">Drugs & Supplements</a></li>
+        <li><a href="Doctor.html">Find a Doctor</a></li>
+        <li><a href="wellness.html">Wellness</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -1446,13 +1556,18 @@
           </div>
 
           <div class="form-group">
-            <label for="people">Number of People</label>
-            <input type="number" id="people" name="people" min="1" max="20" placeholder="e.g., 4" required>
+            <label for="people">Number of People (Max 10)</label>
+            <input type="number" id="people" name="people" min="1" max="10" value="1" placeholder="e.g., 4" required>
+            <small class="form-text text-muted">Maximum of 10 people per order</small>
           </div>
 
           <div class="form-group">
-            <label for="budget">Budget (KES)</label>
-            <input type="number" id="budget" name="budget" min="100" placeholder="e.g., 2000" required>
+            <label for="budget">Total Budget (KES)</label>
+            <input type="number" id="budget" name="budget" min="100" value="500" placeholder="e.g., 2000" required>
+            <div id="budgetWarning" class="alert alert-warning small mt-2 d-none">
+              <i class="fas fa-exclamation-triangle me-1"></i> Your budget seems too low for the number of people. Consider increasing it for better options.
+            </div>
+            <small class="form-text text-muted">Minimum KES 100 per person recommended</small>
           </div>
 
           <div class="form-group">
@@ -1662,9 +1777,285 @@
   <script src="https://unpkg.com/intasend-inlinejs-sdk@4.0.7/build/intasend-inline.js"></script>
 
   <script>
-    // ------------------------------
-    // Full app JS (cleaned & working)
-    // ------------------------------
+
+
+    // Define meal suggestions for different meal types
+    const mealsByType = {
+      breakfast: [
+        {
+          name: 'Millet Porridge with Dates & Groundnuts',
+          recipe: 'Ingredients: millet flour, water, chopped dates, groundnuts.',
+          instructions: 'Whisk millet flour with water over low heat until smooth; top with dates and groundnuts for energy and iron.',
+          image: 'assets/images/meal-planner.png',
+          price: 50
+        },
+        {
+          name: 'Oatmeal with Banana & Moringa',
+          recipe: 'Ingredients: rolled oats, milk or water, banana slices, a pinch of moringa powder.',
+          instructions: 'Cook oats until creamy; stir in banana slices and sprinkle moringa powder for added vitamins.',
+          image: 'assets/images/meal-planner.png',
+          price: 70
+        },
+        {
+          name: 'Mandazi with Fresh Fruit Salad',
+          recipe: 'Ingredients: mandazi, assorted fresh fruits, honey.',
+          instructions: 'Serve warm mandazi with a bowl of fresh fruit salad drizzled with honey for an energizing start to your day.',
+          image: 'assets/images/meal-planner.png',
+          price: 80
+        },
+        {
+          name: 'Sweet Potato Pancakes with Honey',
+          recipe: 'Ingredients: mashed sweet potatoes, flour, eggs, milk, honey, baking powder.',
+          instructions: 'Mix all ingredients to form a batter. Cook on a hot griddle until golden brown. Drizzle with honey before serving.',
+          image: 'assets/images/meal-planner.png',
+          price: 90
+        },
+        {
+          name: 'Avocado & Egg Toast',
+          recipe: 'Ingredients: whole grain bread, ripe avocado, eggs, chili flakes, salt, pepper.',
+          instructions: 'Toast bread, spread mashed avocado, top with poached or fried eggs. Season with chili flakes, salt, and pepper.',
+          image: 'assets/images/meal-planner.png',
+          price: 120
+        },
+        {
+          name: 'Coconut Rice Porridge with Mango',
+          recipe: 'Ingredients: rice, coconut milk, water, sugar, ripe mango, cinnamon.',
+          instructions: 'Cook rice in coconut milk and water until soft. Sweeten to taste. Serve with fresh mango slices and a sprinkle of cinnamon.',
+          image: 'assets/images/meal-planner.png',
+          price: 85
+        },
+        {
+          name: 'African Tea with Bhajia',
+          recipe: 'Ingredients: black tea leaves, milk, ginger, sugar, potatoes, gram flour, spices.',
+          instructions: 'Brew strong tea with ginger and milk. Make potato bhajias by deep-frying spiced gram flour-coated potato slices. Serve together.',
+          image: 'assets/images/meal-planner.png',
+          price: 100
+        },
+        {
+          name: 'Scrambled Eggs with Sukuma Wiki',
+          recipe: 'Ingredients: eggs, sukuma wiki (kale), tomatoes, onions, cooking oil, salt, pepper.',
+          instructions: 'Sauté onions and tomatoes, add chopped sukuma wiki, then pour in beaten eggs. Scramble until cooked through. Season to taste.',
+          image: 'assets/images/meal-planner.png',
+          price: 110
+        }
+      ],
+      lunch: [
+        {
+          name: 'Githeri with Sautéed Spinach & Avocado',
+          recipe: 'Ingredients: boiled maize and beans, fresh spinach, avocado, lemon juice.',
+          instructions: 'Lightly sauté spinach and mix with githeri; serve with diced avocado and a squeeze of lemon for vitamin C.',
+          image: 'assets/images/meal-planner.png',
+          price: 120
+        },
+        {
+          name: 'Vegetable Stew with Brown Rice',
+          recipe: 'Ingredients: a mix of local vegetables (e.g., carrots, kale, tomatoes), spices, brown rice.',
+          instructions: 'Stew vegetables until tender and serve over brown rice to provide essential fiber and nutrients.',
+          image: 'assets/images/meal-planner.png',
+          price: 150
+        },
+        {
+          name: 'Ugali with Sukuma Wiki and Grilled Chicken',
+          recipe: 'Ingredients: maize flour, water, fresh sukuma wiki, grilled chicken, spices.',
+          instructions: 'Prepare ugali with maize flour and water; sauté sukuma wiki with spices and serve alongside slices of grilled chicken for a balanced meal.',
+          image: 'assets/images/meal-planner.png',
+          price: 180
+        },
+        {
+          name: 'Chapati with Bean Stew',
+          recipe: 'Ingredients: chapati, beans, tomatoes, onions, spices.',
+          instructions: 'Slowly simmer beans with tomatoes, onions, and spices; serve with warm chapati for a filling and nutritious lunch.',
+          image: 'assets/images/meal-planner.png',
+          price: 100
+        },
+        {
+          name: 'Mukimo with Grilled Tilapia',
+          recipe: 'Ingredients: potatoes, green peas, maize, spinach, onions, tilapia, lemon, spices.',
+          instructions: 'Prepare mukimo by mashing cooked potatoes, peas, maize, and spinach. Season and grill tilapia with lemon. Serve together.',
+          image: 'assets/images/meal-planner.png',
+          price: 200
+        },
+        {
+          name: 'Wali wa Nazi na Mchuzi wa Samaki',
+          recipe: 'Ingredients: rice, coconut milk, fish, tomatoes, onions, garlic, ginger, spices.',
+          instructions: 'Cook rice in coconut milk. Prepare fish stew with tomatoes, onions, and spices. Serve the coconut rice with fish stew on top.',
+          image: 'assets/images/meal-planner.png',
+          price: 220
+        },
+        {
+          name: 'Matoke with Beef Stew',
+          recipe: 'Ingredients: green bananas, beef, tomatoes, onions, garlic, ginger, spices.',
+          instructions: 'Steam green bananas until tender. Prepare beef stew with tomatoes, onions, and spices. Serve matoke with the beef stew.',
+          image: 'assets/images/meal-planner.png',
+          price: 190
+        },
+        {
+          name: 'Kachumbari with Grilled Chicken',
+          recipe: 'Ingredients: tomatoes, onions, chili, lemon, coriander, chicken, spices.',
+          instructions: 'Prepare kachumbari by mixing diced tomatoes, onions, chili, lemon juice, and coriander. Season and grill chicken. Serve together.',
+          image: 'assets/images/meal-planner.png',
+          price: 210
+        },
+        {
+          name: 'Maharagwe na Wali',
+          recipe: 'Ingredients: kidney beans, coconut milk, rice, onions, garlic, ginger, spices.',
+          instructions: 'Cook beans until tender, then simmer with coconut milk and spices. Serve with steamed rice.',
+          image: 'assets/images/meal-planner.png',
+          price: 130
+        },
+        {
+          name: 'Samosas with Tamarind Chutney',
+          recipe: 'Ingredients: samosa pastry, spiced potato and pea filling, tamarind, sugar, spices.',
+          instructions: 'Fill samosa pastry with spiced potato and pea mixture, fold into triangles, and deep fry. Serve with sweet tamarind chutney.',
+          image: 'assets/images/meal-planner.png',
+          price: 150
+        }
+      ],
+      dinner: [
+        {
+          name: 'Grilled Tilapia with Sweet Potato & Sukuma Wiki',
+          recipe: 'Ingredients: tilapia (low-mercury fish), sweet potato, sukuma wiki, spices.',
+          instructions: 'Season and grill tilapia; boil sweet potatoes and sauté sukuma wiki; serve together for a balanced dinner rich in omega-3 and vitamins.',
+          image: 'assets/images/meal-planner.png',
+          price: 200
+        },
+        {
+          name: 'Chicken & Lentil Stew with Ugali',
+          recipe: 'Ingredients: lean chicken, lentils, tomatoes, onions, maize flour.',
+          instructions: 'Prepare a hearty stew with chicken and lentils for protein and fiber; serve with soft ugali.',
+          image: 'assets/images/meal-planner.png',
+          price: 220
+        },
+        {
+          name: 'Vegetable Pilau with Mixed Beans',
+          recipe: 'Ingredients: basmati rice, mixed vegetables, beans, pilau spices, broth.',
+          instructions: 'Sauté vegetables with pilau spices, add rice and beans, then simmer in broth until cooked. Serve warm for a comforting dinner.',
+          image: 'assets/images/meal-planner.png',
+          price: 180
+        },
+        {
+          name: 'Kenyan Beef Stew with Rice',
+          recipe: 'Ingredients: beef, potatoes, carrots, onions, spices, rice.',
+          instructions: 'Slowly cook beef with vegetables until tender; serve hot over steamed rice for a hearty and nutritious meal.',
+          image: 'assets/images/meal-planner.png',
+          price: 250
+        },
+        {
+          name: 'Fish Curry with Coconut Rice',
+          recipe: 'Ingredients: white fish fillets, coconut milk, rice, curry spices, vegetables.',
+          instructions: 'Prepare a fragrant fish curry with coconut milk and serve with coconut-infused rice for a tropical twist.',
+          image: 'assets/images/meal-planner.png',
+          price: 230
+        },
+        {
+          name: 'Chicken Biryani with Raita',
+          recipe: 'Ingredients: basmati rice, chicken, yogurt, biryani spices, onions, tomatoes.',
+          instructions: 'Layer marinated chicken with partially cooked rice and steam together. Serve with cooling cucumber raita.',
+          image: 'assets/images/meal-planner.png',
+          price: 270
+        },
+        {
+          name: 'Lentil Soup with Fresh Bread',
+          recipe: 'Ingredients: red lentils, carrots, onions, garlic, vegetable stock, bread.',
+          instructions: 'Simmer lentils with vegetables and spices until tender. Blend until smooth and serve with crusty bread.',
+          image: 'assets/images/meal-planner.png',
+          price: 150
+        },
+        {
+          name: 'Stuffed Bell Peppers with Quinoa',
+          recipe: 'Ingredients: bell peppers, quinoa, black beans, corn, cheese, spices.',
+          instructions: 'Stuff bell peppers with a mixture of cooked quinoa, black beans, corn, and cheese. Bake until peppers are tender.',
+          image: 'assets/images/meal-planner.png',
+          price: 190
+        },
+        {
+          name: 'Beef Meatballs with Spaghetti',
+          recipe: 'Ingredients: ground beef, breadcrumbs, egg, spaghetti, tomato sauce, herbs.',
+          instructions: 'Mix beef with breadcrumbs and egg to form meatballs. Bake and serve with spaghetti and tomato sauce.',
+          image: 'assets/images/meal-planner.png',
+          price: 240
+        },
+        {
+          name: 'Vegetable Stir-fry with Noodles',
+          recipe: 'Ingredients: mixed vegetables, egg noodles, soy sauce, garlic, ginger, sesame oil.',
+          instructions: 'Stir-fry vegetables with garlic and ginger, add cooked noodles and sauce. Toss to combine and serve hot.',
+          image: 'assets/images/meal-planner.png',
+          price: 170
+        }
+      ],
+      snack: [
+        {
+          name: 'Fruit Smoothie with Yogurt',
+          recipe: 'Ingredients: mixed fruits (banana, mango, berries), yogurt, honey, ice cubes.',
+          instructions: 'Blend all ingredients until smooth for a refreshing and nutritious snack.',
+          image: 'assets/images/meal-planner.png',
+          price: 80
+        },
+        {
+          name: 'Roasted Maize (Mahindi Choma)',
+          recipe: 'Ingredients: fresh maize, lemon, chili powder, salt.',
+          instructions: 'Roast maize until golden brown; serve with lemon wedges and a sprinkle of chili powder and salt.',
+          image: 'assets/images/meal-planner.png',
+          price: 30
+        },
+        {
+          name: 'Boiled Sweet Potatoes with Peanut Butter',
+          recipe: 'Ingredients: sweet potatoes, natural peanut butter, salt.',
+          instructions: 'Boil sweet potatoes until tender; serve with a side of peanut butter for dipping.',
+          image: 'assets/images/meal-planner.png',
+          price: 50
+        },
+        {
+          name: 'Fruit Salad with Nuts',
+          recipe: 'Ingredients: assorted seasonal fruits, mixed nuts, lime juice, honey.',
+          instructions: 'Chop fruits into bite-sized pieces, mix with nuts, drizzle with lime juice and honey, and serve chilled.',
+          image: 'assets/images/meal-planner.png',
+          price: 100
+        },
+        {
+          name: 'Bhajia with Tamarind Sauce',
+          recipe: 'Ingredients: potatoes, gram flour, spices, tamarind, sugar, chili.',
+          instructions: 'Slice potatoes, dip in spiced gram flour batter, and deep fry until golden. Serve with sweet and spicy tamarind sauce.',
+          image: 'assets/images/meal-planner.png',
+          price: 60
+        },
+        {
+          name: 'Roasted Nuts and Dried Fruit Mix',
+          recipe: 'Ingredients: mixed nuts (almonds, cashews, peanuts), dried fruits (raisins, mango, pineapple), spices.',
+          instructions: 'Toss nuts with spices and roast until golden. Mix with dried fruits and store in an airtight container.',
+          image: 'assets/images/meal-planner.png',
+          price: 120
+        },
+        {
+          name: 'Avocado Toast with Chili Flakes',
+          recipe: 'Ingredients: whole grain bread, ripe avocado, chili flakes, salt, lemon juice.',
+          instructions: 'Toast bread, spread mashed avocado, and sprinkle with chili flakes, salt, and a squeeze of lemon.',
+          image: 'assets/images/meal-planner.png',
+          price: 90
+        },
+        {
+          name: 'Plantain Chips with Guacamole',
+          recipe: 'Ingredients: ripe plantains, avocado, tomato, onion, lime, spices, oil for frying.',
+          instructions: 'Slice plantains thinly and fry until crispy. Make guacamole by mashing avocado with diced tomatoes, onions, lime juice, and spices.',
+          image: 'assets/images/meal-planner.png',
+          price: 110
+        },
+        {
+          name: 'Yogurt with Honey and Granola',
+          recipe: 'Ingredients: plain yogurt, honey, granola, fresh berries.',
+          instructions: 'Layer yogurt with granola and fresh berries. Drizzle with honey before serving.',
+          image: 'assets/images/meal-planner.png',
+          price: 95
+        },
+        {
+          name: 'Sweet Corn and Pea Samosas',
+          recipe: 'Ingredients: samosa pastry, sweet corn, green peas, potatoes, spices.',
+          instructions: 'Fill samosa pastry with spiced sweet corn, peas, and potato mixture. Fold and deep fry until golden brown.',
+          image: 'assets/images/meal-planner.png',
+          price: 70
+        }
+      ]
+    };
 
     // Sample meal database
     const mealDatabase = {
@@ -1699,8 +2090,149 @@
     // -------------------------
     // Initialization
     // -------------------------
+    // Function to check if budget is realistic for number of people
+    function isBudgetRealistic(budget, people) {
+      // Minimum 100 KES per person is considered realistic
+      return budget >= (people * 100);
+    }
+
+    // Function to generate meal suggestions based on user input
+    function generateMealSuggestions() {
+      const mealType = document.getElementById('mealType').value;
+      const budget = parseInt(document.getElementById('budget').value) || 500; // Default to 500 KES if not provided
+      const people = parseInt(document.getElementById('people').value) || 1;
+      const mealResults = document.getElementById('mealResults');
+      const budgetWarning = document.getElementById('budgetWarning');
+      
+      // Reset warning
+      budgetWarning.classList.add('d-none');
+      
+      if (!mealType) {
+        showNotification('Please select a meal type.', 'warning');
+        return;
+      }
+      
+      // Validate number of people
+      if (people > 10) {
+        showNotification('Maximum of 10 people per order. Please adjust your selection.', 'warning');
+        document.getElementById('people').value = 10;
+        return;
+      }
+      
+      // Check if budget is realistic
+      if (!isBudgetRealistic(budget, people)) {
+        budgetWarning.classList.remove('d-none');
+      }
+
+      // Show the results section
+      mealResults.classList.remove('hidden');
+      
+      // Clear previous results
+      mealResults.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="mb-0">Meal Suggestions</h3>
+          <div class="text-muted">
+            <span class="badge bg-primary">${people} ${people === 1 ? 'Person' : 'People'}</span>
+            <span class="badge bg-success ms-2">Budget: KES ${budget}</span>
+          </div>
+        </div>
+        <div class="row" id="mealCards"></div>`;
+      
+      const mealCards = document.getElementById('mealCards');
+      
+      // Get meals for the selected type and filter by budget
+      let selectedMeals = [];
+      
+      if (mealType === 'all') {
+        // Combine all meal types
+        Object.values(mealsByType).forEach(meals => {
+          selectedMeals = [...selectedMeals, ...meals];
+        });
+      } else {
+        selectedMeals = [...mealsByType[mealType] || []];
+      }
+      
+      // Filter meals by budget (per person)
+      const minBudgetPerPerson = 80; // Minimum realistic price per person in KES
+      const maxPricePerMeal = budget / people;
+      
+      // Show warning if budget is too low
+      if (maxPricePerMeal < minBudgetPerPerson) {
+        budgetWarning.classList.remove('d-none');
+      }
+      
+      const filteredMeals = selectedMeals.filter(meal => meal.price <= maxPricePerMeal);
+      
+      if (filteredMeals.length === 0) {
+        mealCards.innerHTML = `
+          <div class="col-12">
+            <div class="alert alert-warning">
+              <h5><i class="fas fa-utensils me-2"></i>No meals found within your budget</h5>
+              <p class="mb-0">
+                Your budget of KES ${budget} (${people > 1 ? `KES ${Math.round(budget/people)} per person` : 'for 1 person'}) 
+                is too low for the selected meal type. Try increasing your budget or selecting a different meal category.
+              </p>
+            </div>
+          </div>`;
+        return;
+      }
+
+      // Display the filtered meals
+      filteredMeals.forEach(meal => {
+        const totalPrice = meal.price * people;
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'col-md-6 col-lg-4 mb-4 fadeIn';
+        cardDiv.innerHTML = `
+          <div class="card h-100 shadow-sm">
+            <img src="${meal.image}" class="card-img-top meal-image" alt="${meal.name}" style="height: 200px; object-fit: cover;">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">${meal.name}</h5>
+              <p class="card-text text-muted">
+                <i class="fas fa-tag"></i> KES ${meal.price} per serving
+                ${people > 1 ? `<br><small>Total for ${people}: KES ${totalPrice}</small>` : ''}
+              </p>
+              <p class="card-text"><small class="text-muted">${meal.recipe}</small></p>
+              <button class="btn btn-outline-secondary toggle-instructions mt-auto">
+                <i class="fas fa-utensils"></i> Show Cooking Instructions
+              </button>
+              <div class="meal-instructions hidden mt-3 p-3 bg-light rounded">
+                <h6><i class="fas fa-list-ol"></i> Instructions:</h6>
+                <p class="mb-0">${meal.instructions}</p>
+              </div>
+            </div>
+          </div>`;
+        mealCards.appendChild(cardDiv);
+      });
+    }
+
+    // Toggle cooking instructions
+    document.addEventListener('click', function (e) {
+      if (e.target && e.target.classList.contains('toggle-instructions')) {
+        const instructions = e.target.nextElementSibling;
+        instructions.classList.toggle('hidden');
+        const icon = e.target.querySelector('i.fas') || e.target;
+        if (instructions.classList.contains('hidden')) {
+          icon.className = 'fas fa-utensils';
+          e.target.innerHTML = '<i class="fas fa-utensils"></i> Show Cooking Instructions';
+        } else {
+          icon.className = 'fas fa-times';
+          e.target.innerHTML = '<i class="fas fa-times"></i> Hide Instructions';
+        }
+      }
+    });
+
+    // Update form submission to use the new function
+    document.getElementById('mealPlannerForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      generateMealSuggestions();
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
       setupTabNavigation();
+
+      // Initialize form with default values
+      document.getElementById('budget').value = '150'; // Default budget to 150 KES
+      document.getElementById('people').value = '1';   // Default to 1 person
 
       // diet selection
       document.querySelectorAll('.diet-card[data-diet]').forEach(card => {
@@ -2303,6 +2835,7 @@
     // -------------------------
     window.viewRecipe = viewRecipe;
     window.addToCart = addToCart;
+    window.generateMeals = generateMealSuggestions; // Make the meal generation function available globally
     window.removeFromCart = removeFromCart;
     window.generateMeals = generateMeals;
     window.calculateNutritionNeeds = calculateNutritionNeeds;
