@@ -132,21 +132,37 @@ Whether you're managing chronic conditions, pursuing wellness goals, or simply t
    - Emergency access to critical health information
 
 ---
-
-### 🤖 AI Health Assistant
+## 🤖 Symptom Checker & AI Health Assistant
 <div align="center">
   <img src="assets/images/symptom-checker.png" alt="Symptom Checker" width="800"/>
 </div>
 
-1. **Symptom Assessment**
-   - Chat-based interface for describing symptoms
-   - AI analyzes patterns and provides guidance
-   - Recommendations for self-care or professional help
+The Symptom Checker is a comprehensive tool that guides users through a structured health assessment process:
 
-2. **Health Monitoring**
-   - Track symptoms over time
-   - Receive alerts for concerning patterns
-   - Share reports with your healthcare provider
+### Symptom Assessment Flow
+1. **Information Tab**: Collect user demographics (age, gender)
+2. **Symptoms Tab**: Browse and select symptoms by body area
+3. **Conditions Tab**: View potential conditions matching symptoms
+4. **Details Tab**: Read detailed information about selected conditions
+5. **Treatment Tab**: Explore treatment options and next steps
+
+### AI Chat Interface
+The integrated AI Health Assistant provides:
+- Natural language symptom description
+- Intelligent response generation based on symptom keywords
+- Emergency detection for critical symptoms
+- Personalized self-care recommendations
+- Guidance on when to seek professional help
+
+### Symptom Database
+The application includes a comprehensive symptom database organized by body areas:
+- General Symptoms
+- Skin Symptoms
+- Head and Neck
+- Chest and Abdomen
+- Back and Pelvis
+- Arms and Legs
+
 
 ## 🛠 Technical Implementation
 
@@ -238,63 +254,6 @@ Plexus-Care/
 - **Wellness**: Health tracking and wellness tips
 - **Info Resources**: Extensive health information library
 
-## 🤖 Symptom Checker & AI Health Assistant
-
-The Symptom Checker is a comprehensive tool that guides users through a structured health assessment process:
-
-### Symptom Assessment Flow
-1. **Information Tab**: Collect user demographics (age, gender)
-2. **Symptoms Tab**: Browse and select symptoms by body area
-3. **Conditions Tab**: View potential conditions matching symptoms
-4. **Details Tab**: Read detailed information about selected conditions
-5. **Treatment Tab**: Explore treatment options and next steps
-
-### AI Chat Interface
-The integrated AI Health Assistant provides:
-- Natural language symptom description
-- Intelligent response generation based on symptom keywords
-- Emergency detection for critical symptoms
-- Personalized self-care recommendations
-- Guidance on when to seek professional help
-
-```javascript
-// Example of AI response generation
-function generateAIResponse(userInput) {
-    const lowerInput = userInput.toLowerCase();
-    
-    // Emergency detection
-    const emergencyKeywords = ['emergency', 'chest pain', 'can\'t breathe'];
-    if (emergencyKeywords.some(keyword => lowerInput.includes(keyword))) {
-        return "I'm really sorry to hear you're experiencing this. Please seek immediate medical attention or call emergency services right away.";
-    }
-    
-    // Symptom-specific advice
-    const symptomResponses = {
-        'headache': 'Headaches can have many causes. Try drinking water, resting, and applying a cool compress.',
-        'fever': 'A fever often indicates infection. Stay hydrated, rest, and monitor your temperature.',
-        // ... more symptom responses
-    };
-    
-    // Find matching symptoms and provide advice
-    for (const [symptom, advice] of Object.entries(symptomResponses)) {
-        if (lowerInput.includes(symptom)) {
-            return advice;
-        }
-    }
-    
-    return "I understand you're not feeling well. Could you provide more details about your symptoms?";
-}
-```
-
-### Symptom Database
-The application includes a comprehensive symptom database organized by body areas:
-- General Symptoms
-- Skin Symptoms
-- Head and Neck
-- Chest and Abdomen
-- Back and Pelvis
-- Arms and Legs
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -329,5 +288,5 @@ For inquiries, feedback, or support:
 ---
 
 <div align="center">
-  <p>Made with ❤️ for better healthcare accessibility</p>
+  <p>Made for better healthcare accessibility</p>
 </div>
