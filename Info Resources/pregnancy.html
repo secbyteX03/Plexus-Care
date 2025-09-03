@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy Resources | Plexus Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #6b7280;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+        
+        .quiz-option {
+            transition: all 0.2s ease;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f3f4f6;
+            transform: translateX(4px);
+        }
+        
+        .quiz-option input:checked + label {
+            background-color: #eef2ff;
+            border-color: var(--primary);
+        }
+        
+        .search-result:hover {
+            background-color: #f9fafb;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                font-size: 12pt;
+                line-height: 1.3;
+            }
+            
+            .print-section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="../index.html" class="text-xl font-bold text-indigo-600">Plexus Care</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="../index.html" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                    <a href="../dashboard.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Dashboard</a>
+                    <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Resources</a>
+                    <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="px-4 py-8 sm:px-0">
+            <h1 class="text-3xl font-bold text-gray-900">Pregnancy Resources</h1>
+            <p class="mt-2 text-lg text-gray-600">Comprehensive information and support for a healthy pregnancy journey</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="bg-white shadow rounded-lg p-6 mb-8">
+            <div class="max-w-2xl mx-auto relative">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <input id="search-input" type="text" class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Search pregnancy topics...">
+                </div>
+                <div id="search-results" class="hidden absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"></div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <section class="bg-white shadow rounded-lg p-6 mb-8">
+            <div id="quiz-intro">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Pregnancy Wellness Quiz</h2>
+                <p class="text-gray-600 mb-6">Take our short quiz to get personalized pregnancy health recommendations and resources tailored to your specific needs and stage of pregnancy.</p>
+                <button id="start-quiz" class="btn-primary px-6 py-3 rounded-md font-medium">Start Quiz</button>
+            </div>
+
+            <div id="quiz-container" class="hidden">
+                <div class="mb-6">
+                    <div class="flex justify-between text-sm text-gray-600 mb-1">
+                        <span id="quiz-progress-text">Question 1 of 5</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="quiz-progress" class="bg-indigo-600 h-2 rounded-full" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <div id="quiz-question-container" class="mb-6">
+                    <!-- Questions will be inserted here by JavaScript -->
+                </div>
+
+                <div class="flex justify-between">
+                    <button id="prev-question" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 invisible">
+                        Previous
+                    </button>
+                    <button id="next-question" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Next Question
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-results" class="hidden">
+                <!-- Results will be inserted here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Pregnancy quiz questions
+        const quizQuestions = [
+            {
+                question: 'Which trimester are you currently in?',
+                type: 'single',
+                key: 'trimester',
+                answers: [
+                    { text: 'First trimester (weeks 1-12)', value: 'first' },
+                    { text: 'Second trimester (weeks 13-27)', value: 'second' },
+                    { text: 'Third trimester (week 28+)', value: 'third' },
+                    { text: 'I\'m not sure', value: 'unsure' }
+                ]
+            },
+            {
+                question: 'What are your main pregnancy concerns?',
+                type: 'multiple',
+                key: 'concerns',
+                answers: [
+                    { text: 'Nutrition and diet', value: 'nutrition' },
+                    { text: 'Exercise and physical activity', value: 'exercise' },
+                    { text: 'Prenatal testing and screening', value: 'testing' },
+                    { text: 'Labor and delivery preparation', value: 'delivery' },
+                    { text: 'Postpartum care', value: 'postpartum' }
+                ]
+            },
+            {
+                question: 'How would you describe your current energy level?',
+                type: 'single',
+                key: 'energy',
+                answers: [
+                    { text: 'Very low energy', value: 'low' },
+                    { text: 'Moderate energy', value: 'moderate' },
+                    { text: 'High energy', value: 'high' },
+                    { text: 'It varies a lot', value: 'varies' }
+                ]
+            },
+            {
+                question: 'Are you experiencing any of these symptoms?',
+                type: 'multiple',
+                key: 'symptoms',
+                answers: [
+                    { text: 'Nausea/vomiting', value: 'nausea' },
+                    { text: 'Back pain', value: 'back-pain' },
+                    { text: 'Swelling in hands/feet', value: 'swelling' },
+                    { text: 'Frequent urination', value: 'urination' },
+                    { text: 'None of these', value: 'none' }
+                ]
+            },
+            {
+                question: 'What type of birth are you planning?',
+                type: 'single',
+                key: 'birth-plan',
+                answers: [
+                    { text: 'Hospital birth with OB/GYN', value: 'hospital-obgyn' },
+                    { text: 'Hospital birth with midwife', value: 'hospital-midwife' },
+                    { text: 'Birth center', value: 'birth-center' },
+                    { text: 'Home birth', value: 'home-birth' },
+                    { text: 'I\'m not sure yet', value: 'unsure' }
+                ]
+            }
+        ];
+
+        // Quiz state
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let quizScore = 0;
+        let recommendedResources = [];
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initQuiz();
+            initSearch();
+            initNewsletterForm();
+            initModal();
+            initAccessibility();
+            initErrorHandling();
+        });
+
+        // Initialize quiz
+        function initQuiz() {
+            const startQuizBtn = document.getElementById('start-quiz');
+            if (startQuizBtn) {
+                startQuizBtn.addEventListener('click', startQuiz);
+            }
+            
+            const nextQuestionBtn = document.getElementById('next-question');
+            if (nextQuestionBtn) {
+                nextQuestionBtn.addEventListener('click', goToNextQuestion);
+            }
+            
+            const prevQuestionBtn = document.getElementById('prev-question');
+            if (prevQuestionBtn) {
+                prevQuestionBtn.addEventListener('click', goToPreviousQuestion);
+            }
+            
+            const restartQuizBtn = document.getElementById('restart-quiz');
+            if (restartQuizBtn) {
+                restartQuizBtn.addEventListener('click', restartQuiz);
+            }
+        }
+
+        // Start the quiz
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            quizScore = 0;
+            
+            // Hide intro, show quiz container
+            document.getElementById('quiz-intro').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            
+            // Show first question
+            showQuestion(currentQuestionIndex);
+        }
+
+        // Show question at the given index
+        function showQuestion(index) {
+            const question = quizQuestions[index];
+            const questionContainer = document.getElementById('quiz-question-container');
+            
+            // Update progress
+            const progress = ((index + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${index + 1} of ${quizQuestions.length}`;
+            
+            // Build question HTML
+            let questionHTML = `
+                <div class="quiz-question" id="question-${index}" role="group" aria-labelledby="question-text-${index}">
+                    <h3 id="question-text-${index}" class="text-xl font-semibold mb-4">${question.question}</h3>
+                    <div class="space-y-3">
+            `;
+            
+            // Add answer options
+            question.answers.forEach((answer, i) => {
+                const answerId = `q${index}-a${i}`;
+                const isChecked = userAnswers[question.key] && 
+                    (question.type === 'multiple' 
+                        ? userAnswers[question.key].includes(answer.value)
+                        : userAnswers[question.key] === answer.value);
+                
+                if (question.type === 'multiple') {
+                    questionHTML += `
+                        <div class="flex items-start">
+                            <input type="checkbox" id="${answerId}" value="${answer.value}" 
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                                ${isChecked ? 'checked' : ''}>
+                            <label for="${answerId}" class="ml-3 text-gray-700">${answer.text}</label>
+                        </div>
+                    `;
+                } else {
+                    questionHTML += `
+                        <div class="flex items-start">
+                            <input type="radio" id="${answerId}" name="q${index}" value="${answer.value}" 
+                                class="mt-1 h-5 w-5 text-primary-600 focus:ring-primary-500"
+                                ${isChecked ? 'checked' : ''}>
+                            <label for="${answerId}" class="ml-3 text-gray-700">${answer.text}</label>
+                        </div>
+                    `;
+                }
+            });
+            
+            questionHTML += `
+                    </div>
+                </div>
+            `;
+            
+            // Update question container
+            questionContainer.innerHTML = questionHTML;
+            
+            // Update navigation buttons
+            document.getElementById('prev-question').classList.toggle('invisible', index === 0);
+            document.getElementById('next-question').textContent = index === quizQuestions.length - 1 ? 'See Results' : 'Next Question';
+            
+            // Add event listeners for answer selection
+            if (question.type === 'multiple') {
+                const checkboxes = questionContainer.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => saveAnswer(question.key, question.type));
+                });
+            } else {
+                const radios = questionContainer.querySelectorAll('input[type="radio"]');
+                radios.forEach(radio => {
+                    radio.addEventListener('change', () => saveAnswer(question.key, question.type));
+                });
+            }
+            
+            // Set focus on the first input for better keyboard navigation
+            const firstInput = questionContainer.querySelector('input');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }
+
+        // Save user's answer
+        function saveAnswer(questionKey, questionType) {
+            const questionContainer = document.getElementById(`question-${currentQuestionIndex}`);
+            
+            if (questionType === 'multiple') {
+                const selected = [];
+                const checkboxes = questionContainer.querySelectorAll('input[type="checkbox"]:checked');
+                checkboxes.forEach(checkbox => {
+                    selected.push(checkbox.value);
+                });
+                userAnswers[questionKey] = selected;
+            } else {
+                const selected = questionContainer.querySelector('input[type="radio"]:checked');
+                userAnswers[questionKey] = selected ? selected.value : null;
+            }
+            
+            // Enable/disable next button based on whether an answer was selected
+            const nextBtn = document.getElementById('next-question');
+            if (nextBtn) {
+                nextBtn.disabled = !userAnswers[questionKey] || 
+                    (Array.isArray(userAnswers[questionKey]) && userAnswers[questionKey].length === 0);
+            }
+        }
+
+        // Navigate to next question or show results
+        function goToNextQuestion() {
+            // Save current answer
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            saveAnswer(currentQuestion.key, currentQuestion.type);
+            
+            // If this is the last question, show results
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                showResults();
+                return;
+            }
+            
+            // Otherwise, go to next question
+            currentQuestionIndex++;
+            showQuestion(currentQuestionIndex);
+        }
+
+        // Go to previous question
+        function goToPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Calculate and show quiz results
+        function showResults() {
+            // In a real implementation, you would analyze the answers and provide recommendations
+            // For now, we'll just show a simple message
+            
+            // Hide quiz container, show results
+            document.getElementById('quiz-container').classList.add('hidden');
+            const resultsContainer = document.getElementById('quiz-results');
+            resultsContainer.classList.remove('hidden');
+            
+            // Generate recommendations based on answers
+            let recommendations = generateRecommendations();
+            
+            // Display results
+            resultsContainer.innerHTML = `
+                <div class="bg-white rounded-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Your Pregnancy Wellness Recommendations</h2>
+                    <p class="text-gray-600 mb-6">Based on your responses, here are some personalized recommendations for your pregnancy journey:</p>
+                    
+                    <div class="space-y-6">
+                        ${recommendations.map(rec => `
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <h3 class="text-lg font-semibold text-indigo-700">${rec.title}</h3>
+                                <p class="text-gray-600 mt-1">${rec.description}</p>
+                                ${rec.link ? `<a href="${rec.link}" class="inline-block mt-2 text-indigo-600 hover:text-indigo-800 font-medium text-sm">Learn more →</a>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <button onclick="restartQuiz()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <svg class="-ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                            </svg>
+                            Retake Quiz
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generate recommendations based on user answers
+        function generateRecommendations() {
+            const recommendations = [];
+            
+            // Trimester-specific recommendations
+            const trimester = userAnswers.trimester;
+            if (trimester === 'first') {
+                recommendations.push({
+                    title: 'First Trimester Care',
+                    description: 'Focus on prenatal vitamins, managing morning sickness, and scheduling your first prenatal visit.',
+                    link: '#first-trimester'
+                });
+            } else if (trimester === 'second') {
+                recommendations.push({
+                    title: 'Second Trimester Care',
+                    description: 'Consider prenatal testing, start planning for maternity leave, and begin thinking about childbirth classes.',
+                    link: '#second-trimester'
+                });
+            } else if (trimester === 'third') {
+                recommendations.push({
+                    title: 'Third Trimester Preparation',
+                    description: 'Prepare for labor, pack your hospital bag, and finalize your birth plan.',
+                    link: '#third-trimester'
+                });
+            }
+            
+            // Concern-specific recommendations
+            if (userAnswers.concerns) {
+                if (userAnswers.concerns.includes('nutrition')) {
+                    recommendations.push({
+                        title: 'Pregnancy Nutrition Guide',
+                        description: 'Learn about essential nutrients, foods to avoid, and healthy eating during pregnancy.',
+                        link: '#nutrition-guide'
+                    });
+                }
+                
+                if (userAnswers.concerns.includes('exercise')) {
+                    recommendations.push({
+                        title: 'Safe Pregnancy Exercises',
+                        description: 'Discover safe and effective exercises for each trimester of pregnancy.',
+                        link: '#exercise-guide'
+                    });
+                }
+                
+                if (userAnswers.concerns.includes('delivery')) {
+                    recommendations.push({
+                        title: 'Birth Plan Template',
+                        description: 'Create a personalized birth plan to communicate your preferences to your healthcare team.',
+                        link: '#birth-plan'
+                    });
+                }
+            }
+            
+            // If no specific recommendations, add general ones
+            if (recommendations.length === 0) {
+                recommendations.push(
+                    {
+                        title: 'Prenatal Care Schedule',
+                        description: 'Learn what to expect at each prenatal visit and how to prepare.',
+                        link: '#prenatal-care'
+                    },
+                    {
+                        title: 'Common Pregnancy Symptoms',
+                        description: 'Understand what\'s normal and when to call your healthcare provider.',
+                        link: '#symptoms'
+                    },
+                    {
+                        title: 'Preparing for Baby',
+                        description: 'Checklist of essential items and preparations for your new arrival.',
+                        link: '#baby-prep'
+                    }
+                );
+            }
+            
+            return recommendations;
+        }
+
+        // Restart the quiz
+        function restartQuiz() {
+            // Reset state
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            quizScore = 0;
+            
+            // Show intro, hide results
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-intro').classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize search functionality
+        function initSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            
+            if (!searchInput || !searchResults) return;
+            
+            // Sample search data - in a real app, this would come from a database
+            const searchData = [
+                { id: 'first-trimester', title: 'First Trimester', category: 'Pregnancy Stages' },
+                { id: 'second-trimester', title: 'Second Trimester', category: 'Pregnancy Stages' },
+                { id: 'third-trimester', title: 'Third Trimester', category: 'Pregnancy Stages' },
+                { id: 'prenatal-vitamins', title: 'Prenatal Vitamins', category: 'Nutrition' },
+                { id: 'pregnancy-exercise', title: 'Exercise During Pregnancy', category: 'Health & Wellness' },
+                { id: 'birth-plan', title: 'Creating a Birth Plan', category: 'Labor & Delivery' },
+                { id: 'baby-gear', title: 'Essential Baby Gear', category: 'Newborn Care' },
+                { id: 'postpartum-recovery', title: 'Postpartum Recovery', category: 'After Birth' },
+                { id: 'breastfeeding', title: 'Breastfeeding Basics', category: 'Newborn Care' },
+                { id: 'baby-names', title: 'Baby Name Ideas', category: 'Planning' }
+            ];
+            
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                searchResults.innerHTML = '';
+                
+                if (query.length < 2) {
+                    searchResults.classList.add('hidden');
+                    return;
+                }
+                
+                const results = searchData.filter(item => 
+                    item.title.toLowerCase().includes(query) ||
+                    item.category.toLowerCase().includes(query)
+                ).slice(0, 5); // Limit to 5 results
+                
+                if (results.length > 0) {
+                    results.forEach(result => {
+                        const resultItem = document.createElement('a');
+                        resultItem.href = `#${result.id}`;
+                        resultItem.className = 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100';
+                        resultItem.innerHTML = `
+                            <div class="font-medium">${result.title}</div>
+                            <div class="text-xs text-gray-500">${result.category}</div>
+                        `;
+                        resultItem.addEventListener('click', () => {
+                            searchResults.classList.add('hidden');
+                            searchInput.value = '';
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.classList.remove('hidden');
+                } else {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'px-4 py-2 text-sm text-gray-500';
+                    noResults.textContent = 'No results found';
+                    searchResults.appendChild(noResults);
+                    searchResults.classList.remove('hidden');
+                }
+            });
+            
+            // Hide results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.add('hidden');
+                }
+            });
+        }
+
+        // Initialize newsletter form
+        function initNewsletterForm() {
+            const form = document.getElementById('newsletter-form');
+            if (!form) return;
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = form.querySelector('input[type="email"]').value;
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const spinner = form.querySelector('.spinner');
+                const successMessage = form.querySelector('.success-message');
+                const errorMessage = form.querySelector('.error-message');
+                
+                // Validate email
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    errorMessage.textContent = 'Please enter a valid email address';
+                    errorMessage.classList.remove('hidden');
+                    return;
+                }
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                if (spinner) spinner.classList.remove('hidden');
+                if (errorMessage) errorMessage.classList.add('hidden');
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Hide spinner
+                    if (spinner) spinner.classList.add('hidden');
+                    
+                    // Show success message
+                    if (successMessage) {
+                        successMessage.classList.remove('hidden');
+                        form.reset();
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            successMessage.classList.add('hidden');
+                            submitBtn.disabled = false;
+                        }, 5000);
+                    }
+                }, 1000);
+            });
+        }
+
+        // Initialize modal
+        function initModal() {
+            const modal = document.getElementById('disclaimer-modal');
+            const acceptBtn = document.getElementById('accept-disclaimer');
+            const closeBtn = document.querySelector('[data-modal-hide="disclaimer-modal"]');
+            
+            if (!modal || !acceptBtn) return;
+            
+            // Show modal if disclaimer not accepted
+            function checkDisclaimer() {
+                if (!localStorage.getItem('disclaimerAccepted')) {
+                    modal.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                }
+            }
+            
+            // Accept disclaimer
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('disclaimerAccepted', 'true');
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            });
+            
+            // Close modal with close button
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                });
+            }
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            });
+            
+            // Check disclaimer on page load
+            checkDisclaimer();
+        }
+
+        // Initialize accessibility features
+        function initAccessibility() {
+            // Add skip to content link
+            const skipLink = document.createElement('a');
+            skipLink.href = '#main-content';
+            skipLink.className = 'sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:shadow-lg';
+            skipLink.textContent = 'Skip to main content';
+            document.body.insertBefore(skipLink, document.body.firstChild);
+            
+            // Make all external links open in new tab with appropriate attributes
+            document.querySelectorAll('a[href^="http"]').forEach(link => {
+                if (!link.href.includes(window.location.hostname)) {
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener noreferrer');
+                    link.innerHTML += ' <span class="sr-only">(opens in new tab)</span>';
+                }
+            });
+        }
+
+        // Initialize error handling
+        function initErrorHandling() {
+            window.addEventListener('error', function(e) {
+                console.error('Error:', e);
+                // In a real app, you might want to log this to an error tracking service
+            });
+        }
+    </script>
+</body>
+</html>
