@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parenting Resources | Plexus Care</title>
+    <meta name="description" content="Expert parenting advice, child development resources, and family wellness tips for every stage of parenthood.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818cf8;
+            --primary-dark: #4338ca;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --text: #1F2937;
+            --light-bg: #F9FAFB;
+            --gray: #9CA3AF;
+            --dark-gray: #4B5563;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #059669;
+            transform: translateY(-1px);
+        }
+        
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .quiz-option {
+            transition: all 0.2s ease;
+            border: 2px solid #E5E7EB;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background-color: #EEF2FF;
+        }
+        
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background-color: #EEF2FF;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 0.3s ease;
+        }
+        
+        .fade-enter, .fade-leave-to {
+            opacity: 0;
+        }
+        
+        .slide-fade-enter-active {
+            transition: all 0.3s ease-out;
+        }
+        
+        .slide-fade-leave-active {
+            transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+        }
+        
+        .slide-fade-enter-from,
+        .slide-fade-leave-to {
+            transform: translateX(20px);
+            opacity: 0;
+        }
+        
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                font-size: 12pt;
+                line-height: 1.5;
+            }
+            
+            .print-section {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Skip to main content link */
+        .skip-to-content {
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+            padding: 1em;
+            background-color: white;
+            color: var(--primary);
+            opacity: 0;
+        }
+        
+        .skip-to-content:focus {
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1;
+        }
+        
+        /* Focus styles for better accessibility */
+        *:focus {
+            outline: 3px solid var(--primary-light);
+            outline-offset: 2px;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Error message styles */
+        .error-message {
+            background-color: #FEE2E2;
+            border-left: 4px solid #EF4444;
+            color: #B91C1C;
+        }
+        
+        /* Success message styles */
+        .success-message {
+            background-color: #D1FAE5;
+            border-left: 4px solid #10B981;
+            color: #065F46;
+        }
+        
+        /* Warning message styles */
+        .warning-message {
+            background-color: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            color: #92400E;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Skip to main content link for screen readers -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-bold text-indigo-600 flex items-center">
+                <i class="fas fa-heartbeat mr-2"></i>
+                Plexus Care
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html" class="text-gray-600 hover:text-indigo-600 transition">Home</a>
+                <a href="#" class="text-indigo-600 font-medium">Parenting</a>
+                <a href="pregnancy.html" class="text-gray-600 hover:text-indigo-600 transition">Pregnancy</a>
+                <a href="sex-relationships.html" class="text-gray-600 hover:text-indigo-600 transition">Sex & Relationships</a>
+                <a href="birth-control.html" class="text-gray-600 hover:text-indigo-600 transition">Birth Control</a>
+                <a href="../about.html" class="text-gray-600 hover:text-indigo-600 transition">About Us</a>
+            </nav>
+            <button class="md:hidden text-gray-600" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-white border-t border-gray-200" id="mobile-menu">
+            <div class="px-4 py-3 space-y-3">
+                <a href="../index.html" class="block px-3 py-2 text-gray-600 hover:bg-gray-100 rounded">Home</a>
+                <a href="#" class="block px-3 py-2 bg-indigo-50 text-indigo-600 rounded font-medium">Parenting</a>
+                <a href="pregnancy.html" class="block px-3 py-2 text-gray-600 hover:bg-gray-100 rounded">Pregnancy</a>
+                <a href="sex-relationships.html" class="block px-3 py-2 text-gray-600 hover:bg-gray-100 rounded">Sex & Relationships</a>
+                <a href="birth-control.html" class="block px-3 py-2 text-gray-600 hover:bg-gray-100 rounded">Birth Control</a>
+                <a href="../about.html" class="block px-3 py-2 text-gray-600 hover:bg-gray-100 rounded">About Us</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Parenting Resources</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8">Expert guidance for every stage of your parenting journey, from newborns to teenagers</p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto relative">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="Search parenting topics..." 
+                           class="w-full px-6 py-4 pr-12 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                           aria-label="Search parenting topics">
+                    <button id="search-button" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white p-2 rounded-full hover:bg-indigo-700 transition">
+                        <i class="fas fa-search"></i>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </div>
+                <div id="search-results" class="hidden absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg z-10 max-h-96 overflow-y-auto">
+                    <!-- Search results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main id="main-content" class="container mx-auto px-4 py-12">
+        <!-- Quiz Section -->
+        <section class="mb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-3">Parenting Style Quiz</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Take our quick quiz to discover personalized parenting resources and tips based on your child's age and your parenting style.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-3xl mx-auto">
+                <!-- Quiz Progress -->
+                <div class="px-6 pt-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700" id="question-counter">Question 1 of 8</span>
+                        <span class="text-sm font-medium text-indigo-600" id="score-display"></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" id="quiz-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <!-- Quiz Container -->
+                <div id="quiz-container" class="p-6 md:p-8">
+                    <!-- Quiz content will be dynamically inserted here -->
+                    <div id="quiz-start" class="text-center py-8">
+                        <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-child text-3xl text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Discover Your Parenting Style</h3>
+                        <p class="text-gray-600 mb-8 max-w-md mx-auto">Answer a few questions about your parenting approach and challenges to get personalized resources and advice.</p>
+                        <button id="start-quiz" class="btn-primary px-8 py-3 rounded-full font-medium">Start Quiz</button>
+                    </div>
+                    
+                    <div id="quiz-questions" class="hidden">
+                        <!-- Questions will be inserted here by JavaScript -->
+                    </div>
+                    
+                    <div id="quiz-results" class="hidden">
+                        <!-- Results will be inserted here by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Quiz Navigation -->
+                <div id="quiz-navigation" class="border-t border-gray-200 p-4 bg-gray-50 hidden">
+                    <div class="flex justify-between items-center">
+                        <button id="prev-question" class="px-4 py-2 text-gray-600 hover:text-indigo-600 font-medium flex items-center">
+                            <i class="fas fa-arrow-left mr-2"></i> Back
+                        </button>
+                        <div class="flex space-x-3">
+                            <button id="next-question" class="btn-primary px-6 py-2 rounded-md font-medium">
+                                Next <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                            <button id="finish-quiz" class="btn-secondary px-6 py-2 rounded-md font-medium hidden">
+                                See Results <i class="fas fa-chart-bar ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Age-Based Resources -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6">Resources by Child's Age</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-indigo-100 flex items-center justify-center">
+                        <i class="fas fa-baby text-5xl text-indigo-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Newborns (0-3 months)</h3>
+                        <p class="text-gray-600 mb-4">Essential care, feeding, and development for your newborn.</p>
+                        <a href="#newborns" class="text-indigo-600 font-medium hover:underline">Explore Resources</a>
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-baby-carriage text-5xl text-blue-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Infants (4-12 months)</h3>
+                        <p class="text-gray-600 mb-4">Milestones, sleep training, and introducing solids.</p>
+                        <a href="#infants" class="text-blue-600 font-medium hover:underline">Explore Resources</a>
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-child text-5xl text-green-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Toddlers (1-3 years)</h3>
+                        <p class="text-gray-600 mb-4">Potty training, tantrums, and early learning.</p>
+                        <a href="#toddlers" class="text-green-600 font-medium hover:underline">Explore Resources</a>
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-yellow-100 flex items-center justify-center">
+                        <i class="fas fa-user-astronaut text-5xl text-yellow-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">School Age (4-12 years)</h3>
+                        <p class="text-gray-600 mb-4">Education, social skills, and healthy habits.</p>
+                        <a href="#school-age" class="text-yellow-600 font-medium hover:underline">Explore Resources</a>
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-red-100 flex items-center justify-center">
+                        <i class="fas fa-user-graduate text-5xl text-red-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Teenagers (13-18 years)</h3>
+                        <p class="text-gray-600 mb-4">Communication, independence, and future planning.</p>
+                        <a href="#teens" class="text-red-600 font-medium hover:underline">Explore Resources</a>
+                    </div>
+                </div>
+                
+                <div class="card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-purple-100 flex items-center justify-center">
+                        <i class="fas fa-users text-5xl text-purple-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Parenting Support</h3>
+                        <p class="text-gray-600 mb-4">Self-care, relationships, and family dynamics.</p>
+                        <a href="#support" class="text-purple-600 font-medium hover:underline">Get Support</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Popular Topics -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6">Popular Parenting Topics</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-moon text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Sleep Training Methods</h3>
+                    <p class="text-gray-600 mb-4">Gentle approaches to help your baby sleep through the night.</p>
+                    <a href="#sleep-training" class="text-indigo-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-utensils text-green-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Nutrition & Picky Eaters</h3>
+                    <p class="text-gray-600 mb-4">Healthy eating habits and dealing with food aversions.</p>
+                    <a href="#nutrition" class="text-green-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Child Development</h3>
+                    <p class="text-gray-600 mb-4">Milestones and activities to support growth.</p>
+                    <a href="#development" class="text-blue-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Discipline Strategies</h3>
+                    <p class="text-gray-600 mb-4">Positive discipline techniques for every age.</p>
+                    <a href="#discipline" class="text-yellow-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-mobile-alt text-red-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Screen Time Guidelines</h3>
+                    <p class="text-gray-600 mb-4">Balancing technology use for children of all ages.</p>
+                    <a href="#screentime" class="text-red-600 font-medium hover:underline">Learn More</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-heart text-purple-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Parental Self-Care</h3>
+                    <p class="text-gray-600 mb-4">Taking care of yourself while raising children.</p>
+                    <a href="#selfcare" class="text-purple-600 font-medium hover:underline">Learn More</a>
+                </div>
+            </div>
+        </section>
