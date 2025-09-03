@@ -1,35 +1,21 @@
-# Plexus Care - AI-Powered Healthcare Platform
+# Plexus Care - Comprehensive Healthcare Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Built with Supabase](https://img.shields.io/badge/Built%20with-Supabase-3ECF8E?logo=supabase)](https://supabase.com/)
-[![Deployed with Vercel](https://img.shields.io/badge/Deployed%20with-Vercel-000000?logo=vercel)](https://vercel.com/)
+[![Deployed with Netlify](https://img.shields.io/badge/Deployed%20with-Netlify-00C7B7?logo=netlify)](https://www.netlify.com/)
 
 <div align="center">
-  <img src="assets/logo.png" alt="Plexus Care Logo" width="200"/>
+  <img src="assets/images/home.PNG" alt="Plexus Care Preview" width="800"/>
+  <p><strong>Live Demo:</strong> <a href="https://plexus-care.netlify.app/">https://plexus-care.netlify.app/</a></p>
 </div>
 
 ## 🌟 Overview
-Plexus Care is an innovative healthcare platform that leverages AI and modern web technologies to provide accessible healthcare solutions. Built for the PLP July Cohort Hackathon, this project addresses the critical need for affordable and reliable healthcare services in Africa through a user-friendly web application.
+Plexus Care is a comprehensive healthcare platform that provides accessible healthcare information and resources. The platform offers a wide range of health-related tools and information, including drug databases, symptom checking, health resources, meal planning, and wellness tracking, all through a user-friendly web application.
 
-## 🚀 Features
+## 🚀 Key Features
 
-### 💊 Pill Identification
-- Snap or upload a photo of any medication
-- AI-powered identification of pills using computer vision
-- Detailed drug information including dosage, side effects, and interactions
-
-### 🤖 AI Symptom Checker
-- Chat-based symptom assessment
-- AI-powered preliminary diagnosis
-- Recommended next steps and when to seek medical attention
-
-### 🏥 Doctor Consultations
-- Book virtual consultations with licensed healthcare providers
-- Secure video calling integration
-- Digital prescriptions and medical records
-
-### 💊 Drugs & Supplements Hub
-- Comprehensive drug information database
+### 💊 Comprehensive Drug Information
+- Detailed drug database with search functionality
 - Pill identification using physical characteristics
 - Drug interaction checker
 - A-Z navigation for easy browsing
@@ -37,32 +23,59 @@ Plexus Care is an innovative healthcare platform that leverages AI and modern we
 - Safety facts and guidelines
 - Responsive design for all devices
 
-### 📱 Mobile-First Design
+### 🤖 Symptom Checker
+- Interactive symptom assessment
+- AI-powered preliminary guidance
+- Recommended next steps
+- When to seek medical attention
+
+### 🍎 Nutrition & Wellness
+- Personalized meal planning
+- Food recipes with nutritional information
+- Wellness tracking and recommendations
+- Healthy lifestyle tips
+
+### 📚 Health Information Resources
+- Extensive library of health conditions
+- Parenting resources and guides
+- Pregnancy and postpartum care
+- Chronic disease management
+- First aid and emergency care
+
+### 🧑‍⚕️ Health Tools
+- BMI Calculator
+- Medication reminders
+- Health journal
+- Appointment scheduling
+
+### 🌐 Accessible Design
 - Fully responsive interface for all devices
-- Offline functionality for low-connectivity areas
-- Push notifications for appointment reminders
+- Accessibility features for users with disabilities
+- Easy-to-navigate interface
 
 ## 🛠️ Technology Stack
 
 ### Frontend
 - **HTML5, CSS3, JavaScript (ES6+)** - Core web technologies
-- **Tailwind CSS** - Utility-first CSS framework
+- **Tailwind CSS** - Utility-first CSS framework for responsive design
 - **Alpine.js** - Lightweight JavaScript framework for reactive interfaces
-- **Interactive UI Components** - For drug search, pill identification, and interaction checking
+- **Chart.js** - For data visualization in health tracking
+- **Interactive UI Components** - For enhanced user experience
 
 ### Backend
 - **Supabase** - Backend-as-a-Service (Authentication, Database, Storage)
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web application framework
 
-### AI/ML
-- **Hugging Face Transformers** - For natural language processing
-- **TensorFlow.js** - For client-side ML models
-- **OpenAI API** - For advanced AI capabilities
+### Database
+- **PostgreSQL** - Primary database via Supabase
+- **Row Level Security** - For data protection
+- **Realtime Subscriptions** - For live updates
 
-### Payment Integration
-- **IntaSend** - For seamless M-Pesa and card payments
-- **Stripe** - International payment processing
+### Integrations
+- **Nutrition API** - For meal planning and recipes
+- **Health Data APIs** - For comprehensive health information
+- **Authentication** - Secure user management
 
 ## 🚀 Getting Started
 
@@ -135,18 +148,18 @@ Plexus Care is an innovative healthcare platform that leverages AI and modern we
 4. On successful payment, user gains access to premium features
 5. Receipt and subscription details are stored in Supabase
 
-## 🎯 Hackathon Focus Areas
+## 🌍 Our Mission
 
-### Problem Statement
-Access to affordable and reliable healthcare information and services remains a significant challenge in many African communities. Plexus Care addresses this by providing:
-- **Accessibility**: Mobile-first platform for users with limited connectivity
-- **Affordability**: Free basic features with affordable premium options
-- **Education**: Empowering users with reliable health information
+Plexus Care is committed to making healthcare information accessible to everyone. Our platform provides:
+- **Comprehensive Resources**: From medication information to wellness tips
+- **User Empowerment**: Tools to take control of personal health
+- **Evidence-Based**: Information from trusted medical sources
+- **Privacy-Focused**: Your health data stays secure
 
-### Innovation
-- **AI-Powered Triage**: Reduces unnecessary hospital visits
-- **Localized Solutions**: Built with African healthcare challenges in mind
-- **Offline-First**: Functions in areas with poor connectivity
+### Key Differentiators
+- **All-in-One Platform**: Health information, meal planning, and wellness tracking in one place
+- **User-Centric Design**: Intuitive interface for all age groups
+- **Regular Updates**: Continuously expanding content and features
 
 ## 📊 Technical Implementation
 
@@ -182,29 +195,35 @@ create table consultations (
 - `POST /api/book-consultation` - Schedule a consultation
 - `POST /api/process-payment` - Handle payments
 
-## 🏆 Hackathon Submission
-
-### Team Members
-- [Your Name] - Team Lead / Full Stack Developer
-- [Team Member 2] - Frontend Developer
-- [Team Member 3] - Backend Developer
-- [Team Member 4] - AI/ML Engineer
-- [Team Member 5] - UI/UX Designer
-
-### Demo Video
-[![Watch the demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+## 🚀 Getting Started
 
 ### Live Demo
-[Plexus Care Live Demo](https://plexus-care.vercel.app)
+[Plexus Care Live Demo](https://plexus-care.netlify.app/)
+
+### Local Development
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Set up your environment variables
+4. Run `npm run dev` to start the development server
+
+### Key Pages
+- **Home**: Overview of all features
+- **Dashboard**: User health dashboard
+- **Drugs & Supplements**: Comprehensive medication information
+- **Symptom Checker**: AI-powered health assessment
+- **Nutrition**: Meal plans and recipes
+- **Wellness**: Health tracking and tips
+- **Info Resources**: Extensive health information library
 
 ## 📝 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
-- PLP for organizing this hackathon
-- Supabase for their amazing BaaS platform
-- IntaSend for seamless payment integration
-- All open-source contributors whose work made this project possible
+- [Supabase](https://supabase.com/) for the amazing backend services
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
+- [Netlify](https://www.netlify.com/) for hosting and deployment
+- [Chart.js](https://www.chartjs.org/) for data visualization
+- All open-source libraries and resources that made this project possible possible
 
 ## 📬 Contact
 For inquiries or feedback, please contact [your-email@example.com](mailto:your-email@example.com)
