@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive birth control information, comparison tools, and personalized recommendations">
+    <title>Birth Control Resource Center - Plexus Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- A11y CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/a11y-css@1.0.0/a11y.min.css" />
+    <!-- Print Styles -->
+    <link rel="stylesheet" href="print.css" media="print">
+    <style>
+        /* Skip to main content link - visible on focus */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Focus styles for better keyboard navigation */
+        *:focus {
+            outline: 3px solid var(--secondary);
+            outline-offset: 2px;
+        }
+
+        button:focus,
+        a:focus {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .no-print,
+            .hero-section,
+            .navigation-tabs,
+            .quiz-container,
+            .search-container,
+            .newsletter-form {
+                display: none !important;
+            }
+
+            body {
+                font-size: 12pt;
+                line-height: 1.5;
+                color: #000;
+                background: #fff;
+            }
+
+            .card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .section {
+                page-break-before: auto;
+                page-break-after: auto;
+            }
+
+            a::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                font-weight: normal;
+            }
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #e0e7ff;
+            --secondary: #f59e0b;
+            --accent: #ec4899;
+            --text: #374151;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --background: #f9fafb;
+            --border-radius-sm: 0.375rem;
+            --border-radius-md: 0.75rem;
+            --border-radius-lg: 1rem;
+            --border-radius-full: 9999px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --line-height-base: 1.6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: var(--line-height-base);
+            color: var(--text);
+            background-color: var(--background);
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-nav {
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .site-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .site-logo:hover {
+            color: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .back-to-dashboard {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .back-to-dashboard:hover {
+            color: var(--secondary);
+            transform: translateX(-5px);
+        }
+
+        .back-to-dashboard i {
+            margin-right: 8px;
+        }
+
+        .me-2 {
+            margin-right: 0.5rem;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .header-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .header-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .birth-control-icon {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-info li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary);
+            margin-top: 3px;
+        }
+
+        .navigation-tabs {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-full);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .nav-tab:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .section-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 20px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--border-radius-md);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .card:hover {
+            background: var(--primary-light);
+            border-left-width: 6px;
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .method-item {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: var(--border-radius-md);
+            text-align: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .method-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .method-item h3 {
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .effectiveness {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: var(--border-radius-sm);
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .treatment-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 15px;
+            width: 2px;
+            height: calc(100% - 15px);
+            background: #ddd;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+        }
+
+        .quiz-button {
+            background: white;
+            color: var(--primary);
+            padding: 15px 30px;
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 10px;
+        }
+
+        .quiz-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-questions {
+            margin: 30px 0;
+            display: none;
+        }
+
+        .question-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .answer-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .answer-option {
+            background: white;
+            color: var(--primary);
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 80px;
+        }
+
+        .answer-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .answer-option.selected {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .quiz-results {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-results h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .results-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .score-display {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-md);
+        }
+
+        .recommendation {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            margin-top: 15px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            padding: 25px;
+            border-radius: var(--border-radius-lg);
+            color: white;
+            text-align: center;
+        }
+
+        .tip-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .resources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-item {
+            background: var(--white);
+            border: 2px solid var(--primary-light);
+            padding: 25px;
+            border-radius: var(--border-radius-md);
+            transition: var(--transition);
+        }
+
+        .resource-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 50px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            padding: 15px 40px;
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .comparison-table tr:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Gender-specific sections */
+        .gender-section {
+            border: 2px solid var(--primary-light);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .gender-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .gender-content {
+            padding: 30px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            .nav-tabs {
+                justify-content: center;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .birth-control-icon {
+                width: 200px;
+                height: 200px;
+                font-size: 5rem;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px 8px;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 4rem 0 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-light), var(--secondary));
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-logo h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .text-muted {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-link[aria-label="Facebook"] {
+            background-color: #1877F2;
+        }
+
+        .social-link[aria-label="Twitter"] {
+            background-color: #1DA1F2;
+        }
+
+        .social-link[aria-label="Instagram"] {
+            background-color: #E1306C;
+        }
+
+        .social-link[aria-label="LinkedIn"] {
+            background-color: #0A66C2;
+        }
+
+        .newsletter-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .newsletter-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .form-control {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            max-width: 350px;
+            flex: 1;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-weight: 600;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #e69008;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .search-container {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid var(--primary-light);
+            border-radius: var(--border-radius-md);
+        }
+
+        .search-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 10px;
+            border: 1px solid var(--primary-light);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow);
+            z-index: 100;
+        }
+
+        .search-result {
+            padding: 10px;
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        .search-result:last-child {
+            border-bottom: none;
+        }
+
+        .search-result a {
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .search-result a:hover {
+            color: var(--primary-dark);
+        }
+
+        .quiz-progress {
+            position: relative;
+            width: 100%;
+            height: 10px;
+            background: var(--primary-light);
+            border-radius: var(--border-radius-md);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary);
+            border-radius: var(--border-radius-md);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1rem;
+            color: white;
+        }
+
+        .quiz-step {
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+        }
+
+        .quiz-questions {
+            margin-top: 20px;
+        }
+
+        .question-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .answer-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .answer-option {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .answer-option:hover {
+            background: var(--primary-light);
+        }
+
+        .answer-option.selected {
+            background: var(--primary);
+            color: white;
+        }
+
+        .quiz-results {
+            margin-top: 20px;
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .recommendation-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow);
+        }
+
+        .recommendation-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .recommendation-item p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .quiz-actions {
+            margin-top: 20px;
+        }
+
+        .quiz-actions button {
+            margin-right: 10px;
+        }
+
+        .emergency-content {
+            padding: 20px;
+        }
+
+        .emergency-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .emergency-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .emergency-card p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .emergency-actions {
+            margin-top: 20px;
+        }
+
+        .emergency-actions button {
+            margin-right: 10px;
+        }
+
+        .emergency-disclaimer {
+            margin-top: 20px;
+        }
+
+        .emergency-disclaimer p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-nav">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="/" class="site-logo">Plexus Care</a>
+                    <a href="/dashboard.html" class="back-to-dashboard">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Birth Control Resource Center</h1>
+                <p>Comprehensive information about contraceptive options for all individuals. Make informed decisions
+                    about your reproductive health with reliable, up-to-date resources.</p>
+            </div>
+            <div class="header-image">
+                <div class="birth-control-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="navigation-tabs">
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <a href="#overview" class="nav-tab">Overview</a>
+                <a href="#methods" class="nav-tab">Methods</a>
+                <a href="#male-options" class="nav-tab">Male Options</a>
+                <a href="#female-options" class="nav-tab">Female Options</a>
+                <a href="#choosing" class="nav-tab">Choosing</a>
+                <a href="#resources" class="nav-tab">Resources</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Container -->
+    <div class="search-container container" id="search-section">
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Search birth control methods..." 
+                   aria-label="Search birth control methods">
+            <div id="searchResults" class="search-results" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <!-- Overview Section -->
+        <div id="overview" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h2>Understanding Birth Control</h2>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>What is Birth Control?</h3>
+                    <p>Birth control, also known as contraception, refers to methods used to prevent pregnancy. These
+                        methods work by preventing fertilization, implantation, or ovulation through various mechanisms.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Types of Methods</h3>
+                    <p><strong>Barrier Methods:</strong> Physically block sperm<br>
+                        <strong>Hormonal Methods:</strong> Prevent ovulation<br>
+                        <strong>Permanent Methods:</strong> Surgical sterilization<br>
+                        <strong>Natural Methods:</strong> Fertility awareness
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Effectiveness Rates</h3>
+                    <p>Birth control effectiveness is measured by how many people out of 100 become pregnant in one year
+                        using that method. Perfect use vs. typical use rates can vary significantly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methods Overview Section -->
+        <div id="methods" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-list-alt"></i>
+                </div>
+                <h2>Birth Control Methods</h2>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Effectiveness</th>
+                        <th>Duration</th>
+                        <th>Reversible</th>
+                        <th>STI Protection</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Male Condom</td>
+                        <td>82% typical use</td>
+                        <td>Per use</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Female Condom</td>
+                        <td>79% typical use</td>
+                        <td>Per use</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Birth Control Pill</td>
+                        <td>91% typical use</td>
+                        <td>Daily</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>IUD (Copper)</td>
+                        <td>>99% effective</td>
+                        <td>10-12 years</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>IUD (Hormonal)</td>
+                        <td>>99% effective</td>
+                        <td>3-7 years</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Implant</td>
+                        <td>>99% effective</td>
+                        <td>3-5 years</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Patch</td>
+                        <td>91% typical use</td>
+                        <td>Weekly</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Vaginal Ring</td>
+                        <td>91% typical use</td>
+                        <td>Monthly</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Interactive Quiz Section -->
+        <div id="quiz" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-clipboard-question"></i>
+                </div>
+                <h2>Find Your Birth Control Match</h2>
+            </div>
+            
+            <div id="quiz-container">
+                <div id="quiz-welcome" class="quiz-step active">
+                    <h3>Take Our Birth Control Quiz</h3>
+                    <p>Answer a few questions to get personalized birth control recommendations based on your needs and preferences.</p>
+                    <button id="start-quiz" class="btn btn-primary">Start Quiz <i class="fas fa-arrow-right"></i></button>
+                </div>
+                
+                <div id="quiz-questions" style="display: none;">
+                    <div id="quiz-progress">
+                        <div class="progress-bar"></div>
+                        <div class="progress-text">Question <span id="current-question">1</span> of <span id="total-questions">5</span></div>
+                    </div>
+                    <div id="question-container"></div>
+                    <div class="quiz-navigation">
+                        <button id="prev-question" class="btn btn-secondary" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button id="next-question" class="btn btn-primary">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <div id="quiz-results" style="display: none;">
+                    <h3>Your Recommended Birth Control Options</h3>
+                    <div id="recommendations" class="recommendations-grid"></div>
+                    <div class="quiz-actions">
+                        <button id="restart-quiz" class="btn btn-secondary"><i class="fas fa-redo"></i> Retake Quiz</button>
+                        <button id="view-all-methods" class="btn btn-primary">View All Methods</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Contraception Section -->
+        <div id="emergency" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2>Emergency Contraception</h2>
+            </div>
+            
+            <div class="emergency-content">
+                <div class="emergency-card">
+                    <h3>Morning-After Pill (Plan B, Ella, etc.)</h3>
+                    <p><strong>Timeframe:</strong> Up to 5 days after unprotected sex, but most effective when taken as soon as possible.</p>
+                    <p><strong>How it works:</strong> Prevents or delays ovulation and may prevent fertilization.</p>
+                    <p><strong>Effectiveness:</strong> 75-89% effective at preventing pregnancy when taken within 72 hours.</p>
+                    <p><strong>Where to get it:</strong> Available over-the-counter at most pharmacies without a prescription.</p>
+                </div>
+                
+                <div class="emergency-card">
+                    <h3>Copper IUD (ParaGard)</h3>
+                    <p><strong>Timeframe:</strong> Can be inserted up to 5 days after unprotected sex.</p>
+                    <p><strong>How it works:</strong> Prevents fertilization and implantation of a fertilized egg.</p>
+                    <p><strong>Effectiveness:</strong> Over 99% effective at preventing pregnancy when inserted within 120 hours.</p>
+                    <p><strong>Additional benefit:</strong> Can be left in place for up to 10 years as ongoing contraception.</p>
+                </div>
+                
+                <div class="emergency-actions">
+                    <a href="#" class="btn btn-primary"><i class="fas fa-phone-alt"></i> Find Emergency Contraception Near You</a>
+                    <a href="#" class="btn btn-secondary"><i class="fas fa-comment-medical"></i> Chat with a Healthcare Provider</a>
+                </div>
+                
+                <div class="emergency-disclaimer">
+                    <p><strong>Important:</strong> Emergency contraception does not protect against sexually transmitted infections (STIs). If you're at risk of STIs, talk to a healthcare provider about testing and prevention options.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medical Disclaimer Modal -->
+    <div id="disclaimer-modal" class="modal" role="dialog" aria-labelledby="disclaimer-title" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="disclaimer-title">Medical Disclaimer</h3>
+                <button class="close-modal" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Important:</strong> The information provided on this website is for educational purposes only and is not intended as medical advice. Always consult with a qualified healthcare provider regarding any questions you may have about birth control options, especially if you have any medical conditions or are taking medications.</p>
+                
+                <p>Birth control methods vary in effectiveness, and no method is 100% effective at preventing pregnancy or sexually transmitted infections (STIs). The information provided here is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+                
+                <p>If you think you may have a medical emergency, call your doctor or emergency services immediately.</p>
+                
+                <div class="checkbox-container">
+                    <input type="checkbox" id="understand-checkbox">
+                    <label for="understand-checkbox">I understand and agree to the terms of this disclaimer</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="accept-disclaimer" class="btn btn-primary" disabled>I Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Signup -->
+    <div class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h3>Stay Informed</h3>
+                    <p>Subscribe to our newsletter for the latest updates on sexual health and birth control options.</p>
+                </div>
+                <form id="newsletter-form" class="newsletter-form" novalidate>
+                    <div class="form-group">
+                        <label for="email" class="sr-only">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="button-text">Subscribe</span>
+                        <span class="spinner" style="display: none;"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Plexus Care</h3>
+                        <p class="text-muted">Your trusted resource for reproductive health information.</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#methods">Methods</a></li>
+                        <li><a href="#quiz">Find Your Match</a></li>
+                        <li><a href="#emergency">Emergency Contraception</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Healthcare Providers</a></li>
+                        <li><a href="#">Support Groups</a></li>
+                        <li><a href="#">Glossary</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> info@plexuscare.org</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Health St, Medical City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-center text-md-start">&copy; 2023 Plexus Care. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="legal-links">
+                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a></li>
+                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Birth control methods data
+        const birthControlMethods = [
+            {
+                id: 'male-condom',
+                name: 'Male Condom',
+                type: 'barrier',
+                effectiveness: '82%',
+                stiProtection: true,
+                requiresPrescription: false,
+                description: 'A thin sheath that covers the penis to collect semen and prevent pregnancy and STIs.',
+                pros: ['Protects against STIs', 'No prescription needed', 'Inexpensive', 'Widely available'],
+                cons: ['Can break or slip off', 'Must be used correctly every time', 'Can reduce sensation'],
+                tags: ['barrier', 'stiprotection', 'male', 'noprescription', 'reversible']
+            },
+            {
+                id: 'iud-hormonal',
+                name: 'Hormonal IUD',
+                type: 'long-acting reversible',
+                effectiveness: '>99%',
+                stiProtection: false,
+                requiresPrescription: true,
+                description: 'A small T-shaped device inserted into the uterus that releases hormones to prevent pregnancy for 3-7 years.',
+                pros: ['Highly effective', 'Long-lasting', 'Low maintenance', 'Can reduce menstrual cramps and bleeding'],
+                cons: ['Requires insertion by a healthcare provider', 'May cause irregular bleeding initially', 'Does not protect against STIs'],
+                tags: ['hormonal', 'longacting', 'reversible', 'prescription', 'iud']
+            },
+            {
+                id: 'implant',
+                name: 'Implant',
+                type: 'long-acting reversible',
+                effectiveness: '>99%',
+                stiProtection: false,
+                requiresPrescription: true,
+                description: 'A small rod inserted under the skin of the upper arm that releases hormones to prevent pregnancy for up to 3-5 years.',
+                pros: ['Highly effective', 'Long-lasting', 'Low maintenance', 'Discreet'],
+                cons: ['Requires insertion/removal by a healthcare provider', 'May cause irregular bleeding', 'Does not protect against STIs'],
+                tags: ['hormonal', 'longacting', 'reversible', 'prescription', 'implant']
+            },
+            {
+                id: 'birth-control-pill',
+                name: 'Birth Control Pill',
+                type: 'hormonal',
+                effectiveness: '91%',
+                stiProtection: false,
+                requiresPrescription: true,
+                description: 'Daily oral contraceptive that prevents pregnancy by stopping ovulation and thickening cervical mucus.',
+                pros: ['Highly effective with perfect use', 'Can regulate periods', 'May improve acne'],
+                cons: ['Must be taken daily at the same time', 'May cause side effects', 'Does not protect against STIs'],
+                tags: ['hormonal', 'daily', 'prescription', 'pill']
+            },
+            {
+                id: 'iud-copper',
+                name: 'Copper IUD',
+                type: 'long-acting reversible',
+                effectiveness: '>99%',
+                stiProtection: false,
+                requiresPrescription: true,
+                description: 'A small T-shaped device with copper that is inserted into the uterus to prevent pregnancy for up to 10-12 years.',
+                pros: ['Highly effective', 'Long-lasting', 'No hormones', 'Can be used as emergency contraception'],
+                cons: ['May cause heavier periods', 'Requires insertion by a healthcare provider', 'Does not protect against STIs'],
+                tags: ['nonhormonal', 'longacting', 'reversible', 'prescription', 'iud', 'copper']
+            },
+            {
+                id: 'patch',
+                name: 'Birth Control Patch',
+                type: 'hormonal',
+                effectiveness: '91%',
+                stiProtection: false,
+                requiresPrescription: true,
+                description: 'A small adhesive patch worn on the skin that releases hormones to prevent pregnancy.',
+                pros: ['Changed weekly', 'Easy to use', 'Don\'t need to remember a daily pill'],
+                cons: ['May cause skin irritation', 'Visible on skin', 'Does not protect against STIs'],
+                tags: ['hormonal', 'weekly', 'prescription', 'patch']
+            },
+            {
+                id: 'ring',
+                name: 'Vaginal Ring',
+                type: 'hormonal',
+                effectiveness: '91%',
+                stiProtection: false,
+                requiresPrescription: true,
+                description: 'A flexible ring inserted into the vagina that releases hormones to prevent pregnancy.',
+                pros: ['Changed monthly', 'Don\'t need to remember daily pills', 'Lower hormone dose than pills'],
+                cons: ['Must be comfortable inserting/removing it', 'May cause vaginal irritation', 'Does not protect against STIs'],
+                tags: ['hormonal', 'monthly', 'prescription', 'ring']
+            },
+            {
+                id: 'shot',
+                name: 'Birth Control Shot',
+                type: 'hormonal',
+                effectiveness: '94%',
+                stiProtection: false,
+                requiresPrescription: true,
+                description: 'An injection of progestin that prevents pregnancy for 3 months.',
+                pros: ['Only needed 4 times a year', 'Private', 'Don\'t need to remember daily pills'],
+                cons: ['May cause irregular bleeding', 'May cause temporary bone density loss', 'Does not protect against STIs'],
+                tags: ['hormonal', 'injection', 'prescription', 'shot']
+            },
+            {
+                id: 'female-condom',
+                name: 'Female Condom',
+                type: 'barrier',
+                effectiveness: '79%',
+                stiProtection: true,
+                requiresPrescription: false,
+                description: 'A pouch inserted into the vagina before sex to prevent pregnancy and STIs.',
+                pros: ['Protects against STIs', 'Can be inserted hours before sex', 'No prescription needed'],
+                cons: ['May be noisy', 'Can be difficult to insert', 'Less effective than male condoms'],
+                tags: ['barrier', 'stiprotection', 'female', 'noprescription', 'reversible']
+            },
+            {
+                id: 'diaphragm',
+                name: 'Diaphragm',
+                type: 'barrier',
+                effectiveness: '88%',
+                stiProtection: false,
+                requiresPrescription: true,
+                description: 'A shallow, flexible cup that covers the cervix to prevent sperm from reaching the uterus.',
+                pros: ['Can be inserted hours before sex', 'No hormones', 'Reusable for 1-2 years'],
+                cons: ['Must be used with spermicide', 'Requires fitting by a healthcare provider', 'Does not protect against STIs'],
+                tags: ['barrier', 'reusable', 'prescription', 'diaphragm']
+            },
+            {
+                id: 'spermicide',
+                name: 'Spermicide',
+                type: 'spermicide',
+                effectiveness: '72%',
+                stiProtection: false,
+                requiresPrescription: false,
+                description: 'A chemical that kills sperm, available as foam, gel, cream, film, or suppository.',
+                pros: ['No prescription needed', 'Can be used with other methods', 'Inexpensive'],
+                cons: ['Less effective than other methods', 'May cause irritation', 'Must be used every time', 'Does not protect against STIs'],
+                tags: ['spermicide', 'noprescription', 'singleuse']
+            },
+            {
+                id: 'fertility-awareness',
+                name: 'Fertility Awareness',
+                type: 'natural',
+                effectiveness: '76-88%',
+                stiProtection: false,
+                requiresPrescription: false,
+                description: 'Tracking menstrual cycles and avoiding sex or using protection on fertile days.',
+                pros: ['No hormones or devices', 'Can be combined with other methods', 'Increases body awareness'],
+                cons: ['Requires daily tracking', 'Less effective than other methods', 'Does not protect against STIs', 'Affected by irregular cycles'],
+                tags: ['natural', 'noprescription', 'fertility']
+            },
+            {
+                id: 'withdrawal',
+                name: 'Withdrawal',
+                type: 'behavioral',
+                effectiveness: '78%',
+                stiProtection: false,
+                requiresPrescription: false,
+                description: 'The man pulls out before ejaculation to prevent sperm from entering the vagina.',
+                pros: ['No cost', 'No devices or hormones needed', 'Immediately reversible'],
+                cons: ['Less effective than other methods', 'Requires self-control', 'Pre-cum may contain sperm', 'Does not protect against STIs'],
+                tags: ['behavioral', 'noprescription', 'withdrawal']
+            },
+            {
+                id: 'sterilization-female',
+                name: 'Female Sterilization',
+                type: 'permanent',
+                effectiveness: '>99%',
+                stiProtection: false,
+                requiresSurgery: true,
+                description: 'A surgical procedure that blocks or seals the fallopian tubes to prevent pregnancy permanently.',
+                pros: ['Permanent', 'Highly effective', 'No daily maintenance'],
+                cons: ['Difficult to reverse', 'Requires surgery', 'Does not protect against STIs', 'Expensive without insurance'],
+                tags: ['permanent', 'surgical', 'femalesterilization']
+            },
+            {
+                id: 'sterilization-male',
+                name: 'Male Sterilization (Vasectomy)',
+                type: 'permanent',
+                effectiveness: '>99%',
+                stiProtection: false,
+                requiresSurgery: true,
+                description: 'A surgical procedure that cuts or blocks the vas deferens to prevent sperm from reaching semen.',
+                pros: ['Permanent', 'Highly effective', 'Less invasive than female sterilization', 'No effect on sexual function'],
+                cons: ['Not immediately effective', 'Difficult to reverse', 'Requires surgery', 'Does not protect against STIs'],
+                tags: ['permanent', 'surgical', 'malesterilization']
+            }
+        ];
+
+        // Quiz questions and logic
+        const quizQuestions = [
+            {
+                question: 'What is your primary goal for using birth control?',
+                type: 'single',
+                key: 'goal',
+                answers: [
+                    { text: 'Prevent pregnancy', value: 'prevent-pregnancy' },
+                    { text: 'Regulate periods', value: 'regulate-periods' },
+                    { text: 'Reduce period pain', value: 'reduce-pain' },
+                    { text: 'Treat acne', value: 'treat-acne' },
+                    { text: 'Other medical reasons', value: 'medical' }
+                ]
+            },
+            {
+                question: 'How important is protection against sexually transmitted infections (STIs) for you?',
+                type: 'single',
+                key: 'sti-protection',
+                answers: [
+                    { text: 'Very important - I need STI protection', value: 'very-important' },
+                    { text: 'Somewhat important', value: 'somewhat-important' },
+                    { text: 'Not a priority - I\'m in a monogamous relationship', value: 'not-priority' },
+                    { text: 'Not applicable - I use other protection', value: 'not-applicable' }
+                ]
+            },
+            {
+                question: 'How often do you want to think about birth control?',
+                type: 'single',
+                key: 'frequency',
+                answers: [
+                    { text: 'I don\'t mind taking a pill daily', value: 'daily' },
+                    { text: 'I prefer weekly or monthly options', value: 'weekly-monthly' },
+                    { text: 'I want something long-term (3+ years)', value: 'long-term' },
+                    { text: 'I want something permanent', value: 'permanent' }
+                ]
+            },
+            {
+                question: 'Do you have any medical conditions or concerns?',
+                type: 'multiple',
+                key: 'concerns',
+                answers: [
+                    { text: 'High blood pressure', value: 'high-bp' },
+                    { text: 'History of blood clots', value: 'blood-clots' },
+                    { text: 'Migraines with aura', value: 'migraines' },
+                    { text: 'Breast cancer', value: 'breast-cancer' },
+                    { text: 'Liver disease', value: 'liver-disease' },
+                    { text: 'None of the above', value: 'none' }
+                ]
+            },
+            {
+                question: 'What\'s most important to you in a birth control method?',
+                type: 'multiple',
+                key: 'priorities',
+                answers: [
+                    { text: 'High effectiveness', value: 'effectiveness' },
+                    { text: 'Ease of use', value: 'ease' },
+                    { text: 'Minimal side effects', value: 'side-effects' },
+                    { text: 'Non-hormonal option', value: 'non-hormonal' },
+                    { text: 'Privacy', value: 'privacy' },
+                    { text: 'Low cost', value: 'cost' }
+                ]
+            }
+        ];
+        
+        // Method scoring based on quiz answers
+        const methodScores = {
+            'male-condom': {
+                'sti-protection:very-important': 2,
+                'frequency:daily': 1,
+                'priorities:effectiveness': 2,
+                'priorities:ease': 1,
+                'priorities:cost': 2,
+                'concerns:high-bp': 3,
+                'concerns:blood-clots': 3,
+                'concerns:migraines': 3,
+                'concerns:breast-cancer': 3,
+                'concerns:liver-disease': 3
+            },
+            'iud-hormonal': {
+                'goal:regulate-periods': 3,
+                'goal:reduce-pain': 3,
+                'frequency:long-term': 3,
+                'priorities:effectiveness': 3,
+                'priorities:ease': 3,
+                'priorities:privacy': 3,
+                'concerns:blood-clots': -1,
+                'concerns:breast-cancer': -1
+            },
+            'iud-copper': {
+                'goal:prevent-pregnancy': 3,
+                'frequency:long-term': 3,
+                'priorities:effectiveness': 3,
+                'priorities:non-hormonal': 3,
+                'priorities:privacy': 3,
+                'concerns:high-bp': 3,
+                'concerns:blood-clots': 3,
+                'concerns:migraines': 3,
+                'concerns:breast-cancer': 3,
+                'concerns:liver-disease': 3
+            },
+            'implant': {
+                'goal:prevent-pregnancy': 3,
+                'frequency:long-term': 3,
+                'priorities:effectiveness': 3,
+                'priorities:privacy': 3,
+                'concerns:blood-clots': -1,
+                'concerns:breast-cancer': -1
+            },
+            'birth-control-pill': {
+                'goal:regulate-periods': 3,
+                'goal:reduce-pain': 2,
+                'goal:treat-acne': 2,
+                'frequency:daily': 3,
+                'priorities:effectiveness': 2,
+                'concerns:blood-clots': -1,
+                'concerns:breast-cancer': -1,
+                'concerns:liver-disease': -1
+            },
+            'patch': {
+                'goal:prevent-pregnancy': 2,
+                'frequency:weekly-monthly': 3,
+                'priorities:ease': 2,
+                'concerns:blood-clots': -1,
+                'concerns:breast-cancer': -1
+            },
+            'ring': {
+                'goal:prevent-pregnancy': 2,
+                'frequency:weekly-monthly': 3,
+                'priorities:ease': 2,
+                'concerns:blood-clots': -1,
+                'concerns:breast-cancer': -1
+            },
+            'shot': {
+                'goal:prevent-pregnancy': 2,
+                'frequency:weekly-monthly': 3,
+                'priorities:privacy': 2,
+                'concerns:blood-clots': -1,
+                'concerns:breast-cancer': -1
+            },
+            'female-condom': {
+                'sti-protection:very-important': 2,
+                'frequency:daily': 1,
+                'priorities:effectiveness': 1,
+                'priorities:cost': 1,
+                'concerns:high-bp': 3,
+                'concerns:blood-clots': 3,
+                'concerns:migraines': 3,
+                'concerns:breast-cancer': 3,
+                'concerns:liver-disease': 3
+            },
+            'diaphragm': {
+                'frequency:daily': 1,
+                'priorities:non-hormonal': 2,
+                'concerns:high-bp': 3,
+                'concerns:blood-clots': 3,
+                'concerns:migraines': 3,
+                'concerns:breast-cancer': 3,
+                'concerns:liver-disease': 3
+            },
+            'spermicide': {
+                'frequency:daily': 1,
+                'priorities:non-hormonal': 2,
+                'priorities:cost': 3,
+                'concerns:high-bp': 3,
+                'concerns:blood-clots': 3,
+                'concerns:migraines': 3,
+                'concerns:breast-cancer': 3,
+                'concerns:liver-disease': 3
+            },
+            'fertility-awareness': {
+                'frequency:daily': 1,
+                'priorities:non-hormonal': 3,
+                'priorities:cost': 3,
+                'concerns:high-bp': 3,
+                'concerns:blood-clots': 3,
+                'concerns:migraines': 3,
+                'concerns:breast-cancer': 3,
+                'concerns:liver-disease': 3
+            },
+            'withdrawal': {
+                'frequency:daily': 1,
+                'priorities:non-hormonal': 3,
+                'priorities:cost': 3,
+                'concerns:high-bp': 3,
+                'concerns:blood-clots': 3,
+                'concerns:migraines': 3,
+                'concerns:breast-cancer': 3,
+                'concerns:liver-disease': 3
+            },
+            'sterilization-female': {
+                'frequency:permanent': 3,
+                'priorities:effectiveness': 3,
+                'priorities:ease': 3,
+                'priorities:privacy': 3
+            },
+            'sterilization-male': {
+                'frequency:permanent': 3,
+                'priorities:effectiveness': 3,
+                'priorities:ease': 3,
+                'priorities:privacy': 3
+            }
+        };
+
+        // Quiz state
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let quizScore = 0;
+        let recommendedMethods = [];
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize components
+            initSearch();
+            initModal();
+            initNewsletterForm();
+            initAccessibility();
+            initQuiz();
+            
+            // Check if disclaimer was accepted
+            checkDisclaimer();
+            
+            // Initialize error handling
+            initErrorHandling();
+        });
+
+        // Initialize quiz
+        function initQuiz() {
+            const startQuizBtn = document.getElementById('start-quiz');
+            if (startQuizBtn) {
+                startQuizBtn.addEventListener('click', startQuiz);
+            }
+            
+            const nextQuestionBtn = document.getElementById('next-question');
+            if (nextQuestionBtn) {
+                nextQuestionBtn.addEventListener('click', goToNextQuestion);
+            }
+            
+            const prevQuestionBtn = document.getElementById('prev-question');
+            if (prevQuestionBtn) {
+                prevQuestionBtn.addEventListener('click', goToPreviousQuestion);
+            }
+            
+            const restartQuizBtn = document.getElementById('restart-quiz');
+            if (restartQuizBtn) {
+                restartQuizBtn.addEventListener('click', restartQuiz);
+            }
+        }
+        
+        // Start the quiz
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            quizScore = 0;
+            
+            // Hide intro, show quiz container
+            document.getElementById('quiz-intro').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            
+            // Show first question
+            showQuestion(currentQuestionIndex);
+            
+            // Track quiz start in analytics
+            if (window.gtag) {
+                gtag('event', 'quiz_start', {
+                    'event_category': 'engagement',
+                    'event_label': 'Birth Control Quiz Started'
+                });
+            }
+        }
+        
+        // Show question at the given index
+        function showQuestion(index) {
+            const question = quizQuestions[index];
+            const questionContainer = document.getElementById('quiz-question-container');
+            
+            // Update progress
+            const progress = ((index + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+            document.getElementById('quiz-progress-text').textContent = `Question ${index + 1} of ${quizQuestions.length}`;
+            
+            // Build question HTML
+            let questionHTML = `
+                <div class="quiz-question" id="question-${index}" role="group" aria-labelledby="question-text-${index}">
+                    <h3 id="question-text-${index}" class="text-xl font-semibold mb-4">${question.question}</h3>
+                    <div class="space-y-3">
+            `;
+            
+            // Add answer options
+            question.answers.forEach((answer, i) => {
+                const answerId = `q${index}-a${i}`;
+                const isChecked = userAnswers[question.key] && 
+                    (question.type === 'multiple' 
+                        ? userAnswers[question.key].includes(answer.value)
+                        : userAnswers[question.key] === answer.value);
+                
+                if (question.type === 'multiple') {
+                    questionHTML += `
+                        <div class="flex items-start">
+                            <input type="checkbox" id="${answerId}" value="${answer.value}" 
+                                class="mt-1 h-5 w-5 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                                ${isChecked ? 'checked' : ''}>
+                            <label for="${answerId}" class="ml-3 text-gray-700">${answer.text}</label>
+                        </div>
+                    `;
+                } else {
+                    questionHTML += `
+                        <div class="flex items-start">
+                            <input type="radio" id="${answerId}" name="q${index}" value="${answer.value}" 
+                                class="mt-1 h-5 w-5 text-primary-600 focus:ring-primary-500"
+                                ${isChecked ? 'checked' : ''}>
+                            <label for="${answerId}" class="ml-3 text-gray-700">${answer.text}</label>
+                        </div>
+                    `;
+                }
+            });
+            
+            questionHTML += `
+                    </div>
+                </div>
+            `;
+            
+            // Update question container
+            questionContainer.innerHTML = questionHTML;
+            
+            // Update navigation buttons
+            document.getElementById('prev-question').classList.toggle('invisible', index === 0);
+            document.getElementById('next-question').textContent = index === quizQuestions.length - 1 ? 'See Results' : 'Next Question';
+            
+            // Add event listeners for answer selection
+            if (question.type === 'multiple') {
+                const checkboxes = questionContainer.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => saveAnswer(question.key, question.type));
+                });
+            } else {
+                const radios = questionContainer.querySelectorAll('input[type="radio"]');
+                radios.forEach(radio => {
+                    radio.addEventListener('change', () => saveAnswer(question.key, question.type));
+                });
+            }
+            
+            // Set focus on the first input for better keyboard navigation
+            const firstInput = questionContainer.querySelector('input');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }
+        
+        // Save user's answer
+        function saveAnswer(questionKey, questionType) {
+            const questionContainer = document.getElementById(`question-${currentQuestionIndex}`);
+            
+            if (questionType === 'multiple') {
+                const selected = [];
+                const checkboxes = questionContainer.querySelectorAll('input[type="checkbox"]:checked');
+                checkboxes.forEach(checkbox => {
+                    selected.push(checkbox.value);
+                });
+                userAnswers[questionKey] = selected;
+            } else {
+                const selected = questionContainer.querySelector('input[type="radio"]:checked');
+                userAnswers[questionKey] = selected ? selected.value : null;
+            }
+            
+            // Enable/disable next button based on whether an answer was selected
+            const nextBtn = document.getElementById('next-question');
+            if (nextBtn) {
+                nextBtn.disabled = !userAnswers[questionKey] || 
+                    (Array.isArray(userAnswers[questionKey]) && userAnswers[questionKey].length === 0);
+            }
+        }
+        
+        // Navigate to next question or show results
+        function goToNextQuestion() {
+            // Save current answer
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            saveAnswer(currentQuestion.key, currentQuestion.type);
+            
+            // If this is the last question, show results
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                showResults();
+                return;
+            }
+            
+            // Otherwise, go to next question
+            currentQuestionIndex++;
+            showQuestion(currentQuestionIndex);
+        }
+        
+        // Go to previous question
+        function goToPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+        
+        // Calculate and show quiz results
+        function showResults() {
+            // Calculate scores for each method
+            const methodTotals = {};
+            
+            // Initialize scores
+            birthControlMethods.forEach(method => {
+                methodTotals[method.id] = 0;
+            });
+            
+            // Calculate scores based on user answers
+            for (const [questionKey, answer] of Object.entries(userAnswers)) {
+                if (!answer) continue;
+                
+                const answers = Array.isArray(answer) ? answer : [answer];
+                
+                answers.forEach(a => {
+                    const answerKey = `${questionKey}:${a}`;
+                    
+                    // Check each method's score for this answer
+                    for (const [methodId, scores] of Object.entries(methodScores)) {
+                        if (scores[answerKey]) {
+                            methodTotals[methodId] += scores[answerKey];
+                        }
+                    }
+                });
+            }
+            
+            // Convert to array and sort by score
+            const sortedMethods = Object.entries(methodTotals)
+                .map(([id, score]) => ({
+                    id,
+                    score,
+                    method: birthControlMethods.find(m => m.id === id)
+                }))
+                .filter(m => m.method) // Filter out any undefined methods
+                .sort((a, b) => b.score - a.score);
+            
+            // Get top 3 methods with positive scores
+            recommendedMethods = sortedMethods
+                .filter(m => m.score > 0)
+                .slice(0, 3);
+            
+            // If no methods have positive scores, show a message
+            if (recommendedMethods.length === 0) {
+                recommendedMethods = sortedMethods.slice(0, 3);
+            }
+            
+            // Display results
+            displayResults();
+            
+            // Track quiz completion in analytics
+            if (window.gtag) {
+                gtag('event', 'quiz_complete', {
+                    'event_category': 'engagement',
+                    'event_label': 'Birth Control Quiz Completed',
+                    'value': recommendedMethods.length > 0 ? 1 : 0
+                });
+            }
+        }
+        
+        // Display quiz results
+        function displayResults() {
+            // Hide quiz container, show results
+            document.getElementById('quiz-container').classList.add('hidden');
+            const resultsContainer = document.getElementById('quiz-results');
+            resultsContainer.classList.remove('hidden');
+            
+            // Build results HTML
+            let resultsHTML = `
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-2xl font-bold mb-6 text-center">Your Recommended Birth Control Methods</h2>
+            `;
+            
+            if (recommendedMethods.length > 0) {
+                resultsHTML += '<div class="space-y-6">';
+                
+                recommendedMethods.forEach((rec, index) => {
+                    const method = rec.method;
+                    const effectiveness = method.effectiveness || 'Varies';
+                    const stiProtection = method.stiProtection ? 'Yes' : 'No';
+                    const prescription = method.requiresPrescription ? 'Yes' : 'No';
+                    
+                    resultsHTML += `
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="mb-4 md:mb-0">
+                                    <h3 class="text-xl font-semibold text-primary-700">${method.name}</h3>
+                                    <p class="text-gray-600 mt-1">${method.type} • ${effectiveness} effective</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                                        #${index + 1} Recommendation
+                                    </span>
+                                    ${method.stiProtection ? '<span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">STI Protection</span>' : ''}
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">How it works:</h4>
+                                    <p class="text-gray-600">${method.description}</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Key Information:</h4>
+                                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                        <li>Effectiveness: ${effectiveness}</li>
+                                        <li>STI Protection: ${stiProtection}</li>
+                                        <li>Requires prescription: ${prescription}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h4 class="font-medium text-gray-900">Pros:</h4>
+                                <ul class="list-disc list-inside text-gray-600">
+                                    ${method.pros.map(pro => `<li>${pro}</li>`).join('')}
+                                </ul>
+                                
+                                <h4 class="font-medium text-gray-900 mt-3">Things to consider:</h4>
+                                <ul class="list-disc list-inside text-gray-600">
+                                    ${method.cons.map(con => `<li>${con}</li>`).join('')}
+                                </ul>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between items-center">
+                                <a href="#${method.id}-details" class="text-primary-600 hover:text-primary-800 font-medium">
+                                    Learn more about ${method.name}
+                                </a>
+                                <button onclick="scrollToMethod('${method.id}')" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                resultsHTML += '</div>';
+            } else {
+                resultsHTML += `
+                    <div class="text-center py-8">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 class="mt-2 text-lg font-medium text-gray-900">No specific recommendations</h3>
+                        <p class="mt-1 text-gray-500">Based on your answers, we couldn't determine specific recommendations. Consider speaking with a healthcare provider.</p>
+                        <div class="mt-6">
+                            <button onclick="restartQuiz()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                                </svg>
+                                Retake Quiz
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            resultsHTML += '</div>';
+            
+            // Add restart button
+            resultsHTML += `
+                <div class="mt-8 text-center">
+                    <button onclick="restartQuiz()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                        <svg class="-ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                        </svg>
+                        Start Over
+                    </button>
+                </div>
+            `;
+            
+            resultsContainer.innerHTML = resultsHTML;
+            
+            // Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Restart the quiz
+        function restartQuiz() {
+            // Reset state
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            quizScore = 0;
+            recommendedMethods = [];
+            
+            // Show intro, hide results
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-intro').classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Track quiz restart in analytics
+            if (window.gtag) {
+                gtag('event', 'quiz_restart', {
+                    'event_category': 'engagement',
+                    'event_label': 'Birth Control Quiz Restarted'
+                });
+            }
+        }
+        
+        // Scroll to a specific method's details
+        function scrollToMethod(methodId) {
+            const element = document.getElementById(`${methodId}-details`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                
+                // Add highlight class temporarily
+                element.classList.add('bg-yellow-50', 'border-l-4', 'border-yellow-400', 'pl-4', 'py-2');
+                
+                // Remove highlight after 3 seconds
+                setTimeout(() => {
+                    element.classList.remove('bg-yellow-50', 'border-l-4', 'border-yellow-400', 'pl-4', 'py-2');
+                }, 3000);
+            }
+        }
+        
+        // Initialize search functionality
+        function initSearch() {
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            
+            if (!searchInput || !searchResults) return;
+            
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                searchResults.innerHTML = '';
+                
+                if (query.length < 2) {
+                    searchResults.classList.add('hidden');
+                    return;
+                }
+                
+                const results = birthControlMethods.filter(method => 
+                    method.name.toLowerCase().includes(query) ||
+                    method.type.toLowerCase().includes(query) ||
+                    method.tags.some(tag => tag.includes(query))
+                ).slice(0, 5); // Limit to 5 results
+                
+                if (results.length > 0) {
+                    results.forEach(method => {
+                        const resultItem = document.createElement('a');
+                        resultItem.href = `#${method.id}-details`;
+                        resultItem.className = 'block px-4 py-2 text-gray-800 hover:bg-gray-100';
+                        resultItem.textContent = method.name;
+                        resultItem.addEventListener('click', () => {
+                            searchResults.classList.add('hidden');
+                            searchInput.value = '';
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.classList.remove('hidden');
+                } else {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'px-4 py-2 text-gray-500';
+                    noResults.textContent = 'No results found';
+                    searchResults.appendChild(noResults);
+                    searchResults.classList.remove('hidden');
+                }
+            });
+            
+            // Hide results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.add('hidden');
+                }
+            });
+        }
+        
+        // Initialize newsletter form
+        function initNewsletterForm() {
+            const form = document.getElementById('newsletter-form');
+            if (!form) return;
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = form.querySelector('input[type="email"]').value;
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const spinner = form.querySelector('.spinner');
+                const successMessage = form.querySelector('.success-message');
+                const errorMessage = form.querySelector('.error-message');
+                
+                // Validate email
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    errorMessage.textContent = 'Please enter a valid email address';
+                    errorMessage.classList.remove('hidden');
+                    return;
+                }
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                spinner.classList.remove('hidden');
+                errorMessage.classList.add('hidden');
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // In a real app, you would make an actual API call here
+                    console.log('Subscribing email:', email);
+                    
+                    // Hide spinner
+                    spinner.classList.add('hidden');
+                    
+                    // Show success message
+                    successMessage.classList.remove('hidden');
+                    form.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.add('hidden');
+                        submitBtn.disabled = false;
+                    }, 5000);
+                    
+                    // Track subscription in analytics
+                    if (window.gtag) {
+                        gtag('event', 'newsletter_signup', {
+                            'event_category': 'engagement',
+                            'event_label': 'Newsletter Subscription',
+                            'value': 1
+                        });
+                    }
+                }, 1000);
+            });
+        }
+        
+        // Initialize modal
+        function initModal() {
+            const modal = document.getElementById('disclaimer-modal');
+            const acceptBtn = document.getElementById('accept-disclaimer');
+            const closeBtn = document.querySelector('[data-modal-hide="disclaimer-modal"]');
+            
+            if (!modal || !acceptBtn) return;
+            
+            // Show modal if disclaimer not accepted
+            function checkDisclaimer() {
+                if (!localStorage.getItem('disclaimerAccepted')) {
+                    modal.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                }
+            }
+            
+            // Accept disclaimer
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('disclaimerAccepted', 'true');
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+                
+                // Track disclaimer acceptance in analytics
+                if (window.gtag) {
+                    gtag('event', 'disclaimer_accepted', {
+                        'event_category': 'engagement',
+                        'event_label': 'Medical Disclaimer Accepted'
+                    });
+                }
+            });
+            
+            // Close modal with close button
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                });
+            }
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            });
+            
+            // Check disclaimer on page load
+            checkDisclaimer();
+        }
+        
+        // Initialize accessibility features
+        function initAccessibility() {
+            // Add skip to content link
+            const skipLink = document.createElement('a');
+            skipLink.href = '#main-content';
+            skipLink.className = 'sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:shadow-lg';
+            skipLink.textContent = 'Skip to main content';
+            document.body.insertBefore(skipLink, document.body.firstChild);
+            
+            // Add aria-live region for dynamic content
+            const liveRegion = document.createElement('div');
+            liveRegion.setAttribute('aria-live', 'polite');
+            liveRegion.setAttribute('aria-atomic', 'true');
+            liveRegion.className = 'sr-only';
+            document.body.appendChild(liveRegion);
+            
+            // Make all external links open in new tab with appropriate attributes
+            document.querySelectorAll('a[href^="http"]').forEach(link => {
+                if (!link.href.includes(window.location.hostname)) {
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener noreferrer');
+                    link.innerHTML += ' <span class="sr-only">(opens in new tab)</span>';
+                }
+            });
+        }
+        
+        // Initialize error handling
+        function initErrorHandling() {
+            window.addEventListener('error', function(e) {
+                console.error('Global error:', e);
+                
+                // Track errors in analytics if available
+                if (window.gtag) {
+                    gtag('event', 'error', {
+                        'event_category': 'error',
+                        'event_label': e.message || 'Unknown error',
+                        'value': e.filename + ': ' + e.lineno
+                    });
+                }
+                
+                // Show user-friendly error message
+                const errorContainer = document.getElementById('error-container');
+                if (errorContainer) {
+                    errorContainer.innerHTML = `
+                        <div class="bg-red-50 border-l-4 border-red-400 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-red-700">
+                                        An error occurred. Please try again later or contact support if the problem persists.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        }
+            
+            // Performance monitoring
+            if ('performance' in window) {
+                window.addEventListener('load', function() {
+                    const timing = window.performance.timing;
+                    const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+                    console.log(`Page loaded in ${pageLoadTime}ms`);
+                    
+                    // Send performance metrics to analytics (example)
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'timing_complete', {
+                            'name': 'page_load',
+                            'value': pageLoadTime,
+                            'event_category': 'JS Dependencies'
+                        });
+                    }
+                });
+            }
+            
+            // Error handling
+            window.addEventListener('error', function(e) {
+                console.error('Error:', e.message, 'in', e.filename, 'line', e.lineno);
+                // Log error to server if needed
+                if (typeof logError === 'function') {
+                    logError(e);
+                }
+                return true; // Prevent default error handling
+            });
+        });
+
+        function initQuiz() {
+            // Quiz initialization code
+            const quizContainer = document.getElementById('quiz-questions');
+            const startBtn = document.getElementById('start-quiz');
+            const restartBtn = document.getElementById('restart-quiz');
+            
+            if (startBtn) {
+                startBtn.addEventListener('click', startQuiz);
+            }
+            
+            if (restartBtn) {
+                restartBtn.addEventListener('click', startQuiz);
+            }
+            
+            function startQuiz() {
+                // Quiz logic here
+                console.log('Quiz started');
+            }
+        }
+        
+        function initSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const query = e.target.value.toLowerCase();
+                    
+                    if (query.length < 2) {
+                        searchResults.innerHTML = '';
+                        searchResults.style.display = 'none';
+                        return;
+                    }
+                    
+                    // Simple search logic - would be enhanced with better search algorithm
+                    const results = birthControlMethods.filter(method => 
+                        method.name.toLowerCase().includes(query) ||
+                        method.description.toLowerCase().includes(query) ||
+                        method.tags.some(tag => tag.includes(query))
+                    );
+                    
+                    displaySearchResults(results);
+                });
+                
+                // Close results when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (e.target !== searchInput) {
+                        searchResults.style.display = 'none';
+                    }
+                });
+            }
+            
+            function displaySearchResults(results) {
+                const searchResults = document.getElementById('searchResults');
+                searchResults.innerHTML = '';
+                
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="no-results">No results found</div>';
+                    searchResults.style.display = 'block';
+                    return;
+                }
+                
+                results.slice(0, 5).forEach(result => {
+                    const resultItem = document.createElement('a');
+                    resultItem.href = `#${result.id}`;
+                    resultItem.className = 'search-result-item';
+                    resultItem.innerHTML = `
+                        <div class="search-result-title">${result.name}</div>
+                        <div class="search-result-desc">${result.description.substring(0, 60)}...</div>
+                    `;
+                    searchResults.appendChild(resultItem);
+                });
+                
+                searchResults.style.display = 'block';
+            }
+        }
+        
+        function initNewsletterForm() {
+            const form = document.getElementById('newsletter-form');
+            if (!form) return;
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const emailInput = form.querySelector('input[type="email"]');
+                const errorElement = document.getElementById('email-error');
+                const submitButton = form.querySelector('button[type="submit"]');
+                const buttonText = submitButton.querySelector('.button-text');
+                const spinner = submitButton.querySelector('.spinner');
+                
+                // Reset previous states
+                emailInput.classList.remove('error');
+                errorElement.textContent = '';
+                
+                // Basic email validation
+                const email = emailInput.value.trim();
+                if (!email) {
+                    showError(emailInput, errorElement, 'Email is required');
+                    return;
+                }
+                
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showError(emailInput, errorElement, 'Please enter a valid email address');
+                    return;
+                }
+                
+                // Show loading state
+                buttonText.textContent = 'Subscribing...';
+                spinner.style.display = 'inline-block';
+                submitButton.disabled = true;
+                
+                try {
+                    // Simulate API call
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    // Show success message
+                    form.innerHTML = `
+                        <div class="success-message">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Thank you for subscribing to our newsletter!</p>
+                        </div>
+                    `;
+                } catch (error) {
+                    showError(emailInput, errorElement, 'An error occurred. Please try again later.');
+                    buttonText.textContent = 'Subscribe';
+                    spinner.style.display = 'none';
+                    submitButton.disabled = false;
+                }
+            });
+            
+            function showError(input, errorElement, message) {
+                input.classList.add('error');
+                errorElement.textContent = message;
+                input.focus();
+            }
+        }
+        
+        function initModal() {
+            const modal = document.getElementById('disclaimer-modal');
+            if (!modal) return;
+            
+            const closeBtn = modal.querySelector('.close-modal');
+            const acceptBtn = document.getElementById('accept-disclaimer');
+            const checkbox = document.getElementById('understand-checkbox');
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+            }
+            
+            if (acceptBtn) {
+                acceptBtn.addEventListener('click', function() {
+                    localStorage.setItem('disclaimerAccepted', 'true');
+                    modal.style.display = 'none';
+                });
+            }
+            
+            if (checkbox) {
+                checkbox.addEventListener('change', function() {
+                    acceptBtn.disabled = !this.checked;
+                });
+            }
+            
+            // Close when clicking outside modal content
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+        
+        function initAccessibility() {
+            // Add skip link functionality
+            const skipLink = document.createElement('a');
+            skipLink.href = '#main-content';
+            skipLink.className = 'skip-link';
+            skipLink.textContent = 'Skip to main content';
+            document.body.insertBefore(skipLink, document.body.firstChild);
+            
+            // Add ARIA roles and labels
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent && !mainContent.id) {
+                mainContent.id = 'main-content';
+                mainContent.setAttribute('role', 'main');
+            }
+            
+            // Make sure all interactive elements are keyboard accessible
+            document.querySelectorAll('button, a, input, select, textarea, [tabindex="0"]').forEach(el => {
+                if (!el.hasAttribute('aria-label') && !el.textContent.trim()) {
+                    el.setAttribute('aria-label', el.getAttribute('title') || 'Interactive element');
+                }
+            });
+        }
+    </script>
+    
+    <!-- Performance monitoring (example using Google Analytics) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR-GA-ID');
+        
+        // Error tracking
+        window.onerror = function(message, source, lineno, colno, error) {
+            if (typeof gtag === 'function') {
+                gtag('event', 'exception', {
+                    'description': error ? error.stack : `${message} at ${source}:${lineno}:${colno}`,
+                    'fatal': false
+                });
+            }
+            return false; // Let the default handler run as well
+        };
+    </script>
+</body>
+
+</html>
