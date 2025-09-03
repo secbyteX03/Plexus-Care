@@ -9,156 +9,26 @@
   <p><strong>Live Demo:</strong> <a href="https://plexus-care.netlify.app/">https://plexus-care.netlify.app/</a></p>
 </div>
 
-## 🌟 Overview
-Plexus Care is a comprehensive healthcare platform that provides accessible healthcare information and resources. The platform offers a wide range of health-related tools and information, including drug databases, symptom checking, health resources, meal planning, and wellness tracking, all through a user-friendly web application.
+## 🌟 Revolutionizing Personal Healthcare
 
-## 🚀 Key Features
+Plexus Care is an all-in-one digital health companion designed to empower individuals in managing their health and wellness journey. Our platform seamlessly integrates AI-powered health tools with intuitive interfaces, making professional-grade healthcare resources accessible to everyone, everywhere.
 
-### 💊 Comprehensive Drug Information & Management
-![Medication Management](screenshots/medication-tracker.png)
-- **Pill Identification**: Upload or take a photo to identify medications
-- **Drug Database**: Searchable database of medications and supplements
-- **Interaction Checker**: Check for potential drug interactions
-- **Dosage Information**: Detailed dosage guidelines and instructions
-- **Side Effects**: Comprehensive list of potential side effects
-- **Alternative Medications**: Find suitable alternatives when needed
-- **Pregnancy & Lactation Safety**: Special safety information
-- **Storage Guidelines**: Proper storage recommendations
-- **Expiration Tracking**: Monitor medication expiration dates
-- **Refill Reminders**: Never run out of important medications
+### 🌟 Why Choose Plexus Care?
+- **Smart Health Monitoring**: Track symptoms, medications, and wellness metrics in one place
+- **Personalized Nutrition**: Get customized meal plans based on your unique dietary needs
+- **AI-Powered Insights**: Receive intelligent health recommendations and early warnings
+- **Seamless Integration**: Connect with healthcare providers and share your health data securely
+- **User-Centric Design**: Intuitive interfaces for users of all technical abilities
 
-### 🤖 AI Symptom Checker & Health Assessment
-![Symptom Checker](screenshots/symptom-checker.png)
-- **Chat-Based Interface**: Describe your symptoms in natural language
-- **AI-Powered Analysis**: Get instant preliminary assessment
-- **Condition Matching**: Identifies potential conditions based on symptoms
-- **Severity Indicator**: Understand when to seek immediate care
-- **Personalized Recommendations**: Tailored health advice
-- **Follow-up Questions**: AI asks relevant questions to narrow down causes
-- **First Aid Guidance**: Immediate steps for common issues
-- **Healthcare Provider Summary**: Exportable report for your doctor
-- **Symptom History**: Track symptoms over time
-- **Multilingual Support**: Available in multiple languages
+Whether you're managing chronic conditions, pursuing wellness goals, or simply taking a proactive approach to your health, Plexus Care provides the tools and insights you need to make informed decisions about your wellbeing.
 
-### 🍽️ Smart Meal Planning & Nutrition
-![Meal Planning](screenshots/meal-planner.png)
-- **Personalized Meal Plans**: Customized based on dietary needs
-- **Recipe Database**: Hundreds of healthy recipes with nutritional info
-- **Meal Prep Tools**: Plan your weekly meals in advance
-- **Grocery Lists**: Auto-generated shopping lists
-- **Dietary Preferences**: Filter for vegetarian, vegan, gluten-free, etc.
-- **Nutrition Tracking**: Monitor daily macronutrients and calories
-- **Meal Timing**: Optimize meal schedules for energy and health
-- **Local Ingredients**: Focus on locally available foods in Kenya
-- **Budget-Friendly Options**: Healthy eating on any budget
-- **Special Diets**: Support for various health conditions
-
-### 🌿 Wellness & Lifestyle Management
-![Wellness Dashboard](screenshots/wellness-dashboard.png)
-- **Activity Tracking**: Monitor daily steps and exercise
-- **Hydration Log**: Track water intake throughout the day
-- **Sleep Analysis**: Improve sleep quality with insights
-- **Stress Management**: Guided breathing and relaxation techniques
-- **Mental Wellness**: Mood tracking and journaling
-- **Habit Building**: Form and maintain healthy habits
-- **Community Support**: Connect with others on similar journeys
-- **Progress Reports**: Visualize your health improvements
-- **Wellness Challenges**: Participate in health challenges
-- **Personalized Tips**: Get recommendations based on your profile
-
-### 🏥 Health Records & Management
-![Health Records](screenshots/health-records.png)
-- **Centralized Health Profile**: All your health information in one place
-- **Appointment Tracking**: Never miss a doctor's visit
-- **Vaccination Records**: Keep track of immunizations
-- **Lab Results**: Store and analyze test results
-- **Prescription History**: Complete medication history
-- **Allergy Tracking**: Document and manage allergies
-- **Family Health History**: Track hereditary conditions
-- **Emergency Card**: Quick access to critical health information
-- **Data Export**: Share records with healthcare providers
-- **Reminders**: For medications, appointments, and check-ups
-
-### 📱 Mobile Experience
-![Mobile App](screenshots/mobile-dashboard.png)
-- **Fully Responsive**: Works on all devices
-- **Offline Access**: Key features available without internet
-- **Biometric Login**: Quick and secure access
-- **Push Notifications**: Stay updated on your health
-- **Dark Mode**: Comfortable viewing in any light
-- **Data Sync**: Seamless across all your devices
-- **Voice Commands**: Hands-free operation
-- **Widget Support**: Quick access to key features
-- **Battery Efficient**: Minimal impact on device battery
-- **Accessibility**: Designed for all users
-
-## 🛠️ Technology Stack
-
-### Frontend
-- **HTML5, CSS3, JavaScript (ES6+)** - Core web technologies
-- **Tailwind CSS** - Utility-first CSS framework for responsive design
-- **Alpine.js** - Lightweight JavaScript framework for reactive interfaces
-- **Chart.js** - For data visualization in health tracking
-- **Interactive UI Components** - For enhanced user experience
-
-### Backend
-- **Supabase** - Backend-as-a-Service (Authentication, Database, Storage)
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web application framework
-
-### Database
-- **PostgreSQL** - Primary database via Supabase
-- **Row Level Security** - For data protection
-- **Realtime Subscriptions** - For live updates
-
-### Integrations
-- **Nutrition API** - For meal planning and recipes
-- **Health Data APIs** - For comprehensive health information
-- **Authentication** - Secure user management
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-- Supabase account
-- IntaSend API keys
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/Plexus-Care.git
-   cd Plexus-Care
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. **Set up environment variables**
-   Create a `.env` file in the root directory:
-   ```env
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   VITE_INTASEND_PUBLIC_KEY=your_intasend_public_key
-   VITE_INTASEND_TEST_MODE=true
-   ```
-
-4. **Start the development server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-
-## 🧠 How It Works
+## 🧠 How Plexus Care Works
 
 ### 🍽️ Smart Meal Planning Journey
+<div align="center">
+  <img src="assets/images/meal-planner.png" alt="Meal Planning Dashboard" width="800"/>
+</div>
+
 1. **Dietary Profile Setup**
    - Complete a brief questionnaire about your dietary preferences
    - Specify any allergies, restrictions, or health conditions
@@ -179,7 +49,13 @@ Plexus Care is a comprehensive healthcare platform that provides accessible heal
    - Monitor macronutrients and micronutrients
    - Get insights into your eating patterns
 
+---
+
 ### 🌿 Wellness Tracking Experience
+<div align="center">
+  <img src="assets/images/wellness-dashboard.png" alt="Wellness Dashboard" width="800"/>
+</div>
+
 1. **Daily Wellness Check-in**
    - Log your mood, energy levels, and stress
    - Track sleep quality and duration
@@ -195,9 +71,61 @@ Plexus Care is a comprehensive healthcare platform that provides accessible heal
    - Track progress with friends and family
    - Earn rewards for healthy behaviors
 
+---
+
 ### 💊 Medication Management System
+<div align="center">
+  <img src="assets/images/medication-tracker.png" alt="Medication Tracker" width="800"/>
+</div>
+
 1. **Pill Identification**
    - Snap a photo of any medication
+   - AI identifies the pill and provides detailed information
+   - Get alerts for potential interactions with other medications
+
+2. **Medication Tracking**
+   - Set up custom medication schedules
+   - Receive timely reminders for each dose
+   - Track adherence and refill needs
+
+3. **Health Profile**
+   - Maintain a complete medication history
+   - Share information with healthcare providers
+   - Emergency access to critical health information
+
+---
+
+### 🤖 AI Health Assistant
+<div align="center">
+  <img src="assets/images/symptom-checker.png" alt="Symptom Checker" width="800"/>
+</div>
+
+1. **Symptom Assessment**
+   - Chat-based interface for describing symptoms
+   - AI analyzes patterns and provides guidance
+   - Recommendations for self-care or professional help
+
+2. **Health Monitoring**
+   - Track symptoms over time
+   - Receive alerts for concerning patterns
+   - Share reports with your healthcare provider
+
+## 🚀 Getting Started
+
+1. Visit our [live demo](https://plexus-care.netlify.app/)
+2. Create your free account
+3. Set up your health profile
+4. Start exploring our health and wellness tools
+
+## 📱 Stay Connected
+
+- [GitHub Repository](https://github.com/secbyteX03/Plexus-Care.git)
+- [Report Issues](https://github.com/secbyteX03/Plexus-Care/issues)
+- [Contribute](https://github.com/secbyteX03/Plexus-Care/pulls)
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
    - AI identifies the pill and provides detailed information
    - Get alerts for potential interactions with other medications
 
@@ -237,37 +165,22 @@ Plexus Care is committed to making healthcare information accessible to everyone
 
 ## 📊 Technical Implementation
 
-### Database Schema
-```sql
--- Users table
-create table users (
-  id uuid references auth.users not null primary key,
-  full_name text,
-  avatar_url text,
-  subscription_tier text default 'free',
-  trial_ends_at timestamp with time zone,
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null
-);
+## 🛠 Technical Architecture
 
--- Consultations table
-create table consultations (
-  id uuid default uuid_generate_v4() primary key,
-  user_id uuid references users(id) not null,
-  doctor_id uuid references users(id),
-  symptoms text,
-  diagnosis text,
-  status text default 'scheduled',
-  scheduled_for timestamp with time zone,
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null
-);
-```
+Plexus Care is built on a modern, scalable architecture that ensures reliability and performance:
 
-### API Endpoints
-- `POST /api/identify-pill` - Process pill images
-- `POST /api/check-symptoms` - Analyze symptoms
-- `GET /api/doctors` - List available doctors
-- `POST /api/book-consultation` - Schedule a consultation
-- `POST /api/process-payment` - Handle payments
+### Core Technologies
+- **Frontend**: React.js with Tailwind CSS for responsive, accessible interfaces
+- **Backend**: Node.js with Express.js for robust API services
+- **Database**: Supabase for secure, real-time data management
+- **AI/ML**: Integration with leading AI models for health insights
+- **Authentication**: Secure user management with JWT and OAuth
+
+### Key Features
+- **Real-time Data Sync**: Your health data is always up-to-date across devices
+- **End-to-End Encryption**: Enterprise-grade security for your sensitive health information
+- **Offline Support**: Access critical features even without an internet connection
+- **Cross-Platform**: Responsive design works on all devices and screen sizes
 
 ## 🚀 Getting Started
 
