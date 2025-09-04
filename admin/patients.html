@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Patients - Plexus Care Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Plexus Care</h2>
+            <small>Admin Panel</small>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li class="menu-title">Main</li>
+            <li class="menu-item">
+                <a href="index.html" class="menu-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            
+            <li class="menu-title">Management</li>
+            <li class="menu-item">
+                <a href="doctors.html" class="menu-link">
+                    <i class="fas fa-user-md"></i>
+                    <span>Doctors</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="patients.html" class="menu-link active">
+                    <i class="fas fa-user-injured"></i>
+                    <span>Patients</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-pills"></i>
+                    <span>Medications</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Health Resources</span>
+                </a>
+            </li>
+            
+            <li class="menu-title">System</li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="page-title">
+                <h1>Patient Management</h1>
+                <p>Manage all patient records and medical history</p>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-outline">
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <button class="btn btn-primary" id="addPatientBtn">
+                    <i class="fas fa-plus"></i> Add New Patient
+                </button>
+            </div>
+        </div>
+
+        <!-- Patients Table -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">All Patients</h2>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search patients...">
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="patientsTable" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Patient</th>
+                            <th>Contact</th>
+                            <th>Date of Birth</th>
+                            <th>Blood Type</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#PAT001</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="patient-avatar">JD</div>
+                                    <div>
+                                        <div style="font-weight: 600;">John Doe</div>
+                                        <div style="font-size: 0.75rem; color: #6b7280;">Male, 35</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>john.doe@example.com<br>+1 (555) 123-4567</td>
+                            <td>15/03/1988</td>
+                            <td>O+</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button class="action-btn" title="View" onclick="viewPatient('PAT001')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn" title="Edit" onclick="editPatient('PAT001')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete" title="Delete" onclick="confirmDelete('PAT001')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#PAT002</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="patient-avatar" style="background: #f59e0b;">JS</div>
+                                    <div>
+                                        <div style="font-weight: 600;">Jane Smith</div>
+                                        <div style="font-size: 0.75rem; color: #6b7280;">Female, 28</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>jane.smith@example.com<br>+1 (555) 234-5678</td>
+                            <td>22/07/1995</td>
+                            <td>A-</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button class="action-btn" title="View" onclick="viewPatient('PAT002')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn" title="Edit" onclick="editPatient('PAT002')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete" title="Delete" onclick="confirmDelete('PAT002')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Patient Modal -->
+    <div id="patientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Patient</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="personal">Personal Info</button>
+                    <button class="tab-btn" data-tab="medical">Medical Info</button>
+                    <button class="tab-btn" data-tab="emergency">Emergency Contact</button>
+                </div>
+                
+                <form id="patientForm">
+                    <div class="tab-content active" id="personal-tab">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="dob">Date of Birth *</label>
+                                    <input type="date" id="dob" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="gender">Gender *</label>
+                                    <select id="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address">
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="medical-tab">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="bloodType">Blood Type</label>
+                                    <select id="bloodType">
+                                        <option value="">Select Blood Type</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="height">Height (cm)</label>
+                                    <input type="number" id="height">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="weight">Weight (kg)</label>
+                                    <input type="number" id="weight">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="bloodPressure">Blood Pressure</label>
+                                    <input type="text" id="bloodPressure" placeholder="e.g. 120/80">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="allergies">Allergies</label>
+                            <input type="text" id="allergies" placeholder="List any allergies">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="conditions">Medical Conditions</label>
+                            <textarea id="conditions" rows="3" placeholder="List any existing medical conditions"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="medications">Current Medications</label>
+                            <textarea id="medications" rows="3" placeholder="List current medications"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Additional Notes</label>
+                            <textarea id="notes" rows="3" placeholder="Any additional notes"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="emergency-tab">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="emergencyName">Emergency Contact Name *</label>
+                                    <input type="text" id="emergencyName" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="emergencyRelation">Relationship *</label>
+                                    <input type="text" id="emergencyRelation" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="emergencyPhone">Phone Number *</label>
+                                    <input type="tel" id="emergencyPhone" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="emergencyEmail">Email</label>
+                                    <input type="email" id="emergencyEmail">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="emergencyAddress">Address</label>
+                            <input type="text" id="emergencyAddress">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelPatient">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="savePatient">Save Patient</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Patient Modal -->
+    <div id="viewPatientModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2>Patient Details</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="patientDetails">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>Confirm Deletion</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this patient record? This action cannot be undone.</p>
+                <div class="form-actions" style="justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-outline" id="cancelDelete">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="js/patients.js"></script>
+</body>
+</html>
