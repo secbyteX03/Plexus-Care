@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plexus Care - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #97b8f7;
+            --secondary-color: #ec4899;
+            --dark-color: #1f2937;
+            --light-color: #f9fafb;
+            --danger-color: #ef4444;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark-color);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-header h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .menu-title {
+            color: #9ca3af;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .menu-item {
+            margin: 0.25rem 0;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #e5e7eb;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .menu-link:hover,
+        .menu-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .menu-link i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        /* Header */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .search-bar {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-bell {
+            position: relative;
+            color: var(--dark-color);
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .card-icon.patients {
+            background: var(--primary-color);
+        }
+
+        .card-icon.doctors {
+            background: var(--success-color);
+        }
+
+        .card-icon.appointments {
+            background: var(--warning-color);
+        }
+
+        .card-icon.revenue {
+            background: var(--danger-color);
+        }
+
+        .card-title {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .card-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin: 0.5rem 0;
+        }
+
+        .card-change {
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-change.positive {
+            color: var(--success-color);
+        }
+
+        .card-change.negative {
+            color: var(--danger-color);
+        }
+
+        /* Recent Activity */
+        .recent-activity {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            color: var(--dark-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .search-bar {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Plexus Care</h2>
+            <small>Admin Panel</small>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-title">Main</li>
+            <li class="menu-item">
+                <a href="#" class="menu-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="menu-title">Management</li>
+            <li class="menu-item">
+                <a href="admin/doctors.html" class="menu-link">
+                    <i class="fas fa-user-md"></i>
+                    <span>Doctors</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="admin/patients.html" class="menu-link">
+                    <i class="fas fa-user-injured"></i>
+                    <span>Patients</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="admin/appointments.html" class="menu-link">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="admin/medications.html" class="menu-link">
+                    <i class="fas fa-pills"></i>
+                    <span>Medications</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="admin/health-resources.html" class="menu-link">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Health Resources</span>
+                </a>
+            </li>
+
+            <li class="menu-title">System</li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-menu">
+                <div class="notification-bell">
+                    <i class="far fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-avatar">
+                    <span>AD</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="dashboard-cards">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Total Patients</span>
+                    <div class="card-icon patients">
+                        <i class="fas fa-user-injured"></i>
+                    </div>
+                </div>
+                <div class="card-value">1,248</div>
+                <div class="card-change positive">
+                    <i class="fas fa-arrow-up"></i> 12.5% from last month
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Active Doctors</span>
+                    <div class="card-icon doctors">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                </div>
+                <div class="card-value">42</div>
+                <div class="card-change positive">
+                    <i class="fas fa-arrow-up"></i> 5.2% from last month
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Appointments</span>
+                    <div class="card-icon appointments">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                </div>
+                <div class="card-value">187</div>
+                <div class="card-change negative">
+                    <i class="fas fa-arrow-down"></i> 2.3% from last week
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Monthly Revenue</span>
+                    <div class="card-icon revenue">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                </div>
+                <div class="card-value">$48,250</div>
+                <div class="card-change positive">
+                    <i class="fas fa-arrow-up"></i> 8.7% from last month
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+            <div class="section-header">
+                <h3 class="section-title">Recent Activity</h3>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            <ul class="activity-list">
+                <li class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="activity-details">
+                        <h4 class="activity-title">New Patient Registration</h4>
+                        <p class="activity-description">John Doe registered as a new patient</p>
+                        <span class="activity-time">10 minutes ago</span>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="activity-details">
+                        <h4 class="activity-title">Appointment Booked</h4>
+                        <p class="activity-description">Dr. Smith - Annual Checkup (Tomorrow, 10:00 AM)</p>
+                        <span class="activity-time">25 minutes ago</span>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div class="activity-details">
+                        <h4 class="activity-title">Prescription Filled</h4>
+                        <p class="activity-description">Amoxicillin 500mg for Sarah Johnson</p>
+                        <span class="activity-time">1 hour ago</span>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <div class="activity-details">
+                        <h4 class="activity-title">Test Results Uploaded</h4>
+                        <p class="activity-description">Blood Test Results - Michael Brown</p>
+                        <span class="activity-time">3 hours ago</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        // Check authentication
+        document.addEventListener('DOMContentLoaded', function () {
+            const isAuthenticated = sessionStorage.getItem('isAuthenticated');
+            if (!isAuthenticated) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Update user info
+            const savedUsername = localStorage.getItem('savedUsername') || 'Admin';
+            const userAvatar = document.querySelector('.user-avatar span');
+            if (userAvatar) {
+                userAvatar.textContent = savedUsername.substring(0, 2).toUpperCase();
+            }
+        });
+
+        // Toggle Sidebar
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function (event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('menuToggle');
+
+            if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Active menu item
+        const menuLinks = document.querySelectorAll('.menu-link:not(.logout)');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                if (this.classList.contains('logout')) {
+                    e.preventDefault();
+                    // Handle logout
+                    sessionStorage.removeItem('isAuthenticated');
+                    window.location.href = 'login.html';
+                    return;
+                }
+                menuLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Handle logout
+        document.querySelector('.logout').addEventListener('click', function (e) {
+            e.preventDefault();
+            sessionStorage.removeItem('isAuthenticated');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+
+</html>
