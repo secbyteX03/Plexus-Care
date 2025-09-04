@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medications - Plexus Care Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Plexus Care</h2>
+            <small>Admin Panel</small>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li class="menu-title">Main</li>
+            <li class="menu-item">
+                <a href="index.html" class="menu-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            
+            <li class="menu-title">Management</li>
+            <li class="menu-item">
+                <a href="doctors.html" class="menu-link">
+                    <i class="fas fa-user-md"></i>
+                    <span>Doctors</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="patients.html" class="menu-link">
+                    <i class="fas fa-user-injured"></i>
+                    <span>Patients</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="appointments.html" class="menu-link">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="medications.html" class="menu-link active">
+                    <i class="fas fa-pills"></i>
+                    <span>Medications</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="health-resources.html" class="menu-link">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Health Resources</span>
+                </a>
+            </li>
+            
+            <li class="menu-title">System</li>
+            <li class="menu-item">
+                <a href="users.html" class="menu-link">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="settings.html" class="menu-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="page-title">
+                <h1>Medication Management</h1>
+                <p>Manage medications and prescriptions</p>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-outline" id="exportBtn">
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <button class="btn btn-primary" id="addMedicationBtn">
+                    <i class="fas fa-plus"></i> Add Medication
+                </button>
+            </div>
+        </div>
+
+        <!-- Medications Table -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">All Medications</h2>
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="categoryFilter">Category:</label>
+                        <select id="categoryFilter" class="form-control">
+                            <option value="">All Categories</option>
+                            <option value="antibiotic">Antibiotic</option>
+                            <option value="analgesic">Analgesic</option>
+                            <option value="antihistamine">Antihistamine</option>
+                            <option value="antidepressant">Antidepressant</option>
+                            <option value="vitamin">Vitamin</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="statusFilter">Status:</label>
+                        <select id="statusFilter" class="form-control">
+                            <option value="">All Statuses</option>
+                            <option value="in-stock">In Stock</option>
+                            <option value="low-stock">Low Stock</option>
+                            <option value="out-of-stock">Out of Stock</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="searchInput">Search:</label>
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search medications...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="medicationsTable" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Medication</th>
+                            <th>Generic Name</th>
+                            <th>Category</th>
+                            <th>Dosage</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Medication Modal -->
+    <div id="medicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">New Medication</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="medicationForm">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="medicationName">Brand Name *</label>
+                                <input type="text" id="medicationName" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="genericName">Generic Name *</label>
+                                <input type="text" id="genericName" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="medicationCategory">Category *</label>
+                                <select id="medicationCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="antibiotic">Antibiotic</option>
+                                    <option value="analgesic">Analgesic</option>
+                                    <option value="antihistamine">Antihistamine</option>
+                                    <option value="antidepressant">Antidepressant</option>
+                                    <option value="vitamin">Vitamin</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="manufacturer">Manufacturer</label>
+                                <input type="text" id="manufacturer">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="dosage">Dosage *</label>
+                                <input type="text" id="dosage" placeholder="e.g., 500mg" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="form">Form *</label>
+                                <select id="form" required>
+                                    <option value="">Select Form</option>
+                                    <option value="tablet">Tablet</option>
+                                    <option value="capsule">Capsule</option>
+                                    <option value="syrup">Syrup</option>
+                                    <option value="injection">Injection</option>
+                                    <option value="cream">Cream/Ointment</option>
+                                    <option value="inhaler">Inhaler</option>
+                                    <option value="drops">Drops</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="quantity">Quantity in Stock *</label>
+                                <input type="number" id="quantity" min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="reorderLevel">Reorder Level</label>
+                                <input type="number" id="reorderLevel" min="0" placeholder="Set low stock alert">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="unitPrice">Unit Price ($)</label>
+                                <input type="number" id="unitPrice" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="date" id="expiryDate">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" rows="3" placeholder="Enter medication description..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sideEffects">Side Effects</label>
+                        <textarea id="sideEffects" rows="2" placeholder="List common side effects..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelMedication">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="saveMedication">Save Medication</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Medication Modal -->
+    <div id="viewMedicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Medication Details</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="medicationDetails">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="js/medications.js"></script>
+</body>
+</html>

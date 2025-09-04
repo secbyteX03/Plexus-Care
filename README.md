@@ -191,6 +191,29 @@ The application uses Supabase PostgreSQL database with tables for:
 - Meal plans and nutrition data
 - Wellness check-in records
 
+## 👨‍💼 Admin Panel
+
+Plexus Care includes a comprehensive admin panel for managing the platform's content and users. The admin panel provides a secure interface for administrators to manage various aspects of the application.
+
+### Admin Panel Features
+
+- **User Management**: View, add, edit, and deactivate user accounts
+- **Content Management**: Manage articles, health resources, and educational content
+- **Appointments**: Schedule and manage patient appointments
+- **Analytics**: View platform usage statistics and health insights
+- **System Settings**: Configure application settings and preferences
+
+### Accessing the Admin Panel
+
+1. Navigate to `/admin/login.html`
+2. Enter your admin credentials
+3. You'll be redirected to the admin dashboard upon successful authentication
+
+<div align="center">
+  <img src="assets/images/Adminpanel.PNG" alt="Admin Panel Dashboard" width="800"/>
+  <p><em>Admin Panel Dashboard - A clean, intuitive interface for managing the Plexus Care platform</em></p>
+</div>
+
 ## 🚀 Getting Started
 
 ### Prerequisites

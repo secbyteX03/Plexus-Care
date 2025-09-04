@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Plexus Care Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Plexus Care</h2>
+            <small>Admin Panel</small>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li class="menu-title">Main</li>
+            <li class="menu-item">
+                <a href="index.html" class="menu-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            
+            <li class="menu-title">Management</li>
+            <li class="menu-item">
+                <a href="doctors.html" class="menu-link">
+                    <i class="fas fa-user-md"></i>
+                    <span>Doctors</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="patients.html" class="menu-link">
+                    <i class="fas fa-user-injured"></i>
+                    <span>Patients</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="appointments.html" class="menu-link">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="medications.html" class="menu-link">
+                    <i class="fas fa-pills"></i>
+                    <span>Medications</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="health-resources.html" class="menu-link">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Health Resources</span>
+                </a>
+            </li>
+            
+            <li class="menu-title">System</li>
+            <li class="menu-item">
+                <a href="users.html" class="menu-link">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="settings.html" class="menu-link active">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-link logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="page-title">
+                <h1>Settings</h1>
+                <p>Configure system settings and preferences</p>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-outline" id="saveSettings">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-container">
+            <!-- Settings Sidebar -->
+            <div class="settings-sidebar">
+                <ul class="settings-nav">
+                    <li class="settings-nav-item">
+                        <a href="#general" class="settings-nav-link active" data-tab="general">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>General</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#appearance" class="settings-nav-link" data-tab="appearance">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Appearance</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#email" class="settings-nav-link" data-tab="email">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#notifications" class="settings-nav-link" data-tab="notifications">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#backup" class="settings-nav-link" data-tab="backup">
+                            <i class="fas fa-database"></i>
+                            <span>Backup & Restore</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#api" class="settings-nav-link" data-tab="api">
+                            <i class="fas fa-code"></i>
+                            <span>API</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#audit-log" class="settings-nav-link" data-tab="audit-log">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Audit Log</span>
+                        </a>
+                    </li>
+                    <li class="settings-nav-item">
+                        <a href="#about" class="settings-nav-link" data-tab="about">
+                            <i class="fas fa-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Sections will be loaded dynamically via JavaScript -->
+                <div id="settings-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading settings...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>
