@@ -602,6 +602,268 @@
     }
   </style>
   <style>
+    /* Personalized Meal Plans Styling */
+    .meal-plan-tabs .nav-tabs {
+      border-bottom: 2px solid #dee2e6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .meal-plan-tabs .nav-link {
+      border: none;
+      color: #6c757d;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      margin: 0 0.25rem;
+      border-radius: 0.5rem 0.5rem 0 0;
+      transition: all 0.3s ease;
+    }
+    
+    .meal-plan-tabs .nav-link.active {
+      background-color: #4a6cf7;
+      color: white;
+      border: none;
+      box-shadow: 0 4px 12px rgba(74, 108, 247, 0.2);
+    }
+    
+    .meal-plan-tabs .nav-link:hover:not(.active) {
+      background-color: #f8f9fa;
+      color: #4a6cf7;
+    }
+    
+    .meal-plan-card {
+      border: none;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      background: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .meal-plan-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .meal-plan-header {
+      background: linear-gradient(135deg, #4a6cf7 0%, #2541b2 100%);
+      color: white;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    
+    .meal-plan-body {
+      padding: 1.5rem;
+    }
+    
+    .meal-item {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f1f3f9;
+    }
+    
+    .meal-item:last-child {
+      border-bottom: none;
+    }
+    
+    .meal-time {
+      font-weight: 600;
+      color: #4a6cf7;
+      min-width: 80px;
+    }
+    
+    .meal-name {
+      flex: 1;
+      margin: 0 1rem;
+    }
+    
+    .meal-calories {
+      color: #6c757d;
+      font-size: 0.875rem;
+    }
+    
+    .nutrition-facts {
+      background: #f8f9fa;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .nutrition-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    
+    .nutrition-label {
+      color: #6c757d;
+    }
+    
+    .nutrition-value {
+      font-weight: 600;
+    }
+    
+    .meal-plan-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    /* Footer Styling */
+    .footer {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 3rem 0 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      color: #3498db;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: #bdc3c7;
+      margin-bottom: 0.5rem;
+      display: block;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: #3498db;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-section {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    /* New Sections Styling */
+    .portion-circle {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: #f8f9fa;
+      position: relative;
+      border: 10px solid #e9ecef;
+      margin: 0 auto;
+    }
+
+    .portion-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #4dabf7;
+      border-radius: 0 0 90px 90px;
+      transition: height 0.5s ease;
+      height: 30%;
+    }
+
+    .portion-text {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .portion-text span {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .recipe-card {
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100%;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .recipe-card .card-body {
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      color: #3b82f6;
+    }
+
+    .icon-lg {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .feature-list li {
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .budget-visualization {
+      border-left: 4px solid #10b981;
+    }
+
     /* Notification animations */
     @keyframes slideIn {
       from {
@@ -1565,7 +1827,8 @@
             <label for="budget">Total Budget (KES)</label>
             <input type="number" id="budget" name="budget" min="100" value="500" placeholder="e.g., 2000" required>
             <div id="budgetWarning" class="alert alert-warning small mt-2 d-none">
-              <i class="fas fa-exclamation-triangle me-1"></i> Your budget seems too low for the number of people. Consider increasing it for better options.
+              <i class="fas fa-exclamation-triangle me-1"></i> Your budget seems too low for the number of people.
+              Consider increasing it for better options.
             </div>
             <small class="form-text text-muted">Minimum KES 100 per person recommended</small>
           </div>
@@ -1711,38 +1974,745 @@
     </div>
   </section>
 
-  <!-- Premium Features -->
-  <section class="premium-banner" id="premium">
+  <!-- Personalized Meal Plans -->
+  <section class="section bg-light" id="personalized-plans">
     <div class="container">
-      <h2>Try Plexus Care Premium FREE for 14 Days</h2>
-      <p>Risk-free! Cancel at any time with no obligation.</p>
-
-      <div class="premium-features">
-        <div class="feature-card">
-          <div class="feature-icon">📅</div>
-          <h3>Plan a Week of Meals</h3>
-          <p>Enjoy stress-free planning and more time for yourself.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🥗</div>
-          <h3>Custom Meal Plans</h3>
-          <p>Get personalized meal plans based on your preferences.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📱</div>
-          <h3>Mobile Access</h3>
-          <p>Access your meal plans on the go with our mobile app.</p>
-        </div>
+      <div class="text-center mb-5">
+        <h2 class="section-title">Your Personalized Meal Plans</h2>
+        <p class="text-muted">Customized meal plans tailored to your dietary preferences and goals</p>
       </div>
 
-      <div class="text-center mt-4">
-        <button class="btn btn-primary" id="startTrialBtn">
-          <i class="fas fa-rocket"></i>
-          Start Free Trial
-        </button>
+      <!-- Plan Selection Tabs -->
+      <div class="meal-plan-tabs">
+        <ul class="nav nav-tabs justify-content-center mb-4" id="mealPlanTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="weekly-tab" data-bs-toggle="tab" data-bs-target="#weekly-plan"
+              type="button" role="tab">
+              <i class="fas fa-calendar-week me-2"></i>Weekly Plan
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="portions-tab" data-bs-toggle="tab" data-bs-target="#portions" type="button"
+              role="tab">
+              <i class="fas fa-utensil-spoon me-2"></i>Portion Control
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="swaps-tab" data-bs-toggle="tab" data-bs-target="#recipe-swaps" type="button"
+              role="tab">
+              <i class="fas fa-exchange-alt me-2"></i>Recipe Swaps
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content" id="mealPlanTabsContent">
+        <!-- Weekly Plan Tab -->
+        <div class="tab-pane fade show active" id="weekly-plan" role="tabpanel" aria-labelledby="weekly-tab">
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">Diet Type</label>
+                    <select class="form-select form-select-lg" id="dietType">
+                      <option value="balanced">Balanced</option>
+                      <option value="keto">Keto</option>
+                      <option value="vegetarian">Vegetarian</option>
+                      <option value="vegan">Vegan</option>
+                      <option value="low-carb">Low-Carb</option>
+                      <option value="mediterranean">Mediterranean</option>
+                      <option value="paleo">Paleo</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">Meals Per Day</label>
+                    <select class="form-select form-select-lg" id="mealsPerDay">
+                      <option value="3">3 Meals</option>
+                      <option value="4">4 Meals (with snack)</option>
+                      <option value="5">5 Meals (with 2 snacks)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="mb-3">
+                    <label class="form-label fw-medium text-muted">Duration</label>
+                    <select class="form-select form-select-lg" id="planDuration">
+                      <option value="7">1 Week</option>
+                      <option value="14">2 Weeks</option>
+                      <option value="30">1 Month</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                  <button class="btn btn-primary btn-lg w-100" id="generateMealPlan">
+                    <i class="fas fa-magic me-2"></i>Generate
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="mealPlanPreview" class="mb-5">
+            <div class="alert alert-info d-flex align-items-center">
+              <i class="fas fa-info-circle fs-4 me-3"></i>
+              <div>
+                <h5 class="alert-heading mb-1">Let's Get Started!</h5>
+                <p class="mb-0">Select your preferences and click "Generate" to create your personalized meal plan.</p>
+              </div>
+            </div>
+            
+            <div id="mealPlanContainer" class="d-none">
+              <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+                <div>
+                  <h3 class="mb-1">Your Meal Plan</h3>
+                  <p class="text-muted mb-0">Tailored to your dietary preferences and goals</p>
+                </div>
+                <div class="mt-3 mt-md-0">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-outline-primary" id="printMealPlan">
+                      <i class="fas fa-print me-2"></i>Print
+                    </button>
+                    <button class="btn btn-outline-success" id="saveMealPlan">
+                      <i class="fas fa-save me-2"></i>Save
+                    </button>
+                    <button class="btn btn-primary" id="shopForPlan">
+                      <i class="fas fa-shopping-cart me-2"></i>Shop Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div id="mealPlanDays" class="row g-4">
+                <!-- Sample day template - will be populated by JavaScript -->
+                <div class="col-12">
+                  <div class="meal-plan-card">
+                    <div class="meal-plan-header">
+                      <h4 class="mb-0">Day 1</h4>
+                      <span class="badge bg-white text-primary">2,100 kcal</span>
+                    </div>
+                    <div class="meal-plan-body">
+                      <div class="meal-item">
+                        <span class="meal-time">Breakfast</span>
+                        <div class="meal-name">
+                          <h6 class="mb-1">Avocado Toast with Poached Eggs</h6>
+                          <p class="meal-calories mb-0">450 kcal | 25g Protein | 35g Carbs | 22g Fat</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">View Recipe</button>
+                      </div>
+                      <div class="meal-item">
+                        <span class="meal-time">Lunch</span>
+                        <div class="meal-name">
+                          <h6 class="mb-1">Grilled Chicken Salad</h6>
+                          <p class="meal-calories mb-0">550 kcal | 42g Protein | 20g Carbs | 35g Fat</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">View Recipe</button>
+                      </div>
+                      <div class="meal-item">
+                        <span class="meal-time">Dinner</span>
+                        <div class="meal-name">
+                          <h6 class="mb-1">Salmon with Quinoa & Vegetables</h6>
+                          <p class="meal-calories mb-0">600 kcal | 45g Protein | 40g Carbs | 28g Fat</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">View Recipe</button>
+                      </div>
+                      
+                      <div class="nutrition-facts mt-4">
+                        <h6 class="mb-3">Daily Nutrition Summary</h6>
+                        <div class="nutrition-item">
+                          <span class="nutrition-label">Calories</span>
+                          <span class="nutrition-value">2,100</span>
+                        </div>
+                        <div class="nutrition-item">
+                          <span class="nutrition-label">Protein</span>
+                          <span class="nutrition-value">112g</span>
+                        </div>
+                        <div class="nutrition-item">
+                          <span class="nutrition-label">Carbs</span>
+                          <span class="nutrition-value">95g</span>
+                        </div>
+                        <div class="nutrition-item">
+                          <span class="nutrition-label">Fat</span>
+                          <span class="nutrition-value">85g</span>
+                        </div>
+                        <div class="nutrition-item">
+                          <span class="nutrition-label">Fiber</span>
+                          <span class="nutrition-value">32g</span>
+                        </div>
+                      </div>
+                      
+                      <div class="meal-plan-actions">
+                        <button class="btn btn-outline-secondary">
+                          <i class="fas fa-sync-alt me-2"></i>Regenerate
+                        </button>
+                        <button class="btn btn-outline-primary">
+                          <i class="fas fa-utensils me-2"></i>View Recipes
+                        </button>
+                        <button class="btn btn-primary ms-auto">
+                          <i class="fas fa-shopping-basket me-2"></i>Add to Grocery List
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portion Control Tab -->
+        <div class="tab-pane fade" id="portions" role="tabpanel" aria-labelledby="portions-tab">
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+              <h3 class="mb-4">Portion Control Guide</h3>
+              <p class="text-muted mb-4">Customize your portion sizes based on your dietary needs and activity level. Adjust the sliders to see how portion sizes change.</p>
+              
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="mb-4">
+                    <label class="form-label fw-medium">Number of People</label>
+                    <div class="d-flex align-items-center">
+                      <span class="me-2">1</span>
+                      <input type="range" class="form-range" id="portionPeople" min="1" max="8" value="1">
+                      <span class="ms-2" id="portionPeopleValue">1</span>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label class="form-label fw-medium">Activity Level</label>
+                    <select class="form-select" id="activityLevel">
+                      <option value="sedentary">Sedentary (little or no exercise)</option>
+                      <option value="light">Lightly Active (light exercise 1-3 days/week)</option>
+                      <option value="moderate" selected>Moderately Active (moderate exercise 3-5 days/week)</option>
+                      <option value="active">Very Active (hard exercise 6-7 days/week)</option>
+                      <option value="extreme">Extremely Active (very hard exercise & physical job)</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="mb-4">
+                    <label class="form-label fw-medium">Dietary Goal</label>
+                    <select class="form-select" id="dietaryGoal">
+                      <option value="weight-loss">Weight Loss</option>
+                      <option value="maintenance" selected>Weight Maintenance</option>
+                      <option value="muscle-gain">Muscle Gain</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label class="form-label fw-medium">Meal Frequency</label>
+                    <select class="form-select" id="mealFrequency">
+                      <option value="3">3 Meals per day</option>
+                      <option value="4">4 Meals per day</option>
+                      <option value="5">5 Meals per day</option>
+                      <option value="6">6 Meals per day</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="alert alert-info mt-4">
+                <i class="fas fa-info-circle me-2"></i>
+                Adjust the settings above to see recommended portion sizes for your specific needs.
+              </div>
+            </div>
+          </div>
+          
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label class="form-label">Number of People</label>
+                    <input type="range" class="form-range" id="portionPeople" min="1" max="10" value="2">
+                    <div class="d-flex justify-content-between">
+                      <small>1 person</small>
+                      <span class="badge bg-primary rounded-pill px-3" id="portionPeopleValue">2 people</span>
+                      <small>10 people</small>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Activity Level</label>
+                    <select class="form-select" id="activityLevel">
+                      <option value="sedentary">Sedentary (little or no exercise)</option>
+                      <option value="light" selected>Lightly Active (light exercise 1-3 days/week)</option>
+                      <option value="moderate">Moderately Active (moderate exercise 3-5 days/week)</option>
+                      <option value="active">Very Active (hard exercise 6-7 days/week)</option>
+                      <option value="extreme">Extremely Active (very hard exercise & physical job)</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Dietary Goal</label>
+                    <select class="form-select" id="dietaryGoal">
+                      <option value="maintain">Maintain Weight</option>
+                      <option value="lose">Lose Weight</option>
+                      <option value="gain">Gain Weight</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Nutritional Targets</h5>
+                  <div class="row g-3">
+                    <div class="col-6">
+                      <div class="d-flex justify-content-between">
+                        <span>Calories:</span>
+                        <strong id="caloriesTarget">2,000</strong>
+                      </div>
+                      <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-success" style="width: 75%"></div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="d-flex justify-content-between">
+                        <span>Protein:</span>
+                        <strong id="proteinTarget">150g</strong>
+                      </div>
+                      <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-info" style="width: 85%"></div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="d-flex justify-content-between">
+                        <span>Carbs:</span>
+                        <strong id="carbsTarget">250g</strong>
+                      </div>
+                      <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-warning" style="width: 60%"></div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="d-flex justify-content-between">
+                        <span>Fats:</span>
+                        <strong id="fatsTarget">65g</strong>
+                      </div>
+                      <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-danger" style="width: 45%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4 text-center">
+                  <h4 class="mb-4">Recommended Portion Sizes</h4>
+                  
+                  <div class="portion-visualization">
+                    <div class="portion-circle mx-auto mb-4">
+                  <div class="portion-fill" id="portionFill"></div>
+                  <div class="portion-text">
+                    <span id="portionSize" class="d-block fs-4 fw-bold">Standard</span>
+                    <span class="text-muted">Portion Size</span>
+                  </div>
+                </div>
+
+                <div class="portion-details mt-4">
+                  <div class="row g-3">
+                    <div class="col-6">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <div class="text-primary mb-2">
+                            <i class="fas fa-utensils fa-2x"></i>
+                          </div>
+                          <h6>Meal Size</h6>
+                          <p class="mb-0" id="mealSizeDetail">Standard adult portion</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <div class="text-success mb-2">
+                            <i class="fas fa-fire fa-2x"></i>
+                          </div>
+                          <h6>Calories</h6>
+                          <p class="mb-0" id="caloriesDetail">500-700 per meal</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <div class="text-info mb-2">
+                            <i class="fas fa-drumstick-bite fa-2x"></i>
+                          </div>
+                          <h6>Protein</h6>
+                          <p class="mb-0" id="proteinDetail">25-35g per meal</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <div class="text-warning mb-2">
+                            <i class="fas fa-bread-slice fa-2x"></i>
+                          </div>
+                          <h6>Carbs</h6>
+                          <p class="mb-0" id="carbsDetail">45-60g per meal</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <button class="btn btn-primary" id="applyPortionSettings">
+                    <i class="fas fa-check-circle me-2"></i>Apply to Meal Plan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recipe Swaps Tab -->
+        <div class="tab-pane fade" id="recipe-swaps" role="tabpanel" aria-labelledby="swaps-tab">
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+              <h3 class="mb-4">Find Recipe Alternatives</h3>
+              <p class="text-muted mb-4">Search for recipe alternatives based on your dietary preferences or ingredient availability.</p>
+              
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" class="form-control form-control-lg" id="recipeSearch" placeholder="Search for a recipe or ingredient...">
+                    <button class="btn btn-primary" type="button">Search</button>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-select form-select-lg" id="dietaryPreference">
+                    <option value="">All Diets</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="keto">Keto</option>
+                    <option value="gluten-free">Gluten-Free</option>
+                    <option value="dairy-free">Dairy-Free</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-select form-select-lg" id="cookingTime">
+                    <option value="">Any Time</option>
+                    <option value="15">Under 15 mins</option>
+                    <option value="30">Under 30 mins</option>
+                    <option value="45">Under 45 mins</option>
+                    <option value="60">Under 1 hour</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <h5 class="mb-3">Popular Swaps</h5>
+                <div class="row g-3" id="popularSwaps">
+                  <!-- Popular swaps will be loaded here -->
+                  <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                          <h6 class="mb-0">Pasta</h6>
+                          <span class="badge bg-light text-dark">Carbs</span>
+                        </div>
+                        <p class="small text-muted mb-3">Try zucchini noodles or spaghetti squash instead of traditional pasta</p>
+                        <button class="btn btn-sm btn-outline-primary w-100">View Alternatives</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                          <h6 class="mb-0">Rice</h6>
+                          <span class="badge bg-light text-dark">Carbs</span>
+                        </div>
+                        <p class="small text-muted mb-3">Try cauliflower rice or quinoa for a lower-carb option</p>
+                        <button class="btn btn-sm btn-outline-primary w-100">View Alternatives</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                          <h6 class="mb-0">Milk</h6>
+                          <span class="badge bg-light text-dark">Dairy</span>
+                        </div>
+                        <p class="small text-muted mb-3">Try almond, oat, or soy milk as dairy alternatives</p>
+                        <button class="btn btn-sm btn-outline-primary w-100">View Alternatives</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row mb-4">
+            <div class="col-md-8 mx-auto text-center">
+              <h4>Find Recipe Alternatives</h4>
+              <p class="text-muted">Looking for something different? Swap any recipe in your meal plan with a suitable
+                alternative.</p>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search for recipes..." id="recipeSearch">
+                <button class="btn btn-primary" type="button" id="searchRecipes">
+                  <i class="fas fa-search me-1"></i>Search
+                </button>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="dietaryFilter" checked>
+                <label class="form-check-label" for="dietaryFilter">Match my dietary preferences</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-5">
+              <div class="card h-100">
+                <div class="card-header bg-light">
+                  <h5 class="mb-0">Current Recipe</h5>
+                </div>
+                <div class="card-body text-center" id="currentRecipe">
+                  <div class="py-4">
+                    <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+                    <h5>Select a recipe to swap</h5>
+                    <p class="text-muted mb-0">Choose a recipe from your meal plan or search above</p>
+                  </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                  <small class="text-muted">Select a recipe to see alternatives</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-center justify-content-center my-4 my-md-0">
+              <div class="text-center">
+                <i class="fas fa-exchange-alt fa-2x text-muted d-block mb-2"></i>
+                <span class="badge bg-primary rounded-pill px-3 py-1">SWAP</span>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <div class="card h-100">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Suggested Alternatives</h5>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="sortOptions"
+                      data-bs-toggle="dropdown">
+                      <i class="fas fa-sort me-1"></i>Sort by
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item sort-option active" href="#" data-sort="relevance">Relevance</a></li>
+                      <li><a class="dropdown-item sort-option" href="#" data-sort="calories">Calories</a></li>
+                      <li><a class="dropdown-item sort-option" href="#" data-sort="prep-time">Prep Time</a></li>
+                      <li><a class="dropdown-item sort-option" href="#" data-sort="rating">Rating</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-body p-0" id="suggestedRecipe">
+                  <div class="suggestions-placeholder p-4 text-center">
+                    <i class="fas fa-lightbulb fa-3x text-warning mb-3"></i>
+                    <h5>Recipe Suggestions</h5>
+                    <p class="text-muted">Select a recipe to see alternative options that match your preferences.</p>
+                  </div>
+                  <div class="suggestions-list" style="max-height: 400px; overflow-y: auto; display: none;">
+                    <!-- Suggested recipes will be loaded here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h5 class="mb-3">Popular Recipe Swaps</h5>
+            <div class="row g-3" id="popularSwaps">
+              <!-- Popular swaps will be loaded here -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- Budget Tracking -->
+  <section class="section" id="budget-tracking">
+    <div class="container">
+      <h2 class="section-title text-center mb-5">Smart Budget Tracking</h2>
+
+      <div class="row g-4">
+        <!-- Budget Overview Card -->
+        <div class="col-lg-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <h4 class="card-title"><i class="fas fa-wallet text-primary me-2"></i>Monthly Budget</h4>
+              <div class="budget-form mb-4">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">KES</span>
+                  <input type="number" id="monthly-budget" class="form-control" placeholder="Enter monthly budget"
+                    value="20000">
+                  <button class="btn btn-primary" id="update-budget">Update</button>
+                </div>
+              </div>
+              <div class="budget-summary text-center">
+                <div class="display-4 fw-bold text-primary mb-2" id="budget-remaining">KES 7,000</div>
+                <div class="text-muted mb-3">remaining of <span id="total-budget">KES 20,000</span></div>
+                <div class="progress mb-2" style="height: 10px;">
+                  <div id="budget-progress" class="progress-bar bg-success" role="progressbar" style="width: 65%;"
+                    aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="small text-muted">Spent: <span id="amount-spent">KES 13,000</span> (65%)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spending by Category -->
+        <div class="col-lg-8">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="card-title mb-0"><i class="fas fa-chart-pie text-primary me-2"></i>Spending by Category</h4>
+                <button class="btn btn-sm btn-outline-primary" id="add-expense">
+                  <i class="fas fa-plus me-1"></i> Add Expense
+                </button>
+              </div>
+
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <div class="category-spending">
+                    <div class="d-flex justify-content-between mb-2">
+                      <span>Groceries</span>
+                      <span class="fw-bold">KES 8,500</span>
+                    </div>
+                    <div class="progress mb-3" style="height: 8px;">
+                      <div class="progress-bar bg-success" style="width: 70%;"></div>
+                    </div>
+                  </div>
+                  <div class="category-spending">
+                    <div class="d-flex justify-content-between mb-2">
+                      <span>Dining Out</span>
+                      <span class="fw-bold">KES 3,200</span>
+                    </div>
+                    <div class="progress mb-3" style="height: 8px;">
+                      <div class="progress-bar bg-info" style="width: 40%;"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="category-spending">
+                    <div class="d-flex justify-content-between mb-2">
+                      <span>Snacks</span>
+                      <span class="fw-bold">KES 1,300</span>
+                    </div>
+                    <div class="progress mb-3" style="height: 8px;">
+                      <div class="progress-bar bg-warning" style="width: 25%;"></div>
+                    </div>
+                  </div>
+                  <div class="category-spending">
+                    <div class="d-flex justify-content-between mb-2">
+                      <span>Beverages</span>
+                      <span class="fw-bold">KES 2,000</span>
+                    </div>
+                    <div class="progress mb-3" style="height: 8px;">
+                      <div class="progress-bar bg-danger" style="width: 35%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Transactions -->
+              <div class="recent-transactions">
+                <h5 class="mb-3"><i class="fas fa-history text-muted me-2"></i>Recent Transactions</h5>
+                <div class="list-group list-group-flush">
+                  <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <div>
+                      <h6 class="mb-0">Nakumatt Supermarket</h6>
+                      <small class="text-muted">Groceries • Today</small>
+                    </div>
+                    <span class="fw-bold text-danger">- KES 2,450</span>
+                  </div>
+                  <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <div>
+                      <h6 class="mb-0">Artcaffé</h6>
+                      <small class="text-muted">Dining Out • Yesterday</small>
+                    </div>
+                    <span class="fw-bold text-danger">- KES 1,850</span>
+                  </div>
+                  <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <div>
+                      <h6 class="mb-0">Naivas Supermarket</h6>
+                      <small class="text-muted">Groceries • 2 days ago</small>
+                    </div>
+                    <span class="fw-bold text-danger">- KES 3,200</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Budget Tips & Alerts -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-lightbulb text-warning me-2 fs-4"></i>
+                <h5 class="mb-0">Budgeting Tips</h5>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="d-flex">
+                    <div class="me-3 text-primary">
+                      <i class="fas fa-percentage fa-2x"></i>
+                    </div>
+                    <div>
+                      <h6>Track Your Spending</h6>
+                      <p class="small text-muted mb-0">Log every expense to see where your money goes each month.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="d-flex">
+                    <div class="me-3 text-primary">
+                      <i class="fas fa-tags fa-2x"></i>
+                    </div>
+                    <div>
+                      <h6>Use Categories</h6>
+                      <p class="small text-muted mb-0">Categorize expenses to identify spending patterns.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="d-flex">
+                    <div class="me-3 text-primary">
+                      <i class="fas fa-bullseye fa-2x"></i>
+                    </div>
+                    <div>
+                      <h6>Set Realistic Goals</h6>
+                      <p class="small text-muted mb-0">Aim to save 10-20% of your income each month.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
 
   <!-- Footer -->
   <footer class="footer">
@@ -2103,22 +3073,22 @@
       const people = parseInt(document.getElementById('people').value) || 1;
       const mealResults = document.getElementById('mealResults');
       const budgetWarning = document.getElementById('budgetWarning');
-      
+
       // Reset warning
       budgetWarning.classList.add('d-none');
-      
+
       if (!mealType) {
         showNotification('Please select a meal type.', 'warning');
         return;
       }
-      
+
       // Validate number of people
       if (people > 10) {
         showNotification('Maximum of 10 people per order. Please adjust your selection.', 'warning');
         document.getElementById('people').value = 10;
         return;
       }
-      
+
       // Check if budget is realistic
       if (!isBudgetRealistic(budget, people)) {
         budgetWarning.classList.remove('d-none');
@@ -2126,7 +3096,7 @@
 
       // Show the results section
       mealResults.classList.remove('hidden');
-      
+
       // Clear previous results
       mealResults.innerHTML = `
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -2137,12 +3107,12 @@
           </div>
         </div>
         <div class="row" id="mealCards"></div>`;
-      
+
       const mealCards = document.getElementById('mealCards');
-      
+
       // Get meals for the selected type and filter by budget
       let selectedMeals = [];
-      
+
       if (mealType === 'all') {
         // Combine all meal types
         Object.values(mealsByType).forEach(meals => {
@@ -2151,25 +3121,25 @@
       } else {
         selectedMeals = [...mealsByType[mealType] || []];
       }
-      
+
       // Filter meals by budget (per person)
       const minBudgetPerPerson = 80; // Minimum realistic price per person in KES
       const maxPricePerMeal = budget / people;
-      
+
       // Show warning if budget is too low
       if (maxPricePerMeal < minBudgetPerPerson) {
         budgetWarning.classList.remove('d-none');
       }
-      
+
       const filteredMeals = selectedMeals.filter(meal => meal.price <= maxPricePerMeal);
-      
+
       if (filteredMeals.length === 0) {
         mealCards.innerHTML = `
           <div class="col-12">
             <div class="alert alert-warning">
               <h5><i class="fas fa-utensils me-2"></i>No meals found within your budget</h5>
               <p class="mb-0">
-                Your budget of KES ${budget} (${people > 1 ? `KES ${Math.round(budget/people)} per person` : 'for 1 person'}) 
+                Your budget of KES ${budget} (${people > 1 ? `KES ${Math.round(budget / people)} per person` : 'for 1 person'}) 
                 is too low for the selected meal type. Try increasing your budget or selecting a different meal category.
               </p>
             </div>
@@ -2287,6 +3257,11 @@
       // Initialize grocery section
       if (document.getElementById('grocery-items')) {
         initGrocerySection();
+      }
+
+      // Initialize budget tracking if on budget page
+      if (document.getElementById('budget-tracking')) {
+        initBudgetTracking();
       }
 
       // Initialize first tab
@@ -2830,11 +3805,849 @@
         showToast("Redirecting to payment...", "info");
       }
     }
-    // -------------------------
+    // Budget Tracking Functions
+    function initBudgetTracking() {
+      // Load budget from localStorage or use defaults
+      const budgetData = JSON.parse(localStorage.getItem('budgetData')) || {
+        monthlyBudget: 20000,
+        spent: 13000,
+        categories: {
+          groceries: 8500,
+          diningOut: 3200,
+          snacks: 1300,
+          beverages: 2000
+        },
+        transactions: [
+          { id: 1, merchant: 'Nakumatt Supermarket', category: 'groceries', amount: 2450, date: 'Today' },
+          { id: 2, merchant: 'Artcaffé', category: 'diningOut', amount: 1850, date: 'Yesterday' },
+          { id: 3, merchant: 'Naivas Supermarket', category: 'groceries', amount: 3200, date: '2 days ago' }
+        ]
+      };
+
+      // Update UI with budget data
+      function updateBudgetUI() {
+        const { monthlyBudget, spent, categories } = budgetData;
+        const remaining = monthlyBudget - spent;
+        const percentageSpent = (spent / monthlyBudget) * 100;
+
+        // Update budget summary
+        document.getElementById('monthly-budget').value = monthlyBudget;
+        document.getElementById('budget-remaining').textContent = `KES ${remaining.toLocaleString()}`;
+        document.getElementById('total-budget').textContent = `KES ${monthlyBudget.toLocaleString()}`;
+        document.getElementById('amount-spent').textContent = `KES ${spent.toLocaleString()} (${Math.round(percentageSpent)}%)`;
+
+        // Update progress bar
+        const progressBar = document.getElementById('budget-progress');
+        progressBar.style.width = `${Math.min(percentageSpent, 100)}%`;
+        progressBar.className = `progress-bar ${percentageSpent > 80 ? 'bg-danger' : percentageSpent > 50 ? 'bg-warning' : 'bg-success'}`;
+        progressBar.setAttribute('aria-valuenow', Math.round(percentageSpent));
+      }
+
+      // Update budget when form is submitted
+      document.getElementById('update-budget').addEventListener('click', function () {
+        const newBudget = parseInt(document.getElementById('monthly-budget').value) || 0;
+        if (newBudget > 0) {
+          budgetData.monthlyBudget = newBudget;
+          saveBudgetData();
+          updateBudgetUI();
+          showNotification('Budget updated successfully!', 'success');
+        } else {
+          showNotification('Please enter a valid budget amount', 'error');
+        }
+      });
+
+      // Add new expense
+      document.getElementById('add-expense').addEventListener('click', function () {
+        // In a real app, this would open a modal to add a new expense
+        showNotification('Feature coming soon! You will be able to add expenses here.', 'info');
+      });
+
+      // Save budget data to localStorage
+      function saveBudgetData() {
+        localStorage.setItem('budgetData', JSON.stringify(budgetData));
+      }
+
+      // Initialize the UI
+      updateBudgetUI();
+    }
+
+    // ============================================
+    // Personalized Meal Plans Functionality
+    // ============================================
+
+    // Sample meal data (in a real app, this would come from an API)
+    const sampleMeals = {
+      breakfast: [
+        { id: 'bf1', name: 'Avocado Toast', calories: 320, protein: 10, carbs: 30, fat: 18, prepTime: 10, rating: 4.5, diet: ['vegetarian', 'vegan', 'mediterranean'] },
+        { id: 'bf2', name: 'Greek Yogurt with Berries', calories: 280, protein: 15, carbs: 35, fat: 8, prepTime: 5, rating: 4.2, diet: ['vegetarian', 'mediterranean'] },
+        { id: 'bf3', name: 'Vegetable Omelette', calories: 350, protein: 22, carbs: 12, fat: 24, prepTime: 15, rating: 4.7, diet: ['vegetarian', 'keto', 'low-carb'] },
+        { id: 'bf4', name: 'Oatmeal with Nuts', calories: 380, protein: 12, carbs: 55, fat: 14, prepTime: 10, rating: 4.3, diet: ['vegetarian', 'vegan', 'balanced'] },
+        { id: 'bf5', name: 'Smoothie Bowl', calories: 320, protein: 8, carbs: 45, fat: 12, prepTime: 8, rating: 4.4, diet: ['vegetarian', 'vegan', 'balanced'] }
+      ],
+      lunch: [
+        { id: 'ln1', name: 'Quinoa Salad Bowl', calories: 420, protein: 18, carbs: 45, fat: 20, prepTime: 20, rating: 4.7, diet: ['vegetarian', 'vegan', 'mediterranean'] },
+        { id: 'ln2', name: 'Grilled Chicken Wrap', calories: 480, protein: 35, carbs: 30, fat: 25, prepTime: 15, rating: 4.5, diet: ['balanced', 'low-carb'] },
+        { id: 'ln3', name: 'Caesar Salad with Salmon', calories: 450, protein: 30, carbs: 15, fat: 32, prepTime: 15, rating: 4.6, diet: ['keto', 'low-carb', 'paleo'] },
+        { id: 'ln4', name: 'Veggie Burger', calories: 380, protein: 22, carbs: 40, fat: 16, prepTime: 10, rating: 4.3, diet: ['vegetarian', 'vegan'] },
+        { id: 'ln5', name: 'Sushi Bowl', calories: 400, protein: 25, carbs: 55, fat: 10, prepTime: 15, rating: 4.4, diet: ['balanced', 'mediterranean'] }
+      ],
+      dinner: [
+        { id: 'dn1', name: 'Grilled Salmon with Veggies', calories: 480, protein: 35, carbs: 25, fat: 28, prepTime: 30, rating: 4.8, diet: ['keto', 'paleo', 'mediterranean'] },
+        { id: 'dn2', name: 'Chicken Stir Fry', calories: 420, protein: 40, carbs: 30, fat: 18, prepTime: 25, rating: 4.6, diet: ['balanced', 'low-carb'] },
+        { id: 'dn3', name: 'Lentil Curry with Rice', calories: 450, protein: 22, carbs: 65, fat: 10, prepTime: 35, rating: 4.5, diet: ['vegetarian', 'vegan'] },
+        { id: 'dn4', name: 'Beef and Broccoli', calories: 460, protein: 38, carbs: 20, fat: 26, prepTime: 25, rating: 4.7, diet: ['keto', 'paleo'] },
+        { id: 'dn5', name: 'Mushroom Risotto', calories: 420, protein: 12, carbs: 60, fat: 15, prepTime: 40, rating: 4.4, diet: ['vegetarian'] }
+      ],
+      snack: [
+        { id: 'sn1', name: 'Almonds & Dark Chocolate', calories: 200, protein: 6, carbs: 12, fat: 16, prepTime: 2, rating: 4.3, diet: ['keto', 'paleo', 'vegetarian'] },
+        { id: 'sn2', name: 'Greek Yogurt with Honey', calories: 180, protein: 15, carbs: 20, fat: 5, prepTime: 2, rating: 4.2, diet: ['vegetarian', 'mediterranean'] },
+        { id: 'sn3', name: 'Veggies with Hummus', calories: 160, protein: 6, carbs: 18, fat: 9, prepTime: 5, rating: 4.1, diet: ['vegetarian', 'vegan', 'mediterranean'] },
+        { id: 'sn4', name: 'Protein Shake', calories: 220, protein: 25, carbs: 15, fat: 6, prepTime: 5, rating: 4.0, diet: ['vegetarian', 'keto', 'low-carb'] },
+        { id: 'sn5', name: 'Rice Cakes with Peanut Butter', calories: 210, protein: 7, carbs: 25, fat: 10, prepTime: 3, rating: 4.3, diet: ['vegetarian', 'vegan'] }
+      ]
+    };
+
+    // Diet type mapping to filter meals
+    const dietFilters = {
+      'balanced': [], // No specific filter for balanced
+      'keto': ['keto'],
+      'vegetarian': ['vegetarian'],
+      'vegan': ['vegan'],
+      'low-carb': ['low-carb'],
+      'mediterranean': ['mediterranean'],
+      'paleo': ['paleo']
+    };
+
+    // Initialize meal planning functionality when the page loads
+    function initializeMealPlans() {
+      console.log('Initializing meal plans...');
+
+      // Check if Bootstrap is available
+      if (typeof bootstrap === 'undefined' || !bootstrap.Tab) {
+        const errorMsg = 'Bootstrap not loaded. Please make sure Bootstrap JS is included before this script.';
+        console.error(errorMsg);
+        showNotification(errorMsg, 'danger');
+        return;
+      }
+
+      try {
+        // Initialize tab functionality first
+        const tabEls = Array.from(document.querySelectorAll('#mealPlanTabs button[data-bs-toggle="tab"]'));
+        console.log(`Found ${tabEls.length} tab elements`);
+
+        if (tabEls.length > 0) {
+          // Set up click handlers for all tabs
+          tabEls.forEach(tabEl => {
+            tabEl.addEventListener('click', function (e) {
+              e.preventDefault();
+              const tabId = this.getAttribute('data-bs-target');
+              console.log('Tab clicked:', tabId);
+
+              // Remove active class from all tabs and panes
+              document.querySelectorAll('#mealPlanTabs .nav-link').forEach(link => {
+                link.classList.remove('active');
+              });
+              document.querySelectorAll('#mealPlanTabsContent .tab-pane').forEach(pane => {
+                pane.classList.remove('show', 'active');
+              });
+
+              // Add active class to clicked tab and corresponding pane
+              this.classList.add('active');
+              const targetPane = document.querySelector(tabId);
+              if (targetPane) {
+                targetPane.classList.add('show', 'active');
+                localStorage.setItem('activeMealPlanTab', tabId);
+              }
+            });
+          });
+
+          // Restore active tab from storage or default to first tab
+          const activeTabId = localStorage.getItem('activeMealPlanTab') || '#weekly-plan';
+          console.log('Active tab from storage:', activeTabId);
+
+          // Find and activate the tab
+          const tabToActivate = document.querySelector(`#mealPlanTabs button[data-bs-target="${activeTabId}"]`);
+          if (tabToActivate) {
+            console.log('Activating tab:', activeTabId);
+            tabToActivate.click(); // Use click to trigger our custom handler
+          } else if (tabEls.length > 0) {
+            // If saved tab not found, activate first tab
+            console.log('Saved tab not found, defaulting to first tab');
+            tabEls[0].click();
+          }
+        } else {
+          console.warn('No tab elements found with selector: #mealPlanTabs button[data-bs-toggle="tab"]');
+        }
+
+        // Now initialize the components
+        console.log('Initializing portion control...');
+        if (typeof initPortionControl === 'function') {
+          initPortionControl();
+        } else {
+          console.error('initPortionControl function not found!');
+        }
+
+        console.log('Initializing meal plan generator...');
+        if (typeof initMealPlanGenerator === 'function') {
+          initMealPlanGenerator();
+        } else {
+          console.error('initMealPlanGenerator function not found!');
+        }
+
+        console.log('Initializing recipe swaps...');
+        if (typeof initRecipeSwaps === 'function') {
+          initRecipeSwaps();
+        } else {
+          console.error('initRecipeSwaps function not found!');
+        }
+      } catch (error) {
+        const errorMsg = `Error initializing meal plans: ${error.message}`;
+        console.error(errorMsg, error);
+        showNotification(errorMsg, 'danger');
+      }
+    }
+
+    // Initialize when the DOM is fully loaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeMealPlans);
+    } else {
+      // DOMContentLoaded has already fired
+      initializeMealPlans();
+    }
+
+    // ============================================
+    // Portion Control Functionality
+    // ============================================
+    function initPortionControl() {
+      const portionPeople = document.getElementById('portionPeople');
+      const portionPeopleValue = document.getElementById('portionPeopleValue');
+      const activityLevel = document.getElementById('activityLevel');
+      const dietaryGoal = document.getElementById('dietaryGoal');
+      const applyBtn = document.getElementById('applyPortionSettings');
+
+      // Update portion visualization when inputs change
+      [portionPeople, activityLevel, dietaryGoal].forEach(element => {
+        if (element) {
+          element.addEventListener('input', updatePortionVisualization);
+          element.addEventListener('change', updatePortionVisualization);
+        }
+      });
+
+      // Apply portion settings to meal plan
+      if (applyBtn) {
+        applyBtn.addEventListener('click', function () {
+          showNotification('Portion settings applied to your meal plan!', 'success');
+          // In a real app, this would update the meal plan with new portion sizes
+        });
+      }
+
+      // Initial update
+      updatePortionVisualization();
+    }
+
+    function updatePortionVisualization() {
+      const portionPeople = document.getElementById('portionPeople');
+      const portionPeopleValue = document.getElementById('portionPeopleValue');
+      const activityLevel = document.getElementById('activityLevel');
+      const portionSize = document.getElementById('portionSize');
+      const portionFill = document.getElementById('portionFill');
+      const dietaryGoal = document.getElementById('dietaryGoal');
+
+      if (!portionPeople || !activityLevel || !portionSize || !portionFill || !dietaryGoal) return;
+
+      const people = parseInt(portionPeople.value);
+      const activity = activityLevel.value;
+      const goal = dietaryGoal.value;
+
+      // Update people count display
+      if (portionPeopleValue) {
+        portionPeopleValue.textContent = `${people} ${people === 1 ? 'person' : 'people'}`;
+      }
+
+      // Calculate portion size based on inputs
+      let size = 1.0;
+
+      // Adjust based on activity level
+      if (activity === 'sedentary') size = 0.8;
+      else if (activity === 'moderate') size = 1.2;
+      else if (activity === 'active') size = 1.4;
+      else if (activity === 'extreme') size = 1.6;
+
+      // Adjust based on dietary goal
+      if (goal === 'lose') size *= 0.9;
+      else if (goal === 'gain') size *= 1.2;
+
+      // Update visual elements
+      const portionPercentage = Math.min(100, Math.round(size * 100));
+      portionFill.style.width = `${portionPercentage}%`;
+
+      // Update portion size text
+      if (portionSize) {
+        if (portionPercentage < 70) portionSize.textContent = 'Small';
+        else if (portionPercentage > 130) portionSize.textContent = 'Large';
+        else portionSize.textContent = 'Standard';
+      }
+
+      // Update nutritional targets
+      updateNutritionalTargets(people, size);
+    }
+
+    function updateNutritionalTargets(people, sizeMultiplier) {
+      const baseCalories = 2000;
+      const baseProtein = 150;
+      const baseCarbs = 250;
+      const baseFats = 65;
+
+      const adjustedCalories = Math.round(baseCalories * sizeMultiplier);
+      const adjustedProtein = Math.round(baseProtein * sizeMultiplier);
+      const adjustedCarbs = Math.round(baseCarbs * sizeMultiplier);
+      const adjustedFats = Math.round(baseFats * sizeMultiplier);
+
+      // Update the display
+      const caloriesTarget = document.getElementById('caloriesTarget');
+      const proteinTarget = document.getElementById('proteinTarget');
+      const carbsTarget = document.getElementById('carbsTarget');
+      const fatsTarget = document.getElementById('fatsTarget');
+
+      if (caloriesTarget) caloriesTarget.textContent = adjustedCalories.toLocaleString();
+      if (proteinTarget) proteinTarget.textContent = `${adjustedProtein}g`;
+      if (carbsTarget) carbsTarget.textContent = `${adjustedCarbs}g`;
+      if (fatsTarget) fatsTarget.textContent = `${adjustedFats}g`;
+
+      // Update portion details
+      const mealSizeDetail = document.getElementById('mealSizeDetail');
+      const caloriesDetail = document.getElementById('caloriesDetail');
+      const proteinDetail = document.getElementById('proteinDetail');
+      const carbsDetail = document.getElementById('carbsDetail');
+
+      if (mealSizeDetail) {
+        mealSizeDetail.textContent =
+          sizeMultiplier < 0.9 ? 'Smaller portion' :
+            sizeMultiplier > 1.3 ? 'Larger portion' : 'Standard portion';
+      }
+
+      if (caloriesDetail) {
+        const perMealCalories = Math.round(adjustedCalories / 3);
+        caloriesDetail.textContent = `${perMealCalories - 50}-${perMealCalories + 50} per meal`;
+      }
+
+      if (proteinDetail) {
+        const perMealProtein = Math.round(adjustedProtein / 3);
+        proteinDetail.textContent = `${perMealProtein - 5}-${perMealProtein + 5}g per meal`;
+      }
+
+      if (carbsDetail) {
+        const perMealCarbs = Math.round(adjustedCarbs / 3);
+        carbsDetail.textContent = `${perMealCarbs - 10}-${perMealCarbs + 10}g per meal`;
+      }
+    }
+
+    // ============================================
+    // Meal Plan Generator Functionality
+    // ============================================
+    function initMealPlanGenerator() {
+      console.log('Initializing meal plan generator...');
+
+      const generateBtn = document.getElementById('generateMealPlan');
+      const printBtn = document.getElementById('printMealPlan');
+      const saveBtn = document.getElementById('saveMealPlan');
+      const shopBtn = document.getElementById('shopForPlan');
+
+      if (generateBtn) {
+        console.log('Found generate button, adding click handler');
+        generateBtn.addEventListener('click', generateMealPlan);
+      } else {
+        console.error('Generate button not found!');
+      }
+
+      if (printBtn) {
+        printBtn.addEventListener('click', function () {
+          window.print();
+        });
+      } else {
+        console.warn('Print button not found');
+      }
+
+      if (saveBtn) {
+        saveBtn.addEventListener('click', function () {
+          showNotification('Meal plan saved successfully!', 'success');
+          // In a real app, this would save the meal plan to the user's account
+        });
+      } else {
+        console.warn('Save button not found');
+      }
+
+      if (shopBtn) {
+        shopBtn.addEventListener('click', function () {
+          // In a real app, this would generate a shopping list
+          showNotification('Shopping list generated!', 'info');
+        });
+      } else {
+        console.warn('Shop button not found');
+      }
+
+      // Check for saved meal plans
+      const savedPlan = localStorage.getItem('savedMealPlan');
+      if (savedPlan) {
+        try {
+          console.log('Found saved meal plan, rendering...');
+          const plan = JSON.parse(savedPlan);
+          renderMealPlan(plan);
+        } catch (e) {
+          console.error('Error loading saved meal plan:', e);
+        }
+      } else {
+        console.log('No saved meal plan found in localStorage');
+      }
+
+      // Add debug info
+      console.log('Meal plan generator initialization complete');
+    }
+
+    function generateMealPlan() {
+      const dietType = document.getElementById('dietType').value;
+      const mealsPerDay = parseInt(document.getElementById('mealsPerDay').value);
+      const duration = parseInt(document.getElementById('planDuration').value);
+
+      // Validate inputs
+      if (!dietType || isNaN(mealsPerDay) || isNaN(duration)) {
+        showNotification('Please fill in all meal plan options.', 'warning');
+        return;
+      }
+
+      // Show loading state
+      const mealPlanContainer = document.getElementById('mealPlanContainer');
+      const mealPlanDays = document.getElementById('mealPlanDays');
+
+      mealPlanDays.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-3">Generating your personalized meal plan...</p>
+        </div>`;
+
+      mealPlanContainer.classList.remove('d-none');
+
+      // Simulate API call with timeout
+      setTimeout(() => {
+        const mealPlan = createMealPlan(dietType, mealsPerDay, duration);
+        renderMealPlan(mealPlan);
+
+        // Save to localStorage
+        localStorage.setItem('savedMealPlan', JSON.stringify(mealPlan));
+
+        // Scroll to the meal plan
+        mealPlanContainer.scrollIntoView({ behavior: 'smooth' });
+      }, 1000);
+    }
+
+    function createMealPlan(dietType, mealsPerDay, duration) {
+      const mealPlan = [];
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const today = new Date();
+
+      // Get the diet filters to apply
+      const dietFilter = dietFilters[dietType] || [];
+
+      for (let i = 0; i < duration; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() + i);
+
+        const dayName = days[date.getDay()];
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+        const dayPlan = {
+          day: dayName,
+          date: dateStr,
+          meals: []
+        };
+
+        // Add breakfast
+        if (mealsPerDay >= 3) {
+          dayPlan.meals.push({
+            type: 'Breakfast',
+            ...getRandomMeal('breakfast', dietFilter)
+          });
+        }
+
+        // Add lunch
+        if (mealsPerDay >= 2) {
+          dayPlan.meals.push({
+            type: 'Lunch',
+            ...getRandomMeal('lunch', dietFilter)
+          });
+        }
+
+        // Add dinner
+        dayPlan.meals.push({
+          type: 'Dinner',
+          ...getRandomMeal('dinner', dietFilter)
+        });
+
+        // Add snacks if needed
+        if (mealsPerDay >= 4) {
+          dayPlan.meals.push({
+            type: 'Snack',
+            ...getRandomMeal('snack', dietFilter)
+          });
+        }
+
+        if (mealsPerDay >= 5) {
+          dayPlan.meals.push({
+            type: 'Snack',
+            ...getRandomMeal('snack', dietFilter)
+          });
+        }
+
+        mealPlan.push(dayPlan);
+      }
+
+      return mealPlan;
+    }
+
+    function getRandomMeal(mealType, dietFilter) {
+      // Filter meals by type and diet
+      let filteredMeals = sampleMeals[mealType] || [];
+
+      if (dietFilter.length > 0) {
+        filteredMeals = filteredMeals.filter(meal =>
+          dietFilter.some(diet => meal.diet.includes(diet))
+        );
+      }
+
+      // If no meals match the filter, return any meal of the type
+      if (filteredMeals.length === 0) {
+        filteredMeals = sampleMeals[mealType] || [];
+      }
+
+      // Return a random meal
+      return filteredMeals[Math.floor(Math.random() * filteredMeals.length)];
+    }
+
+    function renderMealPlan(mealPlan) {
+      const mealPlanDays = document.getElementById('mealPlanDays');
+
+      if (!mealPlanDays || !mealPlan || !Array.isArray(mealPlan)) return;
+
+      let html = '';
+
+      mealPlan.forEach(day => {
+        let mealsHtml = '';
+
+        day.meals.forEach(meal => {
+          mealsHtml += `
+            <div class="meal-item d-flex align-items-center p-2 border-bottom">
+              <div class="flex-shrink-0 me-3">
+                <div class="meal-type-badge bg-light text-dark rounded-pill px-3 py-1 small">
+                  ${meal.type}
+                </div>
+              </div>
+              <div class="flex-grow-1">
+                <h6 class="mb-0">${meal.name}</h6>
+                <div class="d-flex small text-muted">
+                  <span class="me-2">${meal.calories} cal</span>
+                  <span class="me-2">•</span>
+                  <span class="me-2">${meal.prepTime} min</span>
+                  <span class="me-2">•</span>
+                  <span>${meal.rating} <i class="fas fa-star text-warning"></i></span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <button class="btn btn-sm btn-outline-primary swap-meal" data-meal-id="${meal.id}">
+                  <i class="fas fa-exchange-alt"></i>
+                </button>
+              </div>
+            </div>`;
+        });
+
+        html += `
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">${day.day}</h5>
+                <span class="text-muted small">${day.date}</span>
+              </div>
+              <div class="card-body p-0">
+                <div class="meal-list">
+                  ${mealsHtml}
+                </div>
+              </div>
+              <div class="card-footer bg-transparent text-center">
+                <button class="btn btn-sm btn-outline-secondary w-100 view-day-details">
+                  <i class="fas fa-utensils me-1"></i> View Details
+                </button>
+              </div>
+            </div>
+          </div>`;
+      });
+
+      mealPlanDays.innerHTML = html;
+
+      // Add event listeners for swap buttons
+      document.querySelectorAll('.swap-meal').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const mealId = this.getAttribute('data-meal-id');
+          // In a real app, this would open the recipe swap interface
+          showNotification(`Swap meal ${mealId} clicked`, 'info');
+
+          // For demo, switch to the Recipe Swaps tab
+          const swapTab = document.querySelector('[data-bs-target="#recipe-swaps"]');
+          if (swapTab) {
+            const tab = new bootstrap.Tab(swapTab);
+            tab.show();
+          }
+        });
+      });
+
+      // Add event listeners for view details buttons
+      document.querySelectorAll('.view-day-details').forEach(btn => {
+        btn.addEventListener('click', function () {
+          // In a real app, this would show detailed meal information
+          showNotification('Viewing day details', 'info');
+        });
+      });
+    }
+
+    // ============================================
+    // Recipe Swaps Functionality
+    // ============================================
+    function initRecipeSwaps() {
+      const searchInput = document.getElementById('recipeSearch');
+      const searchBtn = document.getElementById('searchRecipes');
+      const dietaryFilter = document.getElementById('dietaryFilter');
+      const sortOptions = document.querySelectorAll('.sort-option');
+
+      // Search functionality
+      if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', () => searchRecipes(searchInput.value, dietaryFilter.checked));
+
+        searchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            searchRecipes(searchInput.value, dietaryFilter.checked);
+          }
+        });
+      }
+
+      // Dietary filter toggle
+      if (dietaryFilter) {
+        dietaryFilter.addEventListener('change', () => {
+          if (searchInput.value) {
+            searchRecipes(searchInput.value, dietaryFilter.checked);
+          }
+        });
+      }
+
+      // Sort options
+      sortOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          // Update active state
+          sortOptions.forEach(opt => opt.classList.remove('active'));
+          option.classList.add('active');
+
+          // Get sort type
+          const sortType = option.getAttribute('data-sort');
+
+          // In a real app, this would re-sort the search results
+          showNotification(`Sorted by: ${sortType.replace('-', ' ')}`, 'info');
+        });
+      });
+
+      // Load popular swaps
+      loadPopularSwaps();
+    }
+
+    function searchRecipes(query, matchDietary = true) {
+      if (!query) {
+        showNotification('Please enter a search term', 'warning');
+        return;
+      }
+
+      const suggestionsList = document.querySelector('.suggestions-list');
+      const placeholder = document.querySelector('.suggestions-placeholder');
+
+      // Show loading state
+      if (suggestionsList && placeholder) {
+        suggestionsList.innerHTML = `
+          <div class="text-center p-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2 mb-0">Searching for recipes...</p>
+          </div>`;
+
+        placeholder.classList.add('d-none');
+        suggestionsList.style.display = 'block';
+      }
+
+      // Simulate API call with timeout
+      setTimeout(() => {
+        // In a real app, this would be an API call to search recipes
+        const results = [];
+
+        // Search through sample meals (simplified for demo)
+        Object.values(sampleMeals).forEach(meals => {
+          meals.forEach(meal => {
+            if (meal.name.toLowerCase().includes(query.toLowerCase())) {
+              results.push(meal);
+            }
+          });
+        });
+
+        // Limit to 5 results for demo
+        const limitedResults = results.slice(0, 5);
+
+        // Display results
+        displaySearchResults(limitedResults, suggestionsList, placeholder);
+      }, 800);
+    }
+
+    function displaySearchResults(results, container, placeholder) {
+      if (!container) return;
+
+      if (results.length === 0) {
+        container.innerHTML = `
+          <div class="text-center p-4">
+            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+            <h5>No recipes found</h5>
+            <p class="text-muted">Try a different search term</p>
+          </div>`;
+        return;
+      }
+
+      let html = '';
+
+      results.forEach(meal => {
+        html += `
+          <div class="recipe-suggestion p-3 border-bottom">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0 me-3">
+                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                  <i class="fas fa-utensils text-muted"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1">
+                <h6 class="mb-0">${meal.name}</h6>
+                <div class="d-flex small text-muted">
+                  <span class="me-2">${meal.calories} cal</span>
+                  <span class="me-2">•</span>
+                  <span class="me-2">${meal.prepTime} min</span>
+                  <span class="me-2">•</span>
+                  <span>${meal.rating} <i class="fas fa-star text-warning"></i></span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <button class="btn btn-sm btn-outline-primary select-recipe" data-meal-id="${meal.id}">
+                  Select
+                </button>
+              </div>
+            </div>
+          </div>`;
+      });
+
+      container.innerHTML = html;
+
+      // Add event listeners to select buttons
+      document.querySelectorAll('.select-recipe').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const mealId = this.getAttribute('data-meal-id');
+          // In a real app, this would update the selected recipe
+          showNotification(`Recipe ${mealId} selected`, 'success');
+        });
+      });
+    }
+
+    function loadPopularSwaps() {
+      const popularSwapsContainer = document.getElementById('popularSwaps');
+      if (!popularSwapsContainer) return;
+
+      // In a real app, this would fetch popular swaps from an API
+      const popularSwaps = [
+        { from: 'Pasta', to: 'Zucchini Noodles', reason: 'Lower carb alternative' },
+        { from: 'Rice', to: 'Cauliflower Rice', reason: 'Low-carb, high-fiber' },
+        { from: 'Potato Mash', to: 'Cauliflower Mash', reason: 'Lower calorie option' },
+        { from: 'Beef Burger', to: 'Portobello Mushroom Burger', reason: 'Vegetarian alternative' },
+        { from: 'White Bread', to: 'Whole Grain Bread', reason: 'Higher fiber content' },
+        { from: 'Sour Cream', to: 'Greek Yogurt', reason: 'Higher protein, lower fat' }
+      ];
+
+      let html = '';
+
+      popularSwaps.forEach(swap => {
+        html += `
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <span class="badge bg-light text-dark me-2">SWAP</span>
+                  <h6 class="mb-0">${swap.from} <i class="fas fa-arrow-right mx-2 text-muted"></i> ${swap.to}</h6>
+                </div>
+                <p class="small text-muted mb-0">${swap.reason}</p>
+              </div>
+              <div class="card-footer bg-transparent text-end">
+                <button class="btn btn-sm btn-outline-primary">Try This Swap</button>
+              </div>
+            </div>
+          </div>`;
+      });
+
+      popularSwapsContainer.innerHTML = html;
+    }
+
+    // ============================================
+    // Helper Functions
+    // ============================================
+
+    function showNotification(message, type = 'info') {
+      // Check if Toast is available (Bootstrap 5)
+      if (typeof bootstrap !== 'undefined' && bootstrap.Toast) {
+        const toastEl = document.createElement('div');
+        toastEl.className = `toast align-items-center text-white bg-${type} border-0`;
+        toastEl.setAttribute('role', 'alert');
+        toastEl.setAttribute('aria-live', 'assertive');
+        toastEl.setAttribute('aria-atomic', 'true');
+
+        toastEl.innerHTML = `
+          <div class="d-flex">
+            <div class="toast-body">
+              ${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>`;
+
+        const toastContainer = document.getElementById('toastContainer');
+        if (toastContainer) {
+          toastContainer.appendChild(toastEl);
+
+          const toast = new bootstrap.Toast(toastEl, {
+            autohide: true,
+            delay: 3000
+          });
+
+          toast.show();
+
+          // Remove the toast after it's hidden
+          toastEl.addEventListener('hidden.bs.toast', function () {
+            toastEl.remove();
+          });
+        } else {
+          // Fallback to alert if toast container doesn't exist
+          alert(`${type.toUpperCase()}: ${message}`);
+        }
+      } else {
+        // Fallback to alert if Bootstrap Toast is not available
+        alert(`${type.toUpperCase()}: ${message}`);
+      }
+    }
+
+    // ============================================
     // Expose some global helpers
-    // -------------------------
+    // ============================================
     window.viewRecipe = viewRecipe;
     window.addToCart = addToCart;
+    window.generateMealPlan = generateMealPlan;
     window.generateMeals = generateMealSuggestions; // Make the meal generation function available globally
     window.removeFromCart = removeFromCart;
     window.generateMeals = generateMeals;
